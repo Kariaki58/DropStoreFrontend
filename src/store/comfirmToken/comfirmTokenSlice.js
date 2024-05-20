@@ -3,7 +3,9 @@ import { comfirmToken } from "./comfirmTokenPost";
 
 
 const initialState = {
-    token: ''
+    token: '',
+    status: '',
+    error: null
 }
 
 const tokenSlice = createSlice({

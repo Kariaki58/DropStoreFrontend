@@ -3,7 +3,10 @@ import { createUserAccount } from "./userPost";
 
 const initialState =  {
     email: '',
-    password: ''
+    password: '',
+    status: '',
+    data: '',
+    error: ''
 }
 
 const userSlice = createSlice({
@@ -25,6 +28,6 @@ const userSlice = createSlice({
       });
   },
 });
-  
+
 
 export default userSlice.reducer

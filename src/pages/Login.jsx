@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
             placeholder='Enter password'
             required
           />
-          <button className='w-full bg-blue-500 text-white py-3 mt-5 rounded-lg font-semibold hover:bg-blue-600 transition duration-300'>Login</button>
+          <button className='w-full bg-purple-700 text-white py-3 mt-5 rounded-lg font-semibold hover:bg-purple-900 transition duration-300'>Login</button>
         </form>
         <p className='mt-4 text-center'>Don't have an account? <Link className='text-blue-700 hover:underline' to='/api/auth/sign-up'>Sign up</Link></p>
       </div>

@@ -6,9 +6,10 @@ import images from '../assets';
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [auth, setAuth] = useState(localStorage.getItem('isAuthenticated'))
 
   return (
-    <header className='bg-blue-900'>
+    <header className='bg-purple-900'>
       <nav className='container flex justify-between m-auto items-center p-3'>
         <h1 className='text-white text-3xl cursor-default'>
           <Link to='/'>DropStore</Link>
@@ -18,9 +19,13 @@ const Header = () => {
           <FaSearch className='absolute right-3 top-3.5 text-xl' />
         </div>
         <ul className='hidden md:flex gap-5 items-center'>
-          <li className='text-white font-bold text-xl cursor-pointer'>
-            <Link to='/api/auth/login'>Login</Link>
-          </li>
+          {
+            !auth ? (
+              <li className='text-white font-bold text-xl cursor-pointer'>
+                <Link to='/api/auth/login'>Login</Link>
+              </li>
+            ): null
+          }
           <li><FaAffiliatetheme className='text-3xl text-white cursor-pointer' /></li>
           <li><FaCartArrowDown className='text-3xl text-white cursor-pointer' /></li>
           <li className='w-10'><img src={images.defaultImage} className='w-full rounded-full' /></li>

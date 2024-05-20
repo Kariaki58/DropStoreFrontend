@@ -12,6 +12,7 @@ const ComfirmToken = () => {
 
   useEffect(() => {
     if (data === 'account created') {
+      localStorage.setItem('isAuthenticated', true)
       navigate('/', { replace: true });
     }
   }, [data, navigate]);
