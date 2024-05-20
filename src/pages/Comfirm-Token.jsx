@@ -13,6 +13,7 @@ const ComfirmToken = () => {
   useEffect(() => {
     if (data === 'account created') {
       localStorage.setItem('isAuthenticated', true)
+      window.location.reload()
       navigate('/', { replace: true });
     }
   }, [data, navigate]);
