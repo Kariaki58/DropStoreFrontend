@@ -9,9 +9,11 @@ const Register = () => {
     const dispatch = useDispatch()
     const { error } = useSelector((state) => state.user)
     const navigate = useNavigate()
+    const [passwordError, setPasswordError] = useState('')
     const [userData, setUserData] = useState({
       email: '',
-      password: ''
+      password: '',
+      comfirmPassword: ''
     })
 
     const handleChange = (e) => {
@@ -23,7 +25,15 @@ const Register = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(createUserAccount(userData));
+      const { email, password } = userData
+      const request = {
+        email, password
+      }
+      if (password != userData.comfirmPassword) {
+        setPasswordError('password did not match')
+        return
+      }
+      dispatch(createUserAccount(request));
       if (!error) {
         navigate('/api/auth/comfirm-token')
       } 
@@ -40,7 +50,9 @@ const Register = () => {
             <label htmlFor='email' className='w-full block text-2xl'>Email address</label>
             <input name='email' type='email' value={userData.email} onChange={handleChange} className='block border-2 border-slate-700 py-2 px-1 font-bold mb-5' placeholder='Enter email' required/>
             <label htmlFor='password' className='block text-2xl'>Password</label>
-            <input type='password' value={userData.password} onChange={handleChange} name='password' className='block border-2 border-slate-700 py-2 px-1 font-bold' placeholder='Enter password' required/>
+            <input type='password' value={userData.password} onChange={handleChange} name='password' className={`block border-2 border-slate-700 py-2 px-1 font-bold ${passwordError !== '' ? 'border-red-600': '' }`} placeholder='Enter password' required/>
+            <label htmlFor='comfirmPassword' className='block text-2xl'>Comfirm Password</label>
+            <input type='password' value={userData.comfirmPassword} onChange={handleChange} name='comfirmPassword' className={`block border-2 border-slate-700 py-2 px-1 font-bold ${passwordError !== '' ? 'border-red-600': '' }`} placeholder='Enter password' required/>
             <button className='bg-blue-300 text-white p-3 mt-5'>register</button>
           </form>
           <p>already have an account? <Link className='text-blue-700' to='/api/auth/login'>sign in</Link></p>

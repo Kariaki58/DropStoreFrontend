@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { comfirmToken } from '../store/comfirmToken/comfirmTokenPost';
 import { useNavigate } from 'react-router';
@@ -10,6 +10,12 @@ const ComfirmToken = () => {
   const navigate = useNavigate()
   const { data, status, error } = useSelector((state) => state.token)
 
+  useEffect(() => {
+    if (data === 'account created') {
+      navigate('/', { replace: true });
+    }
+  }, [data, navigate]);
+
   const handleChange = (e) => {
     setToken({
       ...token,
@@ -19,11 +25,6 @@ const ComfirmToken = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(comfirmToken(token))
-    console.log('data', data)
-    console.log(error)
-    if (data === 'account cated') {
-      navigate('/', { replace: true })
-    }
   }
   return (
     <div className='h-screen flex justify-center items-center'>
