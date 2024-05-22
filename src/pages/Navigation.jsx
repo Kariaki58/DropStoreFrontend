@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch, FaCartArrowDown, FaAffiliatetheme, FaBars } from 'react-icons/fa';
 import images from '../assets';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOutAccount } from '../store/logout/logoutPost';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [auth, setAuth] = useState(localStorage.getItem('isAuthenticated'))
+  const { data, error, status } = useSelector((state) => state.logout)
+  const dispatch = useDispatch()
 
+  const handleLogout = () => {
+    dispatch(logOutAccount())
+  }
+  
   return (
     <header className='bg-purple-900'>
       <nav className='container flex justify-between m-auto items-center p-3'>
@@ -19,13 +26,12 @@ const Header = () => {
           <FaSearch className='absolute right-3 top-3.5 text-xl' />
         </div>
         <ul className='hidden md:flex gap-5 items-center'>
-          {
-            !auth ? (
-              <li className='text-white font-bold text-xl cursor-pointer'>
-                <Link to='/api/auth/login'>Login</Link>
-              </li>
-            ): null
-          }
+          <li className='text-white font-bold text-xl cursor-pointer'>
+              <Link to='/api/auth/login'>Login</Link>
+          </li>
+          <li className='text-white font-bold text-xl cursor-pointer' onClick={handleLogout}>
+            Logout
+          </li>
           <li><FaAffiliatetheme className='text-3xl text-white cursor-pointer' /></li>
           <li><FaCartArrowDown className='text-3xl text-white cursor-pointer' /></li>
           <li className='w-10'><img src={images.defaultImage} className='w-full rounded-full' /></li>
@@ -47,6 +53,9 @@ const Header = () => {
             <ul className='flex flex-col gap-5'>
               <li className='text-black font-bold text-xl cursor-pointer'>
                 <Link to='/api/auth/login' onClick={() => setIsSidebarOpen(false)}>Login</Link>
+              </li>
+              <li className='text-white font-bold text-xl cursor-pointer' onClick={handleLogout}>
+                Logout
               </li>
               <li><FaAffiliatetheme className='text-3xl text-black cursor-pointer' /></li>
               <li><FaCartArrowDown className='text-3xl text-black cursor-pointer' /></li>

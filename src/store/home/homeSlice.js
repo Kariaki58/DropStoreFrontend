@@ -19,7 +19,6 @@ const homeSlice = createSlice({
         })
         .addCase(getHomePageData.fulfilled, (state, action) => {
             state.status = 'succeeded'
-            console.log(action.payload)
             state.content = action.payload
         })
         .addCase(getHomePageData.rejected, (state, action) => {
