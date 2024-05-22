@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch, FaCartArrowDown, FaAffiliatetheme, FaBars } from 'react-icons/fa';
 import images from '../assets';
@@ -8,13 +8,36 @@ import { logOutAccount } from '../store/logout/logoutPost';
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const { data, error, status } = useSelector((state) => state.logout)
-  const dispatch = useDispatch()
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { data, error, status } = useSelector((state) => state.logout);
+  const dispatch = useDispatch();
+  const dropdownRef = useRef(null);
 
   const handleLogout = () => {
-    dispatch(logOutAccount())
-  }
-  
+    dispatch(logOutAccount());
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDropdownOpen) {
+      window.addEventListener('click', handleClickOutside);
+    } else {
+      window.removeEventListener('click', handleClickOutside);
+    }
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   return (
     <header className='bg-purple-900'>
       <nav className='container flex justify-between m-auto items-center p-3'>
@@ -25,16 +48,31 @@ const Header = () => {
           <input className='w-[460px] py-3 px-2 font-medium focus:outline-none bg-slate-300 rounded-s-lg' />
           <FaSearch className='absolute right-3 top-3.5 text-xl' />
         </div>
-        <ul className='hidden md:flex gap-5 items-center'>
-          <li className='text-white font-bold text-xl cursor-pointer'>
-              <Link to='/api/auth/login'>Login</Link>
-          </li>
-          <li className='text-white font-bold text-xl cursor-pointer' onClick={handleLogout}>
-            Logout
-          </li>
+        <ul className='hidden md:flex gap-5 items-center relative'>
           <li><FaAffiliatetheme className='text-3xl text-white cursor-pointer' /></li>
           <li><FaCartArrowDown className='text-3xl text-white cursor-pointer' /></li>
-          <li className='w-10'><img src={images.defaultImage} className='w-full rounded-full' /></li>
+          <li className='relative w-10' ref={dropdownRef}>
+            <img 
+              src={images.defaultImage} 
+              className='w-full rounded-full cursor-pointer' 
+              onClick={toggleDropdown} 
+            />
+            {isDropdownOpen && (
+              <div className='absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50'>
+                <ul className='py-2'>
+
+                  <li className='font-bold text-lg cursor-pointer p-3'><Link to='/profile'>Profile</Link></li>
+                  <li className='font-bold text-lg cursor-pointer p-3'><Link to='/setting'>setting</Link></li>
+                  <li className='font-bold text-lg cursor-pointer p-3'>
+                    <Link to='/api/auth/login'>Login</Link>
+                  </li>
+                  <li className='font-bold text-lg cursor-pointer p-3' onClick={handleLogout}>
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            )}
+          </li>
         </ul>
         <div className='md:hidden flex items-center'>
           <FaSearch className='text-white text-2xl mr-3 cursor-pointer' onClick={() => setIsSearchOpen(!isSearchOpen)} />
