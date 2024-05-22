@@ -6,17 +6,30 @@ import { useNavigate } from 'react-router';
 
 const ComfirmToken = () => {
   const [token, setToken] = useState({ email_token: ''})
+  const [displayDuration, setdisplayDuration] = useState(true)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { data, status, error } = useSelector((state) => state.token)
 
-  useEffect(() => {
-    if (data === 'account created') {
-      localStorage.setItem('isAuthenticated', true)
-      navigate('/', { replace: true });
-    }
-  }, [data]);
 
+  useEffect(() => {
+    if (status === 'succeeded') {
+        setTimeout(() => {
+          setdisplayDuration(false)
+        }, 1000);
+    }
+  }, [status])
+
+  // in production remove the set time out
+  useEffect(() => {
+    if (data !== 'token not correct' && status === 'succeeded') {
+      setTimeout(() => {
+        navigate('/', { replace: true })
+      }, 2000);
+    } else {
+    }
+  }, [status])
+  
   const handleChange = (e) => {
     setToken({
       ...token,
@@ -29,7 +42,7 @@ const ComfirmToken = () => {
   }
 
   useEffect(() => {
-    if (data !== 'Invalid credentials' && status === 'succeeded') {
+    if (data !== 'token not correct' && status === 'succeeded') {
       setTimeout(() => {
         navigate('/', { replace: true })
       }, 2000);
@@ -43,7 +56,7 @@ const ComfirmToken = () => {
       <div className='bg-white shadow-lg rounded-lg p-8 w-full max-w-md'>
         {
           status === 'succeeded' && displayDuration && (
-            <div className={`${ data === 'loged in successfull' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-50 flex justify-center items-center`}>
+            <div className={`${ data === 'account created' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-[500] flex justify-center items-center`}>
               <h1 className='text-white p-4'>{ data }</h1>
             </div>
           )

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaCartArrowDown, FaAffiliatetheme, FaBars } from 'react-icons/fa';
 import images from '../assets';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,8 +9,11 @@ const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [displayDuration, setdisplayDuration] = useState(true)
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const dropdownRef = useRef(null);
+  const { data, status, error } = useSelector((state) => state.logout)
 
   const handleLogout = () => {
     dispatch(logOutAccount());
@@ -27,6 +30,24 @@ const Header = () => {
   };
 
   useEffect(() => {
+    if (status === 'succeeded') {
+        setTimeout(() => {
+          setdisplayDuration(false)
+        }, 1000);
+    }
+  }, [status])
+
+  // in production remove the set time out
+  useEffect(() => {
+    if (data !== 'Failed to destroy session' && status === 'succeeded') {
+      setTimeout(() => {
+        navigate('/', { replace: true })
+      }, 2000);
+    } else {
+    }
+  }, [status])
+  
+  useEffect(() => {
     if (isDropdownOpen) {
       window.addEventListener('click', handleClickOutside);
     } else {
@@ -39,6 +60,13 @@ const Header = () => {
 
   return (
     <header className='bg-purple-900'>
+      {
+        status === 'succeeded' && displayDuration && (
+          <div className={`${ data === 'you are been loged out' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-[10000] flex justify-center items-center`}>
+            <h1 className='text-white p-4'>{ data }</h1>
+          </div>
+        )
+      }
       <nav className='container flex justify-between m-auto items-center p-3'>
         <h1 className='text-white text-3xl cursor-default'>
           <Link to='/'>DropStore</Link>
@@ -57,7 +85,7 @@ const Header = () => {
               onClick={toggleDropdown} 
             />
             {isDropdownOpen && (
-              <div className='absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50'>
+              <div className='absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
                 <ul className='py-2'>
 
                   <li className='font-bold text-lg cursor-pointer p-3'><Link to='/profile'>Profile</Link></li>
