@@ -9,7 +9,6 @@ const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { data, error, status } = useSelector((state) => state.logout);
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
 

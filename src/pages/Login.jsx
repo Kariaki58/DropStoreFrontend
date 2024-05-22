@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logInAccount } from '../store/loginToken/loginTokenPost';
 
 const Login = () => {
   const dispatch = useDispatch()
-  const { error } = useSelector((state) => state.login)
+  const { status, data } = useSelector((state) => state.login)
+  const [displayDuration, setdisplayDuration] = useState(true)
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setdisplayDuration(true)
+    dispatch(logInAccount(userData))
+  }
+
 
   const navigate = useNavigate()
   const [userData, setUserData] = useState({
@@ -20,16 +29,34 @@ const Login = () => {
     })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(logInAccount(userData))
-    if (!error) {
-      navigate('/', { replace: true })
+  useEffect(() => {
+    if (status === 'succeeded') {
+        setTimeout(() => {
+          setdisplayDuration(false)
+        }, 1000);
     }
-  }
+  }, [status])
+
+  // in production remove the set time out
+  useEffect(() => {
+    if (data !== 'Invalid credentials' && status === 'succeeded') {
+      setTimeout(() => {
+        navigate('/', { replace: true })
+      }, 2000);
+    } else {
+    }
+  }, [status])
+
   return (
     <div className='m-auto max-w-lg mt-24 flex justify-center px-4 md:px-0'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full'>
+        {
+          status === 'succeeded' && displayDuration && (
+            <div className={`${ data === 'loged in successfull' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-50 flex justify-center items-center`}>
+              <h1 className='text-white p-4'>{ data }</h1>
+            </div>
+          )
+        }
         <form className='w-full' onSubmit={handleSubmit}>
           <h1 className='text-3xl font-semibold mb-6 text-center'>Sign In</h1>
           <label htmlFor='email' className='block text-xl mb-2'>Email address</label>

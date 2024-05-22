@@ -15,7 +15,7 @@ const ComfirmToken = () => {
       localStorage.setItem('isAuthenticated', true)
       navigate('/', { replace: true });
     }
-  }, [data, navigate]);
+  }, [data]);
 
   const handleChange = (e) => {
     setToken({
@@ -27,9 +27,27 @@ const ComfirmToken = () => {
     e.preventDefault()
     dispatch(comfirmToken(token))
   }
+
+  useEffect(() => {
+    if (data !== 'Invalid credentials' && status === 'succeeded') {
+      setTimeout(() => {
+        navigate('/', { replace: true })
+      }, 2000);
+    } else {
+    }
+  }, [status])
+
+
   return (
     <div className='h-screen flex justify-center items-center'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full max-w-md'>
+        {
+          status === 'succeeded' && displayDuration && (
+            <div className={`${ data === 'loged in successfull' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-50 flex justify-center items-center`}>
+              <h1 className='text-white p-4'>{ data }</h1>
+            </div>
+          )
+        }
         <h1 className='text-xl font-semibold mb-4'>{data}</h1>
         <h1 className='text-xl font-semibold mb-4'>{status}</h1>
         <form onSubmit={handleSubmit}>

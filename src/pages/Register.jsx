@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,9 @@ import { createUserAccount } from '../store/user/userPost';
 
 const Register = () => {
     const dispatch = useDispatch()
-    const { error } = useSelector((state) => state.user)
+    const { error, status, data } = useSelector((state) => state.user)
     const navigate = useNavigate()
+    const [displayDuration, setdisplayDuration] = useState(true)
     const [passwordError, setPasswordError] = useState('')
     const [userData, setUserData] = useState({
       email: '',
@@ -25,6 +26,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
+      setdisplayDuration(true)
       const { email, password } = userData
       const request = {
         email, password
@@ -34,15 +36,34 @@ const Register = () => {
         return
       }
       dispatch(createUserAccount(request));
-      if (!error) {
-        navigate('/api/auth/comfirm-token')
-      } 
     };
+
+    useEffect(() => {
+      if (status === 'succeeded') {
+          setTimeout(() => {
+            setdisplayDuration(false)
+          }, 1000);
+      }
+    }, [status])
+
+    useEffect(() => {
+      if (data === 'An email has been sent to you' && status === 'succeeded') {
+        setTimeout(() => {
+          navigate('/api/auth/comfirm-token')
+        }, 2000)
+      } 
+    }, [status])
 
   return (
     <div className='m-auto max-w-lg mt-14 flex justify-center px-4 md:px-0'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full'>
-        {error && <h1 className='text-red-500 mb-4'>There is an issue with your request</h1>}
+        {
+          status === 'succeeded' && displayDuration && (
+            <div className={`${ data === 'An email has been sent to you' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-50 flex justify-center items-center`}>
+              <h1 className='text-white p-4'>{ data }</h1>
+            </div>
+          )
+        }
         <form className='w-full' onSubmit={handleSubmit}>
           <h1 className='text-3xl font-semibold mb-6 text-center'>Sign Up</h1>
           <label htmlFor='email' className='block text-xl mb-2'>Email address</label>
