@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard"
 import CustomizedStore from "./pages/CustomizedStore"
 import Orders from "./pages/Orders"
 import Stats from "./pages/Stats"
+import Store from './pages/Store'
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/api/auth/sign-up" element={<Register />} />
         <Route path="/api/auth/comfirm-token" element={<ComfirmToken />} />
         <Route path="/api/settings" element={<Settings />} />
-        <Route path="/api/store" element={<CustomizedStore />} />
+        <Route path="/api/customize/store" element={<CustomizedStore />} />
+        <Route path="/api/store" element={<Store />} />
         <Route path="/api/dashboard" element={<Dashboard />} >
           <Route index element={<Stats />} />
           <Route path="orders" element={<Orders />} />

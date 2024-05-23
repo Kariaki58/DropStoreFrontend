@@ -4,6 +4,12 @@ import ProductsInStore from './ProductsInStore';
 import { Link } from 'react-router-dom';
 
 const CustomizedStore = () => {
+    const ChangeBanner = () => {
+      document.getElementById('banner').click()
+    }
+    const handleImageClick = () => {
+      document.getElementById('image').click();
+    };
   return (
     <section>
         <div className='relative w-full h-[400px]'>
@@ -11,6 +17,7 @@ const CustomizedStore = () => {
             src={images.laptop}
             alt="Banner"
             className='absolute inset-0 w-full h-full object-cover'
+            onClick={ChangeBanner}
           />
         </div>
         <div className='flex justify-center'>
@@ -23,6 +30,7 @@ const CustomizedStore = () => {
               <option>Kitchen Utils</option>
               <option>School items</option>
             </select>
+            <input type='file' onClick={ChangeBanner} accept='image/*' id='banner' className='hidden'/>
             <div>
               <Link to='/api/store/upload/fill'>
                 <button className='bg-purple-700 p-5 rounded-full text-white font-bold'>Upload New Product</button>
@@ -30,7 +38,7 @@ const CustomizedStore = () => {
             </div>
           </div>
         </div>
-        <ProductsInStore />
+        <ProductsInStore read={false} handleImageClick={handleImageClick} cursor='cursor-pointer' />
     </section>
   );
 }

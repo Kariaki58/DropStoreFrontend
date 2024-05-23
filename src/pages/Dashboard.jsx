@@ -30,7 +30,7 @@ const Dashboard = () => {
             </li>
             <li className='flex items-center gap-2 text-2xl bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-800 text-white active:bg-slate-800'>
               <TbBuildingStore />
-              <Link to='/api/store'><p>Manage Store</p></Link>
+              <Link to='/api/customize/store'><p>Manage Store</p></Link>
             </li>
             <li className='flex items-center gap-2 text-2xl bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-800 text-white active:bg-slate-800'>
               <IoMdHelpCircle />

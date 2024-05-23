@@ -1,11 +1,7 @@
 import React from 'react';
 import images from '../assets';
 
-function ProductsInStore() {
-  const handleImageClick = () => {
-    document.getElementById('image').click();
-  };
-
+function ProductsInStore({ read, handleImageClick, cursor }) {
   const handleFileChange = (event) => {
     // Handle file change here
   };
@@ -18,7 +14,7 @@ function ProductsInStore() {
             src={images.laptop}
             width={124}
             onClick={handleImageClick}
-            className="cursor-pointer w-full"
+            className={`${cursor} w-full`}
           />
         </div>
         <form className="mt-2">
@@ -26,11 +22,13 @@ function ProductsInStore() {
             type="text"
             value="Dell Latitude E7250 4 Generation"
             className="border-none focus:outline-none resize-none block w-full p-2 rounded-md shadow-sm"
+            readOnly={read}
           ></textarea>
           <input
             type="text"
             value="$200"
             className="border-none focus:outline-none block w-full py-2 pr-4 rounded-md shadow-sm text-end"
+            readOnly={read}
           />
           <input
             type="file"
@@ -38,6 +36,7 @@ function ProductsInStore() {
             className="hidden"
             accept="image/*"
             onChange={handleFileChange}
+            readOnly={read}
           />
         </form>
         <div className='flex justify-center py-2'>
@@ -52,7 +51,7 @@ function ProductsInStore() {
           src={images.laptop}
           width={124}
           onClick={handleImageClick}
-          className="cursor-pointer w-full"
+          className={`${cursor} w-full`}
         />
       </div>
       <form className="mt-2">
@@ -60,11 +59,13 @@ function ProductsInStore() {
           type="text"
           value="Dell Latitude E7250 4 Generation"
           className="border-none focus:outline-none resize-none block w-full p-2 rounded-md shadow-sm"
+          readOnly={read}
         ></textarea>
         <input
           type="text"
           value="$200"
           className="border-none focus:outline-none block w-full py-2 pr-4 rounded-md shadow-sm text-end"
+          readOnly={read}
         />
         <input
           type="file"
@@ -72,6 +73,7 @@ function ProductsInStore() {
           className="hidden"
           accept="image/*"
           onChange={handleFileChange}
+          readOnly={read}
         />
       </form>
       <div className='flex justify-center py-2'>
@@ -86,7 +88,7 @@ function ProductsInStore() {
           src={images.laptop}
           width={124}
           onClick={handleImageClick}
-          className="cursor-pointer w-full"
+          className="w-full"
         />
       </div>
       <form className="mt-2">
@@ -94,11 +96,13 @@ function ProductsInStore() {
           type="text"
           value="Dell Latitude E7250 4 Generation"
           className="border-none focus:outline-none resize-none block w-full p-2 rounded-md shadow-sm"
+          readOnly={read}
         ></textarea>
         <input
           type="text"
           value="$200"
           className="border-none focus:outline-none block w-full py-2 pr-4 rounded-md shadow-sm text-end"
+          readOnly={read}
         />
         <input
           type="file"
@@ -106,6 +110,7 @@ function ProductsInStore() {
           className="hidden"
           accept="image/*"
           onChange={handleFileChange}
+          readOnly={read}
         />
       </form>
       <div className='flex justify-center py-2'>
@@ -120,7 +125,7 @@ function ProductsInStore() {
           src={images.laptop}
           width={124}
           onClick={handleImageClick}
-          className="cursor-pointer w-full"
+          className={`${cursor} w-full`}
         />
       </div>
       <form className="mt-2">
@@ -128,11 +133,13 @@ function ProductsInStore() {
           type="text"
           value="Dell Latitude E7250 4 Generation"
           className="border-none focus:outline-none resize-none block w-full p-2 rounded-md shadow-sm"
+          readOnly={read}
         ></textarea>
         <input
           type="text"
           value="$200"
           className="border-none focus:outline-none block w-full py-2 pr-4 rounded-md shadow-sm text-end"
+          readOnly={read}
         />
         <input
           type="file"
@@ -140,6 +147,7 @@ function ProductsInStore() {
           className="hidden"
           accept="image/*"
           onChange={handleFileChange}
+          readOnly={read}
         />
       </form>
       <div className='flex justify-center py-2'>
@@ -154,7 +162,7 @@ function ProductsInStore() {
           src={images.laptop}
           width={124}
           onClick={handleImageClick}
-          className="cursor-pointer w-full"
+          className={`${cursor} w-full`}
         />
       </div>
       <form className="mt-2">
@@ -162,11 +170,13 @@ function ProductsInStore() {
           type="text"
           value="Dell Latitude E7250 4 Generation"
           className="border-none focus:outline-none resize-none block w-full p-2 rounded-md shadow-sm"
+          readOnly={read}
         ></textarea>
         <input
           type="text"
           value="$200"
           className="border-none focus:outline-none block w-full py-2 pr-4 rounded-md shadow-sm text-end"
+          readOnly={read}
         />
         <input
           type="file"
@@ -174,6 +184,7 @@ function ProductsInStore() {
           className="hidden"
           accept="image/*"
           onChange={handleFileChange}
+          readOnly={read}
         />
       </form>
       <div className='flex justify-center py-2'>
@@ -188,7 +199,7 @@ function ProductsInStore() {
           src={images.laptop}
           width={124}
           onClick={handleImageClick}
-          className="cursor-pointer w-full"
+          className={`${cursor} w-full`}
         />
       </div>
       <form className="mt-2">
@@ -196,11 +207,13 @@ function ProductsInStore() {
           type="text"
           value="Dell Latitude E7250 4 Generation"
           className="border-none focus:outline-none resize-none block w-full p-2 rounded-md shadow-sm"
+          readOnly={read}
         ></textarea>
         <input
           type="text"
           value="$200"
           className="border-none focus:outline-none block w-full py-2 pr-4 rounded-md shadow-sm text-end"
+          readOnly={read}
         />
         <input
           type="file"
@@ -208,6 +221,7 @@ function ProductsInStore() {
           className="hidden"
           accept="image/*"
           onChange={handleFileChange}
+          readOnly={read}
         />
       </form>
       <div className='flex justify-center py-2'>
@@ -222,7 +236,7 @@ function ProductsInStore() {
           src={images.laptop}
           width={124}
           onClick={handleImageClick}
-          className="cursor-pointer w-full"
+          className={`${cursor} w-full`}
         />
       </div>
       <form className="mt-2">
@@ -230,11 +244,13 @@ function ProductsInStore() {
           type="text"
           value="Dell Latitude E7250 4 Generation"
           className="border-none focus:outline-none resize-none block w-full p-2 rounded-md shadow-sm"
+          readOnly={read}
         ></textarea>
         <input
           type="text"
           value="$200"
           className="border-none focus:outline-none block w-full py-2 pr-4 rounded-md shadow-sm text-end"
+          readOnly={read}
         />
         <input
           type="file"
@@ -242,6 +258,7 @@ function ProductsInStore() {
           className="hidden"
           accept="image/*"
           onChange={handleFileChange}
+          readOnly={read}
         />
       </form>
       <div className='flex justify-center py-2'>
