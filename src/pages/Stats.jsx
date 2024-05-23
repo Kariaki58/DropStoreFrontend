@@ -8,7 +8,7 @@ const Stats = () => {
           <menu className='grid grid-cols-3 gap-8'>
             <div className='bg-slate-600 p-5 text-white text-xl font-bold rounded-lg'>
               <p>530</p>
-              <Link to='/api/orders'><p>Orders</p></Link>
+              <Link to='/api/dashboard/orders'><p>Orders</p></Link>
             </div>
             <div className='bg-slate-600 p-5 text-white text-xl font-bold rounded-lg'>
               <p>200</p>
