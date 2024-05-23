@@ -88,8 +88,8 @@ const Header = () => {
               <div className='absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
                 <ul className='py-2'>
 
-                  <li className='font-bold text-lg cursor-pointer p-3'><Link to='/profile'>Profile</Link></li>
-                  <li className='font-bold text-lg cursor-pointer p-3'><Link to='/setting'>setting</Link></li>
+                  <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
+                  <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/settings'>setting</Link></li>
                   <li className='font-bold text-lg cursor-pointer p-3'>
                     <Link to='/api/auth/login'>Login</Link>
                   </li>
