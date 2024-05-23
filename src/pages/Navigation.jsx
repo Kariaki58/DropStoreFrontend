@@ -79,7 +79,7 @@ const Header = () => {
           <li><FaAffiliatetheme className='text-3xl text-white cursor-pointer' /></li>
           <li><FaCartArrowDown className='text-3xl text-white cursor-pointer' /></li>
           <li className='relative w-10' ref={dropdownRef}>
-            <img 
+            <img
               src={images.defaultImage} 
               className='w-full rounded-full cursor-pointer' 
               onClick={toggleDropdown} 
