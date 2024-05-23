@@ -20,23 +20,23 @@ const Dashboard = () => {
         </div>
         <div className='mt-10 self-start pl-5'>
           <ul className='space-y-7'>
-            <li className='flex items-center gap-2 text-2xl bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-800 text-white active:bg-slate-800'>
+            <li className='flex items-center gap-2 text-2xl bg-slate-900 p-3 rounded-lg cursor-pointer hover:bg-slate-700 text-white active:bg-slate-700'>
               <MdDashboard /> 
               <Link to='/api/dashboard'><p>Dashboard</p></Link>
             </li>
-            <li className='flex items-center gap-2 text-2xl bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-800 text-white active:bg-slate-800'>
+            <li className='flex items-center gap-2 text-2xl bg-slate-900 p-3 rounded-lg cursor-pointer hover:bg-slate-700 text-white active:bg-slate-700'>
               <TbShoppingCartShare />
               <Link to='/api/dashboard/orders'><p>Orders</p></Link>
             </li>
-            <li className='flex items-center gap-2 text-2xl bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-800 text-white active:bg-slate-800'>
+            <li className='flex items-center gap-2 text-2xl bg-slate-900 p-3 rounded-lg cursor-pointer hover:bg-slate-700 text-white active:bg-slate-700'>
               <TbBuildingStore />
               <Link to='/api/customize/store'><p>Manage Store</p></Link>
             </li>
-            <li className='flex items-center gap-2 text-2xl bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-800 text-white active:bg-slate-800'>
+            <li className='flex items-center gap-2 text-2xl bg-slate-900 p-3 rounded-lg cursor-pointer hover:bg-slate-700 text-white active:bg-slate-700'>
               <IoMdHelpCircle />
               <p>Help?</p>
             </li>
-            <li className='flex items-center gap-2 text-2xl bg-slate-600 p-3 rounded-lg cursor-pointer hover:bg-slate-800 text-white active:bg-slate-800'>
+            <li className='flex items-center gap-2 text-2xl bg-slate-900 p-3 rounded-lg cursor-pointer hover:bg-slate-700 text-white active:bg-slate-800'>
               <FaRegAddressBook />
               <p>Address</p>
             </li>

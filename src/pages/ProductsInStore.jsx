@@ -3,7 +3,6 @@ import images from '../assets';
 
 function ProductsInStore({ read, handleImageClick, cursor }) {
   const handleFileChange = (event) => {
-    // Handle file change here
   };
 
   return (
@@ -40,7 +39,7 @@ function ProductsInStore({ read, handleImageClick, cursor }) {
           />
         </form>
         <div className='flex justify-center py-2'>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md block">
+          <button className="bg-purple-900 text-white px-4 py-2 rounded-md shadow-md block">
             Add to Cart
           </button>
         </div>
@@ -77,7 +76,7 @@ function ProductsInStore({ read, handleImageClick, cursor }) {
         />
       </form>
       <div className='flex justify-center py-2'>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md block">
+          <button className="bg-purple-900 text-white px-4 py-2 rounded-md shadow-md block">
             Add to Cart
           </button>
       </div>
@@ -114,7 +113,7 @@ function ProductsInStore({ read, handleImageClick, cursor }) {
         />
       </form>
       <div className='flex justify-center py-2'>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md block">
+          <button className="bg-purple-900 text-white px-4 py-2 rounded-md shadow-md block">
             Add to Cart
           </button>
       </div>
@@ -151,7 +150,7 @@ function ProductsInStore({ read, handleImageClick, cursor }) {
         />
       </form>
       <div className='flex justify-center py-2'>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md block">
+        <button className="bg-purple-900 text-white px-4 py-2 rounded-md shadow-md block">
           Add to Cart
         </button>
       </div>
@@ -188,7 +187,7 @@ function ProductsInStore({ read, handleImageClick, cursor }) {
         />
       </form>
       <div className='flex justify-center py-2'>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md block">
+        <button className="bg-purple-900 text-white px-4 py-2 rounded-md shadow-md block">
           Add to Cart
         </button>
       </div>
@@ -225,7 +224,7 @@ function ProductsInStore({ read, handleImageClick, cursor }) {
         />
       </form>
       <div className='flex justify-center py-2'>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md block">
+        <button className="bg-purple-900 text-white px-4 py-2 rounded-md shadow-md block">
           Add to Cart
         </button>
       </div>
@@ -262,7 +261,7 @@ function ProductsInStore({ read, handleImageClick, cursor }) {
         />
       </form>
       <div className='flex justify-center py-2'>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md block">
+          <button className="bg-purple-900 text-white px-4 py-2 rounded-md shadow-md block">
             Add to Cart
           </button>
         </div>

@@ -17,7 +17,7 @@ const Store = () => {
         <div className='flex justify-center'>
           <div className='flex flex-col items-center'>
             <form>
-              <input className='text-center font-bold text-[4rem] text-purple-700 focus:outline-none' value='James Store' readOnly/>
+              <input className='text-center font-bold text-[4rem] text-purple-900 focus:outline-none' value='James Store' readOnly/>
             </form>
             <input type='file' accept='image/*' id='banner' className='hidden' readOnly/>
           </div>

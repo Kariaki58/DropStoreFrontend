@@ -77,7 +77,7 @@ const Header = () => {
         </div>
         <ul className='hidden md:flex gap-5 items-center relative'>
           <li><FaAffiliatetheme className='text-3xl text-white cursor-pointer' /></li>
-          <li><FaCartArrowDown className='text-3xl text-white cursor-pointer' /></li>
+          <Link to='/api/carts'><li><FaCartArrowDown className='text-3xl text-white cursor-pointer' /></li></Link>
           <li className='relative w-10' ref={dropdownRef}>
             <img
               src={images.defaultImage} 

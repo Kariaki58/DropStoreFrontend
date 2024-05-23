@@ -23,17 +23,17 @@ const CustomizedStore = () => {
         <div className='flex justify-center'>
           <div className='flex flex-col items-center'>
             <form>
-              <input className='text-center font-bold text-[4rem] text-purple-700 focus:outline-none' value='James Store'/>
+              <input className='text-center font-bold text-[4rem] text-purple-900 focus:outline-none' value='James Store'/>
             </form>
-            <select className="block w-full border bg-slate-600 text-white font-bold p-5 focus:outline-none border-gray-300 rounded-md mt-5 mb-5">
-              <option>Kid Dress</option>
-              <option>Kitchen Utils</option>
-              <option>School items</option>
+            <select className="block w-full border bg-purple-900 text-white text-xl font-bold p-5 focus:outline-none border-gray-300 rounded-md mt-5 mb-5">
+              <option className='font-bold text-xl'>Kid Dress</option>
+              <option className='font-bold text-xl'>Kitchen Utils</option>
+              <option className='font-bold text-xl'>School items</option>
             </select>
             <input type='file' onClick={ChangeBanner} accept='image/*' id='banner' className='hidden'/>
             <div>
               <Link to='/api/store/upload/fill'>
-                <button className='bg-purple-700 p-5 rounded-full text-white font-bold'>Upload New Product</button>
+                <button className='bg-purple-900 p-5 rounded-full text-white font-bold'>Upload New Product</button>
               </Link>
             </div>
           </div>
