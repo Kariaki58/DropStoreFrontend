@@ -9,12 +9,17 @@ import { Link, Outlet } from 'react-router-dom';
 
 
 const Dashboard = () => {
+    const handleImageClick = () => {
+      document.getElementById('newImage').click()
+      console.log('clicked')
+    }
   return (
     <div className='flex'>
       <div className='bg-purple-900 h-screen w-[20%] flex items-center flex-col overflow-y-auto'>
         <div className='text-center mt-5'>
           <div className='w-28 h-28 mx-auto'>
-            <img src={images.defaultImage} className='rounded-full' />
+            <img src={images.defaultImage} className='rounded-full cursor-pointer' onClick={handleImageClick}/>
+            <input type='file' accept='image/*' id='newImage' className='hidden' onClick={handleImageClick} />
           </div>
           <input value='Kariaki Stephen' type='text' className='mt-4 text-center bg-transparent focus:border focus:outline-none text-white'/>
         </div>
