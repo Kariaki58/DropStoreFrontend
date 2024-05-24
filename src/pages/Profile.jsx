@@ -6,16 +6,8 @@ const AddressForm = () => {
       <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Add Your Address</h2>
       <form className="space-y-4">
         <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
-          <input id="fullName" name="fullName" type="text" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-        </div>
-        <div>
           <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">Phone Number</label>
           <input id="phoneNumber" name="phoneNumber" type="tel" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-          <input id="email" name="email" type="email" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
         </div>
         <div>
           <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address</label>
