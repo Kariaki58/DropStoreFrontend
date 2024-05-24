@@ -71,10 +71,10 @@ const ComfirmToken = () => {
             onChange={handleChange}
             type='text'
             placeholder='Enter your 6 digit token'
-            className='block w-full border-2 border-slate-700 py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='block w-full border-2 border-slate-700 py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
             required
           />
-          <button className='w-full p-3 bg-blue-600 text-white rounded-full mt-5 hover:bg-blue-700 transition duration-300'>
+          <button className='w-full p-3 bg-purple-900 text-white rounded-full mt-5 hover:bg-purple-700 transition duration-300'>
             Check
           </button>
         </form>

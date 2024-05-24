@@ -72,7 +72,7 @@ const Register = () => {
             type='email'
             value={userData.email}
             onChange={handleChange}
-            className='block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
             placeholder='Enter email'
             required
           />
@@ -82,7 +82,7 @@ const Register = () => {
             value={userData.password}
             onChange={handleChange}
             name='password'
-            className={`block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 ${passwordError ? 'border-red-600 focus:ring-red-500' : 'border-slate-700 focus:ring-blue-500'}`}
+            className={`block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 ${passwordError ? 'border-red-600 focus:ring-red-500' : 'border-slate-700 focus:ring-purple-500'}`}
             placeholder='Enter password'
             required
           />
@@ -92,13 +92,13 @@ const Register = () => {
             value={userData.comfirmPassword}
             onChange={handleChange}
             name='comfirmPassword'
-            className={`block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 ${passwordError ? 'border-red-600 focus:ring-red-500' : 'border-slate-700 focus:ring-blue-500'}`}
+            className={`block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 ${passwordError ? 'border-red-600 focus:ring-red-500' : 'border-slate-700 focus:ring-purple-500'}`}
             placeholder='Confirm password'
             required
           />
           <button className='w-full bg-purple-700 text-white py-3 mt-5 rounded-lg font-semibold hover:bg-purple-900 transition duration-300'>Register</button>
         </form>
-        <p className='mt-4 text-center'>Already have an account? <Link className='text-blue-700 hover:underline' to='/api/auth/login'>Sign in</Link></p>
+        <p className='mt-4 text-center'>Already have an account? <Link className='text-purple-700 hover:underline' to='/api/auth/login'>Sign in</Link></p>
       </div>
     </div>
   );

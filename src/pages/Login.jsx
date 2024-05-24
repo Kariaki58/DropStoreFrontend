@@ -65,7 +65,7 @@ const Login = () => {
             type='email'
             value={userData.email}
             onChange={handleChange}
-            className='block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
             placeholder='Enter email'
             required
           />
@@ -75,13 +75,13 @@ const Login = () => {
             value={userData.password}
             onChange={handleChange}
             type='password'
-            className='block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
             placeholder='Enter password'
             required
           />
           <button className='w-full bg-purple-700 text-white py-3 mt-5 rounded-lg font-semibold hover:bg-purple-900 transition duration-300'>Login</button>
         </form>
-        <p className='mt-4 text-center'>Don't have an account? <Link className='text-blue-700 hover:underline' to='/api/auth/sign-up'>Sign up</Link></p>
+        <p className='mt-4 text-center'>Don't have an account? <Link className='text-purple-700 hover:underline' to='/api/auth/sign-up'>Sign up</Link></p>
       </div>
     </div>
   );

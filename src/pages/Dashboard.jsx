@@ -41,9 +41,11 @@ const Dashboard = () => {
               <IoMdHelpCircle />
               <p>Help?</p>
             </li>
-            <li className='flex items-center gap-2 text-2xl bg-slate-900 p-3 rounded-lg cursor-pointer hover:bg-slate-700 text-white active:bg-slate-800'>
-              <FaRegAddressBook />
-              <p>Address</p>
+            <li className='text-2xl bg-slate-900 p-3 rounded-lg cursor-pointer hover:bg-slate-700 text-white active:bg-slate-800'>
+              <Link to='/api/profile' className='flex gap-2 items-center'>
+                <FaRegAddressBook />
+                <p>Address</p>
+              </Link>
             </li>
           </ul>
         </div>
