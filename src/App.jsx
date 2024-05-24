@@ -13,6 +13,7 @@ import Store from './pages/Store'
 import Carts from "./pages/Carts"
 import ProductsInStore from "./pages/ProductsInStore"
 import UploadProductForm from './pages/UploadProductForm';
+import AddressForm from "./pages/Profile"
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/api/settings" element={<Settings />} />
         <Route path="/api/store" element={<Store />} />
         <Route path="/api/carts" element={<Carts />} />
+        <Route path="/api/profile" element={<AddressForm />} />
         <Route path="/api/dashboard" element={<Dashboard />} >
           <Route index element={<Stats />} />
           <Route path="orders" element={<Orders />} />
