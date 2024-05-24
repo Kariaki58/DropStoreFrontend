@@ -1,7 +1,7 @@
 import React from 'react';
 import images from '../assets';
 import ProductsInStore from './ProductsInStore';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 const CustomizedStore = () => {
     const ChangeBanner = () => {
@@ -32,13 +32,20 @@ const CustomizedStore = () => {
             </select>
             <input type='file' onClick={ChangeBanner} accept='image/*' id='banner' className='hidden'/>
             <div>
-              <Link to='/api/store/upload/fill'>
-                <button className='bg-purple-900 p-5 rounded-full text-white font-bold'>Upload New Product</button>
-              </Link>
+              <div>
+                <Link to='/api/customize/store/upload'>
+                  <button className='bg-purple-900 p-5 rounded-full text-white font-bold'>Upload New Product</button>
+                </Link>
+              </div>
+              <div className='text-center mt-5'>
+                <Link to='/api/store'>
+                  <button className='bg-purple-900 px-5 py-2 rounded-full text-white font-bold'>Go live</button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-        <ProductsInStore read={false} handleImageClick={handleImageClick} cursor='cursor-pointer' />
+        <Outlet />
     </section>
   );
 }

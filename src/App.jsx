@@ -11,6 +11,8 @@ import Orders from "./pages/Orders"
 import Stats from "./pages/Stats"
 import Store from './pages/Store'
 import Carts from "./pages/Carts"
+import ProductsInStore from "./pages/ProductsInStore"
+import UploadProductForm from './pages/UploadProductForm';
 
 function App() {
   return (
@@ -22,12 +24,15 @@ function App() {
         <Route path="/api/auth/sign-up" element={<Register />} />
         <Route path="/api/auth/comfirm-token" element={<ComfirmToken />} />
         <Route path="/api/settings" element={<Settings />} />
-        <Route path="/api/customize/store" element={<CustomizedStore />} />
         <Route path="/api/store" element={<Store />} />
         <Route path="/api/carts" element={<Carts />} />
         <Route path="/api/dashboard" element={<Dashboard />} >
           <Route index element={<Stats />} />
           <Route path="orders" element={<Orders />} />
+        </Route>
+        <Route path="/api/customize/store" element={<CustomizedStore />}>
+          <Route index element={<ProductsInStore />} />
+          <Route path="upload" element={<UploadProductForm />} />
         </Route>
       </Routes>
     </div>
