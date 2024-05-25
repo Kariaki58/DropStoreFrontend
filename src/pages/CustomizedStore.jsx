@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import images from '../assets';
 import ProductsInStore from './ProductsInStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserUploads } from '../store/upload/allUserUpload/userUploadGet';
+import { ThreeDots } from 'react-loader-spinner';
 import { Link, Outlet } from 'react-router-dom';
 
 const CustomizedStore = () => {
+    const dispatch = useDispatch()
+    const { content, status, error } = useSelector((state) => state.userupload)
+
+    useEffect(() => {
+      dispatch(getUserUploads())
+      console.log(content)
+    }, [])
     const ChangeBanner = () => {
       document.getElementById('banner').click()
     }
-    const handleImageClick = () => {
-      document.getElementById('image').click();
-    };
   return (
     <section>
         <div className='relative w-full h-[400px]'>
@@ -51,3 +58,5 @@ const CustomizedStore = () => {
 }
 
 export default CustomizedStore;
+
+
