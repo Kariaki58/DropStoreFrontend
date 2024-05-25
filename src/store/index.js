@@ -5,8 +5,9 @@ import homeSlice from "./home/homeSlice";
 import loginSlice from './loginToken/loginTokenSlice';
 import logoutSlice from './logout/logoutSlice';
 import userUploadSlice from "./upload/allUserUpload/userUploadSlice";
-// import signatureSlice from './upload/products/uploadProductSlice';
-// import uploadProductSlice from "./upload/products/uploadProductSlice";
+import { productSlice } from "./upload/modifyUpload/modifyupload.js";
+import createStoreSlice from './upload/customizeUserStore/productsInStoreSlice';
+
 
 export const store = configureStore({
     reducer: {
@@ -15,7 +16,9 @@ export const store = configureStore({
         home: homeSlice,
         login: loginSlice,
         logout: logoutSlice,
-        userupload: userUploadSlice
+        userupload: userUploadSlice,
+        modify: productSlice,
+        createstore: createStoreSlice
         // upload: uploadProductSlice,
         // signature: signatureSlice
     },

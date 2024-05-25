@@ -3,7 +3,7 @@ import { getHomePageData } from './homeGet';
 
 // change state to initail state
 const initialState = {
-    content: '',
+    content: [],
     status: '',
     error: null
 }
