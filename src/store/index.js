@@ -7,6 +7,8 @@ import logoutSlice from './logout/logoutSlice';
 import userUploadSlice from "./upload/allUserUpload/userUploadSlice";
 import { productSlice } from "./upload/modifyUpload/modifyupload.js";
 import createStoreSlice from './upload/customizeUserStore/productsInStoreSlice';
+import StoreSlice from "./upload/StoreProducts/StoreSlice.js";
+import addToCartSlice from "./upload/cart/addToCartSlice.js";
 
 
 export const store = configureStore({
@@ -18,9 +20,9 @@ export const store = configureStore({
         logout: logoutSlice,
         userupload: userUploadSlice,
         modify: productSlice,
-        createstore: createStoreSlice
-        // upload: uploadProductSlice,
-        // signature: signatureSlice
+        createstore: createStoreSlice,
+        storeproduct: StoreSlice,
+        cart: addToCartSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
 })

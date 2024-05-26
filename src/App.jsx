@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useParams } from "react-router-dom"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
@@ -14,8 +14,10 @@ import Carts from "./pages/Carts"
 import ProductsInStore from "./pages/ProductsInStore"
 import UploadProductForm from './pages/UploadProductForm';
 import AddressForm from "./pages/Profile"
+import StoreProducts from "./pages/StoreProducts"
 
 function App() {
+  const {storeId} = useParams()
   return (
     <div className="">
       <Navigation />
@@ -28,6 +30,7 @@ function App() {
         <Route path="/api/store" element={<Store />} />
         <Route path="/api/carts" element={<Carts />} />
         <Route path="/api/profile" element={<AddressForm />} />
+        <Route path="/api/:storeId/products" element={<StoreProducts />} />
         <Route path="/api/dashboard" element={<Dashboard />} >
           <Route index element={<Stats />} />
           <Route path="orders" element={<Orders />} />

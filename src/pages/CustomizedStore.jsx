@@ -140,10 +140,16 @@ const CustomizedStore = () => {
             />
             <div className='text-center mt-5'>
               <Link to='/api/customize/store/upload'>
-                <button className='bg-purple-900 p-5 rounded-full text-white font-bold mb-10'>Upload New Product</button>
+                <button className='bg-purple-900 p-5 rounded-full text-white font-bold mb-2'>Upload New Product</button>
               </Link>
             </div>
+              <div className='text-center'>
+                <button type='submit' className='bg-purple-900 px-5 py-2 rounded-full text-white font-bold'>
+                  Go live
+                </button>
+            </div>
           </form>
+          
         </div>
       </div>
       </>
