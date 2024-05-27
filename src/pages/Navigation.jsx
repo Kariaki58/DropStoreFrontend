@@ -3,18 +3,29 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaCartArrowDown, FaAffiliatetheme, FaBars } from 'react-icons/fa';
 import images from '../assets';
 import { useDispatch, useSelector } from 'react-redux';
+import { Cart } from '../store/upload/cart/cart';
 import { logOutAccount } from '../store/logout/logoutPost';
+
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [displayDuration, setdisplayDuration] = useState(true)
+  const [displayDuration, setDisplayDuration] = useState(true);
+  const { cart, loading } = useSelector((state) => state.myCart);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dropdownRef = useRef(null);
-  const { data, status, error } = useSelector((state) => state.logout)
-  const { count, loading } = useSelector((state) => state.cart)
+  const [cartState, setCartState] = useState([]);
+  const { data, status, error } = useSelector((state) => state.logout);
+
+  useEffect(() => {
+    dispatch(Cart());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setCartState(cart);
+  }, [cart]);
 
   const handleLogout = () => {
     dispatch(logOutAccount());
@@ -32,22 +43,20 @@ const Header = () => {
 
   useEffect(() => {
     if (status === 'succeeded') {
-        setTimeout(() => {
-          setdisplayDuration(false)
-        }, 1000);
+      setTimeout(() => {
+        setDisplayDuration(false);
+      }, 1000);
     }
-  }, [status])
+  }, [status]);
 
-  // in production remove the set time out
   useEffect(() => {
     if (data !== 'Failed to destroy session' && status === 'succeeded') {
       setTimeout(() => {
-        navigate('/', { replace: true })
+        navigate('/', { replace: true });
       }, 2000);
-    } else {
     }
-  }, [status])
-  
+  }, [status, data, navigate]);
+
   useEffect(() => {
     if (isDropdownOpen) {
       window.addEventListener('click', handleClickOutside);
@@ -58,7 +67,6 @@ const Header = () => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, [isDropdownOpen]);
-
   return (
     <header className='bg-purple-900'>
       {
@@ -82,7 +90,7 @@ const Header = () => {
             <li className='relative'>
               <FaCartArrowDown className='text-3xl text-white cursor-pointer' />
               {
-                loading && <span className='absolute top-[-10px] left-5 text-white bg-black rounded-full px-1 font-bold text-2xl'>{count}</span>
+                loading && <span className='absolute top-[-10px] left-5 text-white bg-black rounded-full px-1 font-bold text-2xl'>{cartState.length}</span>
               }
             </li>
             

@@ -18,7 +18,6 @@ const CartSlice = createSlice({
         })
         builder.addCase(Cart.fulfilled, (state, action) => {
             state.loading = true
-            console.log(action.payload)
             state.cart = action.payload
         })
         builder.addCase(Cart.rejected, (state, action) => {

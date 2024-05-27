@@ -11,15 +11,16 @@ const Carts = () => {
 
   useEffect(() => {
     dispatch(Cart());
-  }, [loading]);
+  }, [dispatch]);
 
   useEffect(() => {
     setCartState(cart);
   }, [cart]);
 
+
   return (
     <section>
-      {loading ? (
+      {!loading ? (
         <p>Loading...</p>
       ) : (
         cartState.map((item, index) => (
