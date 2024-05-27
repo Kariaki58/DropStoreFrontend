@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { MdDelete } from "react-icons/md";
 import { Cart } from '../store/upload/cart/cart';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';

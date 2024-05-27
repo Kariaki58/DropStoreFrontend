@@ -17,7 +17,6 @@ const storeSlice = createSlice({
             state.loading = false
         })
         .addCase(StoreProductFetch.fulfilled, (state, action) => {
-            console.log(action.payload)
             state.data = action.payload
             state.loading = true
         })

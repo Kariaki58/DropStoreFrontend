@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import images from '../assets';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/upload/cartCount/addTocart';
+import { Cart } from '../store/upload/cart/cart';
 import { StoreProductFetch } from '../store/upload/StoreProducts/StoreProduct';
 
 const StoreProducts = () => {
@@ -14,11 +14,12 @@ const StoreProducts = () => {
       dispatch(StoreProductFetch(storeId));
     }, []);
 
+    
     const handleAddToCart = (productId) => {
       const request = { productId, storeId }
-      console.log(request)
       dispatch(addToCart(request));
     };
+
     return (
       <>
         <div className='relative w-full h-screen'>

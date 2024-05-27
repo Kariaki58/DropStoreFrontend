@@ -11,7 +11,6 @@ import { Link, Outlet } from 'react-router-dom';
 const Dashboard = () => {
     const handleImageClick = () => {
       document.getElementById('newImage').click()
-      console.log('clicked')
     }
   return (
     <div className='flex'>

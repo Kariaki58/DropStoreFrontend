@@ -10,8 +10,6 @@ export const productSlice = createSlice({
     initialState,
     reducers: {
       modifyProduct: (state, action) => {
-        console.log('here')
-        console.log(action.payload)
         state.modifiedproduct = action.payload
       }
     }

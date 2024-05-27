@@ -12,7 +12,6 @@ const Store = () => {
 
     useEffect(() => {
       dispatch(getUserUploads())
-      console.log(content)
     }, [])
     const ChangeBanner = () => {
       document.getElementById('banner').click()

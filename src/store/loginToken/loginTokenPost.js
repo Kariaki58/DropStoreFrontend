@@ -9,7 +9,6 @@ export const logInAccount = createAsyncThunk('login/post', async (userData) => {
         }
         return response.data.msg
     } catch (err) {
-        console.log('catching error')
         return 'invalid credential'
     }
 })

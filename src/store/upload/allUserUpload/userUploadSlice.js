@@ -19,7 +19,6 @@ const userUploadSlice = createSlice({
         })
         .addCase(getUserUploads.fulfilled, (state, action) => {
             state.status = true
-            console.log(action.payload)
             state.content = action.payload
         })
         .addCase(getUserUploads.rejected, (state, action) => {

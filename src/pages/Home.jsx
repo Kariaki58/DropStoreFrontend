@@ -14,7 +14,6 @@ const Home = () => {
     }, [])
 
     const handleClick = (storeId) => {
-      console.log(storeId)
       navigate(`/api/${storeId}/products`)
     }
   
