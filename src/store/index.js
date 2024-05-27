@@ -8,7 +8,8 @@ import userUploadSlice from "./upload/allUserUpload/userUploadSlice";
 import { productSlice } from "./upload/modifyUpload/modifyupload.js";
 import createStoreSlice from './upload/customizeUserStore/productsInStoreSlice';
 import StoreSlice from "./upload/StoreProducts/StoreSlice.js";
-import addToCartSlice from "./upload/cart/addToCartSlice.js";
+import addToCartSlice from "./upload/cartCount/addToCartSlice.js";
+import cartSlice from "./upload/cart/cartSlice.js";
 
 
 export const store = configureStore({
@@ -22,7 +23,8 @@ export const store = configureStore({
         modify: productSlice,
         createstore: createStoreSlice,
         storeproduct: StoreSlice,
-        cart: addToCartSlice
+        cart: addToCartSlice,
+        myCart: cartSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
 })

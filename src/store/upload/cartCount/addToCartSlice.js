@@ -4,7 +4,7 @@ import { addToCart } from "./addTocart";
 
 const initialState = {
     loading: false,
-    cart: [],
+    count: 0,
     error: null
 }
 
@@ -18,7 +18,7 @@ const addToCartSlice = createSlice({
         })
         builder.addCase(addToCart.fulfilled, (state, action) => {
             state.loading = true
-            state.myStore = action.payload
+            state.count = action.payload
         })
         builder.addCase(addToCart.rejected, (state, action) => {
             state.loading = false

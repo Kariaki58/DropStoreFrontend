@@ -14,6 +14,7 @@ const Header = () => {
   const navigate = useNavigate()
   const dropdownRef = useRef(null);
   const { data, status, error } = useSelector((state) => state.logout)
+  const { count, loading } = useSelector((state) => state.cart)
 
   const handleLogout = () => {
     dispatch(logOutAccount());
@@ -77,7 +78,15 @@ const Header = () => {
         </div>
         <ul className='hidden md:flex gap-5 items-center relative'>
           <li><FaAffiliatetheme className='text-3xl text-white cursor-pointer' /></li>
-          <Link to='/api/carts'><li><FaCartArrowDown className='text-3xl text-white cursor-pointer' /></li></Link>
+          <Link to='/api/carts'>
+            <li className='relative'>
+              <FaCartArrowDown className='text-3xl text-white cursor-pointer' />
+              {
+                loading && <span className='absolute top-[-10px] left-5 text-white bg-black rounded-full px-1 font-bold text-2xl'>{count}</span>
+              }
+            </li>
+            
+          </Link>
           <li className='relative w-10' ref={dropdownRef}>
             <img
               src={images.defaultImage} 

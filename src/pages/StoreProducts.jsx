@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import images from '../assets';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../store/upload/cart/addTocart';
+import { addToCart } from '../store/upload/cartCount/addTocart';
 import { StoreProductFetch } from '../store/upload/StoreProducts/StoreProduct';
 
 const StoreProducts = () => {
@@ -14,14 +15,31 @@ const StoreProducts = () => {
     }, []);
 
     const handleAddToCart = (productId) => {
-      console.log(productId);
-      dispatch(addToCart(productId));
+      const request = { productId, storeId }
+      console.log(request)
+      dispatch(addToCart(request));
     };
-
     return (
+      <>
+        <div className='relative w-full h-screen'>
+          <img
+            src={data.banner}
+            alt="Banner"
+            className='absolute inset-0 w-full h-screen object-cover'
+          />
+        </div>
+        <div className='flex justify-center'>
+          <div className='flex flex-col items-center'>
+            <form>
+              <h1 className='text-center font-bold text-[4rem] text-purple-900 focus:outline-none'>{data.storeName}</h1>
+            </form>
+            <div>
+            </div>
+          </div>
+        </div>
       <div className="max-w-[1100px] mx-auto grid grid-cols-5 gap-5">
         {
-          data && data.map((item) => (
+          data && data.msg && data.msg.map((item) => (
             <div key={item._id} className="max-w-md w-52 shadow-md rounded-md mt-5">
               <div>
                 <img
@@ -46,6 +64,7 @@ const StoreProducts = () => {
           ))
         }
       </div>
+      </>
     );
 }
 
