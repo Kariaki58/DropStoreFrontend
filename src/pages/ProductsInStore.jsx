@@ -47,19 +47,18 @@ function ProductsInStore() {
   }
   
   return (
-    <div className="max-w-[1100px] mx-auto grid grid-cols-5 gap-5">
+    <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
       {products.map((item, index) => (
-        <div key={item._id} className="max-w-md w-52 shadow-md rounded-md mt-5">
+        <div key={item._id} className="max-w-xs sm:max-w-md md:max-w-[300px] lg:max-w-[250px] xl:max-w-[200px] w-full shadow-md rounded-md mt-5">
           <div>
             <img
               src={item.imgUrl}
-              width={124}
               onClick={() => handleImageClick(index)}
-              className='cursor-pointer w-full'
+              className='cursor-pointer w-full h-40 sm:h-52 md:h-60 lg:h-48 xl:h-40 object-cover rounded-t-md'
               alt="Product"
             />
           </div>
-          <form className="mt-2">
+          <form className="p-2">
             <textarea
               value={item.productName}
               name="productName"

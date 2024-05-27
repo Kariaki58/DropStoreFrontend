@@ -18,6 +18,7 @@ const CustomizedStore = () => {
 
   const getStoreContent = async () => {
     const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/get/store`, { withCredentials: true })
+    console.log('here')
     setGetStore(response.data.msg)
     setLoading(true)
   }
@@ -70,6 +71,7 @@ const CustomizedStore = () => {
       const storeResponse = await dispatch(
         CreateStore({ storeName: form.storeName, storeCategory: form.storeCategory, banner: imgUrl })
       ).unwrap();
+      console.log(storeResponse)
 
       setImg(null);
       setForm({
@@ -93,6 +95,7 @@ const CustomizedStore = () => {
       [e.target.name]: e.target.value,
     });
   };
+  console.log(getStore)
   return (
     <section>
       {
