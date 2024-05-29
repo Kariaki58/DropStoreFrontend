@@ -79,7 +79,7 @@ const CustomizedStore = () => {
         storeCategory: 'Kid Dress',
       });
       getStoreContent()
-      // navigate('/api/store');
+      navigate('/api/store');
     } catch (error) {
       console.error(error);
     }

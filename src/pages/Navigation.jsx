@@ -85,7 +85,7 @@ const Header = () => {
             <li className='relative'>
               <FaCartArrowDown className='text-3xl text-white cursor-pointer' />
               {
-                loading && <span className='absolute top-[-10px] left-5 text-white bg-black rounded-full px-1 font-bold text-2xl'>{ cart.msg.length }</span>
+                loading && cart && cart.msg && <span className='absolute top-[-10px] left-5 text-white bg-black rounded-full px-1 font-bold text-2xl'>{ cart.msg.length }</span>
               }
             </li>
             

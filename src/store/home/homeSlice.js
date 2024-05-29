@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getHomePageData } from './homeGet';
 
-// change state to initail state
 const initialState = {
     content: [],
     status: '',

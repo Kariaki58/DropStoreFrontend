@@ -10,6 +10,7 @@ import createStoreSlice from './upload/customizeUserStore/productsInStoreSlice';
 import StoreSlice from "./upload/StoreProducts/StoreSlice.js";
 import addToCartSlice from "./upload/cartCount/addToCartSlice.js";
 import cartSlice from "./upload/cart/cartSlice.js";
+import orderSlice from "./orders/orderSlice.js";
 
 
 export const store = configureStore({
@@ -24,7 +25,8 @@ export const store = configureStore({
         createstore: createStoreSlice,
         storeproduct: StoreSlice,
         cart: addToCartSlice,
-        myCart: cartSlice
+        myCart: cartSlice,
+        order: orderSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
 })

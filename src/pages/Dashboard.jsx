@@ -9,9 +9,11 @@ import { Link, Outlet } from 'react-router-dom';
 
 
 const Dashboard = () => {
+   
     const handleImageClick = () => {
       document.getElementById('newImage').click()
     }
+    
   return (
     <div className='flex'>
       <div className='bg-purple-900 h-screen w-[20%] flex items-center flex-col overflow-y-auto'>
