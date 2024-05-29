@@ -14,8 +14,8 @@ const Orders = () => {
   const { orders } = useSelector((state) => state.order);
 
   useEffect(() => {
-    if (orders) {
-      setState(orders);
+    if (orders?.msg) {
+      setState(orders.msg);
     }
   }, [orders]);
 

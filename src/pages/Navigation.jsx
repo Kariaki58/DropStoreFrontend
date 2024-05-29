@@ -97,7 +97,7 @@ const Header = () => {
               onClick={toggleDropdown} 
             />
             {isDropdownOpen && (
-              <div className='absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
+              <div className='absolute right-[-50px] top-12 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
                 <ul className='py-2'>
 
                   <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>

@@ -22,11 +22,13 @@ const Stats = () => {
         <aside className=''>
           <menu className='grid grid-cols-3 gap-8'>
             <div className='bg-slate-900 p-5 text-white text-xl font-bold rounded-lg'>
-              <p>{orders.length}</p>
+              {
+               orders && orders.msg && <p>{orders.msg.length}</p>
+              }
               <Link to='/api/dashboard/orders'><p>Orders</p></Link>
             </div>
             <div className='bg-slate-900 p-5 text-white text-xl font-bold rounded-lg'>
-              <p>200</p>
+              <p>{orders.filledOrder}</p>
               <p>Orders fullfield</p>
             </div>
             <div className='bg-slate-900 p-5 text-white text-xl font-bold rounded-lg'>
