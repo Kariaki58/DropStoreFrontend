@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserUploads } from '../store/upload/allUserUpload/userUploadGet';
 import { ThreeDots } from 'react-loader-spinner';
 import { modifyProduct } from '../store/upload/modifyUpload/modifyupload';
+import axios from 'axios';
+
 
 function ProductsInStore() {
   const dispatch = useDispatch();
@@ -21,11 +23,12 @@ function ProductsInStore() {
     document.getElementById(`image-${index}`).click();
   };
 
-  const handleTextChange = (e, index) => {
+  const handleTextChange = (e, index, productId) => {
     const updatedProducts = [...products];
     updatedProducts[index] = { ...updatedProducts[index], [e.target.name]: e.target.value };
     dispatch(modifyProduct(updatedProducts))
     setProducts(updatedProducts);
+    axios.put("http://localhost:5000/api/product/edit", { product: updatedProducts[index], productId }, { withCredentials: true })
   };
 
   const handleFileChange = (e, index) => {
@@ -63,14 +66,14 @@ function ProductsInStore() {
               value={item.productName}
               name="productName"
               className="border-none focus:outline-none resize-none block w-full p-2 rounded-md shadow-sm"
-              onChange={(e) => handleTextChange(e, index)}
+              onChange={(e) => handleTextChange(e, index, item._id)}
             ></textarea>
             <input
               type="text"
               value={item.price}
               name="price"
               className="border-none focus:outline-none block w-full py-2 pr-4 rounded-md shadow-sm text-end"
-              onChange={(e) => handleTextChange(e, index)}
+              onChange={(e) => handleTextChange(e, index, item._id)}
             />
             <input
               type="file"
