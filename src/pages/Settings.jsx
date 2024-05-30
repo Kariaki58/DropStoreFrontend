@@ -9,17 +9,17 @@ const Settings = () => {
 
     const navigate = useNavigate()
     const uploadFile = async (type, timestamp, signature) => {
-        const folder = 'images'
+        const folder = import.meta.env.VITE_APP_IMAGE_FOLDER
         const data = new FormData()
 
         data.append("file", type === 'image' ? img : video);
         data.append("timestamp", timestamp);
         data.append("signature", signature);
-        data.append("api_key", '914517458145777'); //store in .env file
+        data.append("api_key", import.meta.env.VITE_APP_CLOUDINARY_API_KEY); //store in .env file
         data.append("folder", folder);
         
         try {
-            const cloudName = 'duzsm4tfc' //store in .env file
+            const cloudName = import.meta.env.VITE_APP_CLOUDINARY_CLOUD_NAME //store in .env file
             const resourceType = 'image'
             const api = `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`
 
@@ -33,7 +33,7 @@ const Settings = () => {
 
     const getSignatureForUpload = async (folder) => {
         try {
-          const res = await axios.post(`http://localhost:5000/api/upload`, { folder });
+          const res = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/upload`, { folder });
           return res.data;
         } catch (error) {
           console.error(error);

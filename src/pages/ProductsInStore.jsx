@@ -71,7 +71,7 @@ function ProductsInStore() {
     updatedProducts[index] = { ...updatedProducts[index], [e.target.name]: e.target.value };
     dispatch(modifyProduct(updatedProducts))
     setProducts(updatedProducts);
-    await axios.put("http://localhost:5000/api/product/edit", { product: updatedProducts[index], productId }, { withCredentials: true })
+    await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/product/edit`, { product: updatedProducts[index], productId }, { withCredentials: true })
   };
 
   const handleFileChange = async (e, index, productId) => {
@@ -89,7 +89,7 @@ function ProductsInStore() {
       };
       reader.readAsDataURL(file);
       const updateProduct = {...products[index], imgUrl: update}
-      await axios.put('http://localhost:5000/api/product/edit', { product: updateProduct, productId }, { withCredentials: true })
+      await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/product/edit`, { product: updateProduct, productId }, { withCredentials: true })
     }
   };
 

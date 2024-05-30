@@ -41,7 +41,7 @@ const Login = () => {
   useEffect(() => {
     if (data !== 'Invalid credentials' && status === 'succeeded') {
       setTimeout(() => {
-        navigate('/', { replace: true })
+        navigate('/')
       }, 2000);
     } else {
     }

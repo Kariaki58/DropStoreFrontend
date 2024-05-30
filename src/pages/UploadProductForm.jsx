@@ -12,7 +12,7 @@ const UploadProductForm = () => {
     productName: '',
     description: '',
     price: '',
-    instock: 0,
+    instock: '',
   });
 
   const handleInputChange = (e) => {
@@ -113,7 +113,7 @@ const UploadProductForm = () => {
         </div>
         <div>
           <label htmlFor="instock" className="block text-sm font-medium text-gray-700">How many in stock</label>
-          <input id="instock" name="instock" value={form.instock} type="number" onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" required/>
+          <input id="instock" name="instock" value={form.instock} type="text" onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" required/>
         </div>
         <div>
           <button type="submit" className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">

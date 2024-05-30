@@ -29,7 +29,7 @@ const Carts = () => {
       ...prevQuantities,
       [productId]: (prevQuantities[productId] || 0) + 1,
     }));
-    await axios.put('http://localhost:5000/api/cart/incr', { productId }, { withCredentials: true });
+    await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/cart/incr`, { productId }, { withCredentials: true });
   };
 
   const handleDecrFromCart = async (productId) => {
@@ -43,14 +43,14 @@ const Carts = () => {
         [productId]: newQuantity < 0 ? 0 : newQuantity,
       };
     });
-    await axios.put('http://localhost:5000/api/cart/decr', { productId }, { withCredentials: true });
+    await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/cart/decr`, { productId }, { withCredentials: true });
   };
 
   const handleDelete = async (productId) => {
     setRender((prev) => {
       return prev.filter((item) => item.productId._id !== productId)
   });
-    await axios.delete(`http://localhost:5000/api/cart/${productId}`, { withCredentials: true });
+    await axios.delete(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/cart/${productId}`, { withCredentials: true });
   };
 
   const calculateTotalPrice = () => {

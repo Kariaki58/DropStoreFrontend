@@ -16,20 +16,12 @@ const ComfirmToken = () => {
     if (status === 'succeeded') {
         setTimeout(() => {
           setdisplayDuration(false)
+          navigate('/', { replace: true })
         }, 1000);
     }
   }, [status])
 
   // in production remove the set time out
-  useEffect(() => {
-    if (data !== 'token not correct' && status === 'succeeded') {
-      setTimeout(() => {
-        navigate('/', { replace: true })
-      }, 2000);
-    } else {
-    }
-  }, [status])
-  
   const handleChange = (e) => {
     setToken({
       ...token,
@@ -40,16 +32,6 @@ const ComfirmToken = () => {
     e.preventDefault()
     dispatch(comfirmToken(token))
   }
-
-  useEffect(() => {
-    if (data !== 'token not correct' && status === 'succeeded') {
-      setTimeout(() => {
-        navigate('/', { replace: true })
-      }, 2000);
-    } else {
-    }
-  }, [status])
-
 
   return (
     <div className='h-screen flex justify-center items-center'>

@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 
 
 export const StoreProductFetch = createAsyncThunk('storeProduct/fetch', async (storeId) => {
-    const response = await axios.get(`http://localhost:5000/api/${storeId}/products`, { withCredentials: true })
+    const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/${storeId}/products`, { withCredentials: true })
 
     return response.data
 })

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import images from '../assets';
 import { useDispatch } from 'react-redux';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { CreateStore } from '../store/upload/customizeUserStore/productsInStorePost';
 import axios from 'axios';
 
 const CustomizedStore = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [img, setImg] = useState(null);
   const [imgPreview, setImgPreview] = useState(null); // New state for image preview
   const [getStore, setGetStore] = useState({});

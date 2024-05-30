@@ -3,6 +3,6 @@ import axios from "axios";
 
 
 export const addToCart = createAsyncThunk('cart/add', async (request) => {
-    const response = await axios.post('http://localhost:5000/api/cart', request, { withCredentials: true })
+    const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/cart`, request, { withCredentials: true })
     return response.data.msg
 })

@@ -47,7 +47,7 @@ const Header = () => {
   useEffect(() => {
     if (data !== 'Failed to destroy session' && status === 'succeeded') {
       setTimeout(() => {
-        navigate('/', { replace: true });
+        navigate('/');
       }, 2000);
     }
   }, [status, data, navigate]);

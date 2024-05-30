@@ -28,7 +28,7 @@ const Orders = () => {
         order._id === orderId ? { ...order, delivery: updateStatus } : order
       )
     );
-    const response = await axios.put('http://localhost:5000/api/dashboard/orders', request, { withCredentials: true });
+    const response = await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/dashboard/orders`, request, { withCredentials: true });
     console.log(response)
   };
 
