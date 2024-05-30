@@ -1,8 +1,4 @@
-# React + Vite
+## DropStore
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Screenshot from 2024-05-30 17-04-36](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/805241b7-6602-45ce-b05b-a5047ad644bd)
+![Screenshot from 2024-05-30 17-04-33](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/dec37fd2-9c73-43d5-95ca-99ac0426eb3a)
