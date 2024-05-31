@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Cart } from '../store/upload/cart/cart';
 import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js'
 import { useDispatch, useSelector } from 'react-redux';
 
 const Carts = () => {
@@ -32,6 +33,14 @@ const Carts = () => {
     await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/cart/incr`, { productId }, { withCredentials: true });
   };
 
+  const makePayment = async () => {
+    const stripe = await loadStripe(`${import.meta.env.VITE_APP_STRIPE_PUBLIC}`)
+    
+    const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/create-checkout-session`, { products: render }, { withCredentials: true })
+    await stripe.redirectToCheckout({
+      sessionId: response.data.id
+    })
+  }
   const handleDecrFromCart = async (productId) => {
     if (quantities[productId] <= 0) {
       return;
@@ -92,7 +101,7 @@ const Carts = () => {
       )}
       <div className="bg-purple-900 w-40 h-40 rounded-full flex flex-col items-center justify-center p-4 text-white fixed bottom-10 right-10 shadow-lg">
         <h1 className="text-lg font-bold">${calculateTotalPrice()}</h1>
-        <button className="mt-2 bg-slate-700 hover:bg-slate-900 text-white font-semibold py-1 px-4 rounded">
+        <button onClick={makePayment} className="mt-2 bg-slate-700 hover:bg-slate-900 text-white font-semibold py-1 px-4 rounded">
           Checkout
         </button>
       </div>

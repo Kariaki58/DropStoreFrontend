@@ -15,6 +15,8 @@ import ProductsInStore from "./pages/ProductsInStore"
 import UploadProductForm from './pages/UploadProductForm';
 import AddressForm from "./pages/Profile"
 import StoreProducts from "./pages/StoreProducts"
+import SuccessPage from "./pages/SuccessPage"
+import CancelPage from "./pages/CancelPage"
 
 function App() {
   const {storeId} = useParams()
@@ -31,6 +33,8 @@ function App() {
         <Route path="/api/carts" element={<Carts />} />
         <Route path="/api/profile" element={<AddressForm />} />
         <Route path="/api/:storeId/products" element={<StoreProducts />} />
+        <Route path="/payment/sucess" element={<SuccessPage />} />
+        <Route path="/payment/cancel" element={<CancelPage />} />
         <Route path="/api/dashboard" element={<Dashboard />} >
           <Route index element={<Stats />} />
           <Route path="orders" element={<Orders />} />
