@@ -23,7 +23,7 @@ const Home = () => {
       {content.map((item) => (
         <div
           key={item._id}
-          className='w-full sm:w-1/2 lg:w-1/3 p-2 bg-purple-900 text-white rounded-lg cursor-pointer'
+          className='w-full sm:w-1/2 lg:w-1/5 p-2 bg-purple-900 text-white rounded-lg cursor-pointer'
           onClick={() => handleClick(item._id)}
         >
           <div className='h-48 overflow-hidden rounded-t-lg'>

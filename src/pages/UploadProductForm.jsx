@@ -81,7 +81,7 @@ const UploadProductForm = () => {
       });
 
       setLoading(false);
-      navigate("/");
+      navigate("/api/customize/store");
     } catch (error) {
       console.error(error);
       setLoading(false);
