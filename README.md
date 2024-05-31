@@ -1,5 +1,10 @@
 ## DropStore
 
+
+![Screenshot from 2024-05-31 01-02-38](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/68128a01-8bae-470c-8c8c-ca13b2853f01)
+
+![Screenshot from 2024-05-31 01-02-43](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/a592d77e-e395-4598-912d-2272fc072269)
+
 The frontend of DropStore using React JS
 
 Drop store is An ecommerce platform where users can do the following
@@ -16,10 +21,6 @@ Drop store is An ecommerce platform where users can do the following
 - orders page
 - sellers dashboard
 - address page
-
-![Screenshot from 2024-05-31 01-02-38](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/68128a01-8bae-470c-8c8c-ca13b2853f01)
-
-![Screenshot from 2024-05-31 01-02-43](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/a592d77e-e395-4598-912d-2272fc072269)
 
 ## How To Install It
 
