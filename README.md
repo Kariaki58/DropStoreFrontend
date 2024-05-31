@@ -2,8 +2,9 @@
 
 The frontend application of DropStore using React JS
 
-![Screenshot from 2024-05-30 17-04-33](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/dec37fd2-9c73-43d5-95ca-99ac0426eb3a)
-![Screenshot from 2024-05-30 17-04-36](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/805241b7-6602-45ce-b05b-a5047ad644bd)
+![Screenshot from 2024-05-31 01-02-38](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/68128a01-8bae-470c-8c8c-ca13b2853f01)
+
+![Screenshot from 2024-05-31 01-02-43](https://github.com/Kariaki58/DropStoreFrontend/assets/113528028/a592d77e-e395-4598-912d-2272fc072269)
 
 ## How To Install It
 
