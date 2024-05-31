@@ -16,7 +16,7 @@ const ComfirmToken = () => {
     if (status === 'succeeded') {
         setTimeout(() => {
           setdisplayDuration(false)
-          navigate('/', { replace: true })
+          navigate('/')
         }, 1000);
     }
   }, [status])
