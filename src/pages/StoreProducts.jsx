@@ -18,9 +18,19 @@ const StoreProducts = () => {
     dispatch(addToCart(request));
   };
 
+  if (!loading) {
+    return (
+      <div>Loading</div>
+    )
+  }
   return (
     <>
       <div className='relative w-full h-screen'>
+        {
+          error && <div className='bg-red-700 w-96 border rounded-full left-52 absolute top-[-50px]'>
+            <p className='p-3 text-center text-white'>{ error }</p>
+          </div>
+        }
         <img
           src={data.banner}
           alt="Banner"
