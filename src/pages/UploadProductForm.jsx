@@ -7,6 +7,7 @@ const UploadProductForm = () => {
   const [img, setImg] = useState(null);
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null)
 
   const [form, setFormData] = useState({
     productName: '',
@@ -43,7 +44,7 @@ const UploadProductForm = () => {
       const { secure_url } = res.data;
       return secure_url;
     } catch (error) {
-      console.error(error);
+      setError('Something went wrong in the server')
     }
   };
 
@@ -52,7 +53,7 @@ const UploadProductForm = () => {
       const res = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/gensignature`, { folder }, { withCredentials: true });
       return res.data;
     } catch (error) {
-      console.error(error);
+      setError('Something went wrong in the server')
     }
   };
 
@@ -67,11 +68,11 @@ const UploadProductForm = () => {
       const imgUrl = await uploadFile(img, 'image', imgTimestamp, imgSignature);
       const videoUrl = await uploadFile(video, 'video', videoTimestamp, videoSignature);
 
-      await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/upload/product`, { 
+      const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/upload/product`, { 
         imgUrl, videoUrl, ...form
       }, { withCredentials: true });
 
-      setImg([]);
+      setImg(null);
       setVideo(null);
       setFormData({
         productName: '',
@@ -80,16 +81,32 @@ const UploadProductForm = () => {
         instock: 0,
       });
 
-      setLoading(false);
+      setLoading(prev => !prev);
       navigate("/api/customize/store");
+      setError(response.data.msg)
     } catch (error) {
-      console.error(error);
-      setLoading(false);
+      console.error("Error response:");
+      console.error(error.response.data);
+      setLoading(prev => !prev);
+      setFormData({
+        productName: '',
+        description: '',
+        price: '',
+        instock: 0,
+      });
+      setImg(null)
+      setVideo(null)
+      setError(error.response.data.error)
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
+    <div className="max-w-3xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md relative">
+      {
+        error && <div className={`color ${error === 'Product added to store' ?  'bg-green-700': 'bg-red-700'} w-96 border rounded-full left-52 absolute top-[-50px]`}>
+          <p className='p-3 text-center text-white'>{ error }</p>
+        </div>
+      }
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="image" className="block text-sm font-medium text-gray-700">Upload product Image</label>
