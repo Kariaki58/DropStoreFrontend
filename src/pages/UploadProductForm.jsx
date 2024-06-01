@@ -85,8 +85,6 @@ const UploadProductForm = () => {
       navigate("/api/customize/store");
       setError(response.data.msg)
     } catch (error) {
-      console.error("Error response:");
-      console.error(error.response.data);
       setLoading(prev => !prev);
       setFormData({
         productName: '',
