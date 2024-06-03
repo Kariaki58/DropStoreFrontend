@@ -20,7 +20,8 @@ const storeSlice = createSlice({
             state.data = action.payload
             state.loading = true
         })
-        .addCase(StoreProductFetch.rejected, (state) => {
+        .addCase(StoreProductFetch.rejected, (state, action) => {
+            state.error = action.payload
             state.loading = false
         })
     ]

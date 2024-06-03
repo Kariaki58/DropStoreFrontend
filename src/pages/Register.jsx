@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ThreeDots } from 'react-loader-spinner';
 import { createUserAccount } from '../store/user/userPost';
 
 
 const Register = () => {
     const dispatch = useDispatch()
-    const { error, status, data } = useSelector((state) => state.user)
+    const { error, loading, data } = useSelector((state) => state.user)
     const navigate = useNavigate()
     const [displayDuration, setdisplayDuration] = useState(true)
     const [passwordError, setPasswordError] = useState('')
@@ -39,26 +40,39 @@ const Register = () => {
     };
 
     useEffect(() => {
-      if (status === 'succeeded') {
+      if (!loading) {
           setTimeout(() => {
             setdisplayDuration(false)
           }, 1000);
       }
-    }, [status])
+    }, [loading])
 
     useEffect(() => {
-      if (data === 'An email has been sent to you' && status === 'succeeded') {
+      if (data === 'An email has been sent to you' && !loading) {
         setTimeout(() => {
           navigate('/api/auth/comfirm-token')
         }, 2000)
       } 
-    }, [status])
+    }, [loading])
+
+    if (!loading) {
+      return (<ThreeDots
+      visible={true}
+      height="80"
+      width="80"
+      color="#4fa94d"
+      radius="9"
+      ariaLabel="three-dots-loading"
+      wrapperStyle={{}}
+      wrapperClass=""
+      />)
+    }
 
   return (
     <div className='m-auto max-w-lg mt-14 flex justify-center px-4 md:px-0'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full'>
         {
-          status === 'succeeded' && displayDuration && (
+          !loading && displayDuration && (
             <div className={`${ data === 'An email has been sent to you' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-50 flex justify-center items-center`}>
               <h1 className='text-white p-4'>{ data }</h1>
             </div>

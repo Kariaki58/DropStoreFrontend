@@ -4,7 +4,7 @@ import { getUserUploads } from "./userUploadGet";
 
 const initialState = {
     content: [],
-    status: false,
+    loading: false,
     error: null
 }
 
@@ -15,14 +15,14 @@ const userUploadSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(getUserUploads.pending, (state) => {
-            state.status = false
+            state.loading = false
         })
         .addCase(getUserUploads.fulfilled, (state, action) => {
-            state.status = true
+            state.loading = true
             state.content = action.payload
         })
         .addCase(getUserUploads.rejected, (state, action) => {
-            state.status = false
+            state.loading = false
             state.error = action.payload
         })
     }

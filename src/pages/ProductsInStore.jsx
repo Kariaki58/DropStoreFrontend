@@ -11,6 +11,7 @@ function ProductsInStore() {
   const dispatch = useDispatch();
   const { content, status } = useSelector((state) => state.userupload);
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null)
   const [img, setImg] = useState(null)
   
 
@@ -44,7 +45,7 @@ function ProductsInStore() {
       const { secure_url } = res.data;
       return secure_url;
     } catch (error) {
-      console.error(error);
+      return
     }
   };
 

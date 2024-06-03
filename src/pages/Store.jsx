@@ -1,26 +1,38 @@
 import React, { useEffect } from 'react';
 import images from '../assets';
-import ProductsInStore from './ProductsInStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserUploads } from '../store/upload/allUserUpload/userUploadGet';
 import { ThreeDots } from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
+
 
 const Store = () => {
     const dispatch = useDispatch()
-    const { content, status, error } = useSelector((state) => state.userupload)
+    const { content, loading, error } = useSelector((state) => state.userupload)
 
     useEffect(() => {
       dispatch(getUserUploads())
     }, [])
-    const ChangeBanner = () => {
-      document.getElementById('banner').click()
+    if (!loading) {
+      return (
+        <ThreeDots
+        visible={true}
+        height="80"
+        width="80"
+        color="#4fa94d"
+        radius="9"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        />
+      )
     }
-    const handleImageClick = () => {
-      document.getElementById('image').click();
-    };
   return (
-    <section>
+    <section className='relative'>
+      {
+          error && <div className='bg-red-700 w-96 border rounded-full left-52 absolute top-[-50px]'>
+            <p className='p-3 text-center text-white'>{ error }</p>
+          </div>
+      }
         <div className='relative w-full h-[400px]'>
           <img
             src={images.laptop}

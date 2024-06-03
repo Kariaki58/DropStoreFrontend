@@ -4,7 +4,7 @@ import { createUserAccount } from "./userPost";
 const initialState =  {
     email: '',
     password: '',
-    status: '',
+    loading: false,
     data: '',
     error: ''
 }
@@ -16,14 +16,14 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createUserAccount.pending, (state) => {
-        state.status = 'loading';
+        state.loading = false;
       })
       .addCase(createUserAccount.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.loading = true;
         state.data = action.payload;
       })
       .addCase(createUserAccount.rejected, (state, action) => {
-        state.status = 'failed';
+        state.loading = false;
         state.error = action.payload;
       });
   },

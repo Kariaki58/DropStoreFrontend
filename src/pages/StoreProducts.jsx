@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/upload/cartCount/addTocart';
 import { StoreProductFetch } from '../store/upload/StoreProducts/StoreProduct';
+import { ThreeDots } from 'react-loader-spinner';
 
 const StoreProducts = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,16 @@ const StoreProducts = () => {
 
   if (!loading) {
     return (
-      <div>Loading</div>
+      <ThreeDots
+      visible={true}
+      height="80"
+      width="80"
+      color="#4fa94d"
+      radius="9"
+      ariaLabel="three-dots-loading"
+      wrapperStyle={{}}
+      wrapperClass=""
+      />
     )
   }
   return (

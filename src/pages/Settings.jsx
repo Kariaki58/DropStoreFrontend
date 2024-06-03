@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { BallTriangle } from 'react-loader-spinner'
+import { ThreeDots } from 'react-loader-spinner'
 import { useNavigate } from 'react-router';
 
 const Settings = () => {
@@ -65,16 +65,16 @@ const Settings = () => {
         <button type="submit" className='bg-purple-700 p-5'>Upload</button>
       </form>
       {
-        loading && <BallTriangle
-            height={100}
-            width={100}
-            radius={5}
-            color="#4fa94d"
-            ariaLabel="ball-triangle-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            />
+        loading && <ThreeDots
+        visible={true}
+        height="80"
+        width="80"
+        color="#4fa94d"
+        radius="9"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        />
       }
     </div>
   );
