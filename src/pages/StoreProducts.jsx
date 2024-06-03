@@ -19,7 +19,7 @@ const StoreProducts = () => {
     dispatch(addToCart(request));
   };
 
-  if (!loading) {
+  if (loading) {
     return (
       <ThreeDots
       visible={true}

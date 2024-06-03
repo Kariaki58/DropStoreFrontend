@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Cart } from '../store/upload/cart/cart';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js'
+import { ThreeDots } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Carts = () => {
@@ -23,7 +24,7 @@ const Carts = () => {
       }, {});
       setQuantities(initialQuantities);
     }
-  }, [cart]);
+  }, [cart, loading]);
 
   const handleAddToCart = async (productId) => {
     setQuantities((prevQuantities) => ({
@@ -68,6 +69,21 @@ const Carts = () => {
       return total + price * (quantities[item.productId._id] || 0);
     }, 0).toFixed(2);
   };
+
+  if (loading) {
+    return (
+      <ThreeDots
+      visible={true}
+      height="80"
+      width="80"
+      color="#4fa94d"
+      radius="9"
+      ariaLabel="three-dots-loading"
+      wrapperStyle={{}}
+      wrapperClass=""
+      />
+    )
+  }
 
   return (
     <section className="container mx-auto p-5">

@@ -8,7 +8,7 @@ import { createUserAccount } from '../store/user/userPost';
 
 const Register = () => {
     const dispatch = useDispatch()
-    const { error, loading, data } = useSelector((state) => state.user)
+    const { loading, data } = useSelector((state) => state.user)
     const navigate = useNavigate()
     const [displayDuration, setdisplayDuration] = useState(true)
     const [passwordError, setPasswordError] = useState('')

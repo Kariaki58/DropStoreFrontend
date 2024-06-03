@@ -12,7 +12,7 @@ const Store = () => {
     useEffect(() => {
       dispatch(getUserUploads())
     }, [])
-    if (!loading) {
+    if (loading) {
       return (
         <ThreeDots
         visible={true}

@@ -6,7 +6,7 @@ import { getHomePageData } from '../store/home/homeGet';
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { content, status, error } = useSelector((state) => state.home);
+  const { content, loading, error } = useSelector((state) => state.home);
 
   useEffect(() => {
     dispatch(getHomePageData());
@@ -18,8 +18,8 @@ const Home = () => {
 
   return (
     <div className='mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-wrap gap-4 mt-5'>
-      {status === 'loading' && <p>Loading...</p>}
-      {status === 'failed' && <p>{error}</p>}
+      {loading && <p>Loading...</p>}
+      {loading && <p>{error}</p>}
       {content.map((item) => (
         <div
           key={item._id}

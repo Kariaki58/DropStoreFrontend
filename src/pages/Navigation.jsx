@@ -16,7 +16,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
-  const { data, status, error } = useSelector((state) => state.logout);
+  const { logoutState } = useSelector((state) => state.logout);
 
   useEffect(() => {
     dispatch(Cart());
@@ -37,20 +37,20 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (status === 'succeeded') {
+    if (logoutState && !logoutState.loading) {
       setTimeout(() => {
         setDisplayDuration(false);
       }, 1000);
     }
-  }, [status]);
+  }, [logoutState?.loading]);
 
   useEffect(() => {
-    if (data !== 'Failed to destroy session' && status === 'succeeded') {
+    if (logoutState?.data !== 'Failed to destroy session' && !logoutState?.loading) {
       setTimeout(() => {
         navigate('/');
       }, 2000);
     }
-  }, [status, data, navigate]);
+  }, [logoutState?.loading, logoutState?.data, navigate]);
 
   useEffect(() => {
     if (isDropdownOpen) {
@@ -65,9 +65,9 @@ const Header = () => {
   return (
     <header className='bg-purple-900'>
       {
-        status === 'succeeded' && displayDuration && (
-          <div className={`${ data === 'you are been loged out' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-[10000] flex justify-center items-center`}>
-            <h1 className='text-white p-4'>{ data }</h1>
+        logoutState?.loading && displayDuration && (
+          <div className={`${ logoutState?.data === 'you are been loged out' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-[10000] flex justify-center items-center`}>
+            <h1 className='text-white p-4'>{ logoutState?.data }</h1>
           </div>
         )
       }
@@ -88,7 +88,6 @@ const Header = () => {
                 loading && cart && cart.msg && <span className='absolute top-[-10px] left-5 text-white bg-black rounded-full px-1 font-bold text-2xl'>{ cart.msg.length }</span>
               }
             </li>
-            
           </Link>
           <li className='relative w-10' ref={dropdownRef}>
             <img

@@ -5,7 +5,7 @@ import { logInAccount } from '../store/loginToken/loginTokenPost';
 
 const Login = () => {
   const dispatch = useDispatch()
-  const { status, data } = useSelector((state) => state.login)
+  const { loading, data } = useSelector((state) => state.login)
   const [displayDuration, setdisplayDuration] = useState(true)
 
 
@@ -30,28 +30,28 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (status === 'succeeded') {
+    if (!loading) {
         setTimeout(() => {
           setdisplayDuration(false)
         }, 1000);
     }
-  }, [status])
+  }, [loading])
 
   // in production remove the set time out
   useEffect(() => {
-    if (data !== 'Invalid credentials' && status === 'succeeded') {
+    if (data !== 'Invalid credentials' && !loading) {
       setTimeout(() => {
-        navigate('/')
+        console.log("here")
       }, 2000);
     } else {
     }
-  }, [status])
+  }, [loading])
 
   return (
     <div className='m-auto max-w-lg mt-24 flex justify-center px-4 md:px-0'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full'>
         {
-          status === 'succeeded' && displayDuration && (
+          !loading && displayDuration && (
             <div className={`${ data === 'loged in successfull' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-50 flex justify-center items-center`}>
               <h1 className='text-white p-4'>{ data }</h1>
             </div>

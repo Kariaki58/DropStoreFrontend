@@ -3,7 +3,7 @@ import { getHomePageData } from './homeGet';
 
 const initialState = {
     content: [],
-    loading: true,
+    loading: false,
     error: null
 }
 
@@ -14,14 +14,14 @@ const homeSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(getHomePageData.pending, (state) => {
-            state.status = true
+            state.status = false
         })
         .addCase(getHomePageData.fulfilled, (state, action) => {
-            state.status = false
+            state.status = true
             state.content = action.payload
         })
         .addCase(getHomePageData.rejected, (state, action) => {
-            state.status = true
+            state.status = false
             state.error = action.payload
         })
     }

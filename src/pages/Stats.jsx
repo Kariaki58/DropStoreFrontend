@@ -15,7 +15,7 @@ const Stats = () => {
 
     const { orders, error, loading } = useSelector((state) => state.order)
 
-    if (!loading) {
+    if (loading) {
       return (
         <ThreeDots
         visible={true}
