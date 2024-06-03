@@ -39,9 +39,12 @@ const Login = () => {
 
   // in production remove the set time out
   useEffect(() => {
+    console.log('here', data)
+    console.log(!loading)
     if (data !== 'Invalid credentials' && !loading) {
+      console.log('inside')
       setTimeout(() => {
-        navigate('/api/auth/comfirm-token')
+        navigate('/')
       }, 2000);
     }
   }, [data])
