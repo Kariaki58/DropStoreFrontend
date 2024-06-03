@@ -2,28 +2,45 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaCartArrowDown, FaAffiliatetheme, FaBars } from 'react-icons/fa';
 import images from '../assets';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Cart } from '../store/upload/cart/cart';
-import { logOutAccount } from '../store/logout/logoutPost';
-
+import axios from 'axios';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [displayDuration, setDisplayDuration] = useState(true);
+  const dispatch = useDispatch()
   const { cart, loading } = useSelector((state) => state.myCart);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
-  const { logoutState } = useSelector((state) => state.logout);
+  const [status, setStatus] = useState(false)
+  const [errorOnLogout, setErrorOnLogout] = useState(null)
+  const[logoutState, setLogoutState] = useState(null)
+
 
   useEffect(() => {
     dispatch(Cart());
-  }, [dispatch]);
+  }, []);
 
-  const handleLogout = () => {
-    dispatch(logOutAccount());
+  useEffect(() => {
+    setTimeout(() => {
+      setDisplayDuration(false)
+    }, 2000)
+  }, [logoutState])
+  
+  const handleLogout = async () => {
+    const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/auth/logout`, {}, { withCredentials: true })
+    if (response.data.error) {
+      setDisplayDuration(false)
+      setErrorOnLogout(response.data.error)
+    }
+    setDisplayDuration(true)
+    setLogoutState(response.data.msg)
+    setStatus(prev => !prev)
+    navigate('/api/auth/login')
+    location.reload()
   };
 
   const toggleDropdown = () => {
@@ -35,25 +52,6 @@ const Header = () => {
       setIsDropdownOpen(false);
     }
   };
-
-  useEffect(() => {
-    
-    if (logoutState && !logoutState.loading) {
-      setTimeout(() => {
-        setDisplayDuration(false);
-      }, 1000);
-    }
-  }, [logoutState?.loading]);
-
-  useEffect(() => {
-    console.log(logoutState?.data)
-    console.log(logoutState?.loading)
-    if (logoutState?.data !== 'Failed to destroy session' && !logoutState?.loading) {
-      setTimeout(() => {
-        // navigate('/');
-      }, 2000);
-    }
-  }, [logoutState?.loading, logoutState?.data, navigate]);
 
   useEffect(() => {
     if (isDropdownOpen) {
@@ -69,10 +67,15 @@ const Header = () => {
   return (
     <header className='bg-purple-900'>
       {
-        logoutState?.loading && displayDuration && (
-          <div className={`${ logoutState?.data === 'you are been loged out' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-[10000] flex justify-center items-center`}>
-            <h1 className='text-white p-4'>{ logoutState?.data }</h1>
+        displayDuration && status && (
+          <div className={`${ logoutState === 'you are been loged out' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-[10000] flex justify-center items-center`}>
+            <h1 className='text-white p-4'>{ logoutState }</h1>
           </div>
+        )
+      }
+      {
+        errorOnLogout && (
+          <div className='bg-red-600'></div>
         )
       }
       <nav className='container flex justify-between m-auto items-center p-3'>

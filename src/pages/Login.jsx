@@ -39,10 +39,9 @@ const Login = () => {
 
   // in production remove the set time out
   useEffect(() => {
-    console.log('here', data)
-    console.log(!loading)
+    console.log('data', data)
+    console.log('loading', loading)
     if (data !== 'Invalid credentials' && !loading) {
-      console.log('inside')
       setTimeout(() => {
         navigate('/')
       }, 2000);
