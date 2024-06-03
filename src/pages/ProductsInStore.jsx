@@ -9,7 +9,7 @@ import axios from 'axios';
 
 function ProductsInStore() {
   const dispatch = useDispatch();
-  const { content, status } = useSelector((state) => state.userupload);
+  const { content, loading } = useSelector((state) => state.userupload);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null)
   const [img, setImg] = useState(null)
@@ -102,13 +102,13 @@ function ProductsInStore() {
     await axios.delete(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/${productId}/delete`, { withCredentials: true})
   }
 
-  if (status === 'loading') {
+  if (!loading) {
     return <ThreeDots color="#fff" height={10} />;
   }
   
   return (
     <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-      {products.map((item, index) => (
+      {loading && products && products.map((item, index) => (
         <div key={item._id} className="max-w-xs sm:max-w-md md:max-w-[300px] lg:max-w-[250px] xl:max-w-[200px] w-full shadow-md rounded-md mt-5">
           <div className='relative'>
             <img

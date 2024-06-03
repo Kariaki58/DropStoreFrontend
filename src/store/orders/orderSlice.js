@@ -4,7 +4,7 @@ import { getOrders } from "./orderGet";
 const initialState = {
     orders: [],
     error: null,
-    loading: false,
+    loading: true,
 };
 
 const orderSlice = createSlice({
@@ -14,14 +14,14 @@ const orderSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getOrders.pending, (state) => {
-                state.loading = false;
+                state.loading = true;
             })
             .addCase(getOrders.fulfilled, (state, action) => {
-                state.loading = true;
+                state.loading = false;
                 state.orders = action.payload;
             })
             .addCase(getOrders.rejected, (state, action) => {
-                state.loading = false;
+                state.loading = true;
                 state.error = action.error.message;
             });
     }

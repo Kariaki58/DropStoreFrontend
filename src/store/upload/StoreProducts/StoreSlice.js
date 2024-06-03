@@ -4,7 +4,7 @@ import { StoreProductFetch } from './StoreProduct';
 
 const initialState = {
     data: [],
-    loading: '',
+    loading: true,
     error: null
 }
 
@@ -14,15 +14,15 @@ const storeSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => [
         builder.addCase(StoreProductFetch.pending, (state) => {
-            state.loading = false
+            state.loading = true
         })
         .addCase(StoreProductFetch.fulfilled, (state, action) => {
             state.data = action.payload
-            state.loading = true
+            state.loading = false
         })
         .addCase(StoreProductFetch.rejected, (state, action) => {
             state.error = action.payload
-            state.loading = false
+            state.loading = true
         })
     ]
 })

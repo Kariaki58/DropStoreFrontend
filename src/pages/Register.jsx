@@ -55,19 +55,6 @@ const Register = () => {
       } 
     }, [loading])
 
-    if (!loading) {
-      return (<ThreeDots
-      visible={true}
-      height="80"
-      width="80"
-      color="#4fa94d"
-      radius="9"
-      ariaLabel="three-dots-loading"
-      wrapperStyle={{}}
-      wrapperClass=""
-      />)
-    }
-
   return (
     <div className='m-auto max-w-lg mt-14 flex justify-center px-4 md:px-0'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full'>

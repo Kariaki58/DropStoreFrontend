@@ -4,7 +4,7 @@ import { logInAccount } from "./loginTokenPost";
 const initialState = {
     email: '',
     password: '',
-    status: '',
+    loading: true,
     data: '',
     error: ''
 }
@@ -16,14 +16,14 @@ const loginSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(logInAccount.pending, (state) => {
-            state.status = 'loading'
+            state.status = true
         })
         .addCase(logInAccount.fulfilled, (state, action) => {
-            state.status = 'succeeded'
+            state.status = false
             state.data = action.payload
         })
         .addCase(logInAccount.rejected, (state, action) => {
-            state.status = 'failed'
+            state.status = true
             state.error = action.payload
         })
     }

@@ -3,7 +3,7 @@ import userAddress from "./address";
 
 const initialState = {
     address: [],
-    loading: false,
+    loading: true,
     error: null
 }
 
@@ -13,14 +13,14 @@ const addSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(userAddress.pending, (state) => {
-            state.loading = false
+            state.loading = true
         })
         .addCase(userAddress.fulfilled, (state, action) => {
-            state.loading = true
+            state.loading = false
             state.address = action.payload
         })
         .addCase(userAddress.rejected, (state, action) => {
-            state.loading = false
+            state.loading = true
             state.error = action.payload
         })
     }

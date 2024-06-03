@@ -3,7 +3,7 @@ import { CreateStore } from "./productsInStorePost";
 
 
 const initialState = {
-    loading: false,
+    loading: true,
     myStore: [],
     error: null
 }
@@ -14,14 +14,14 @@ const createStoreSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(CreateStore.pending, (state) => {
-            state.loading = false
+            state.loading = true
         })
         builder.addCase(CreateStore.fulfilled, (state, action) => {
-            state.loading = true
+            state.loading = false
             state.myStore = action.payload
         })
         builder.addCase(CreateStore.rejected, (state, action) => {
-            state.loading = false
+            state.loading = true
             state.error = action.payload
         })
     }

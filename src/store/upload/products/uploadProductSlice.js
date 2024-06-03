@@ -5,7 +5,7 @@ import { getSignatureForUpload } from "./uploadProduct";
 const initialState = {
     timestamp: null,
     signature: null,
-    loading: false,
+    loading: true,
     error: null,
 }
 
@@ -23,7 +23,7 @@ const signatureSlice = createSlice({
           state.signature = action.payload.signature;
         })
         .addCase(getSignatureForUpload.rejected, (state, action) => {
-          state.loading = false;
+          state.loading = true;
           state.error = action.error.message;
         });
     },

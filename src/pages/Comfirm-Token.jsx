@@ -9,17 +9,15 @@ const ComfirmToken = () => {
   const [displayDuration, setdisplayDuration] = useState(true)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { data, status, error } = useSelector((state) => state.token)
+  const { data, loading, error } = useSelector((state) => state.token)
 
 
   useEffect(() => {
-    if (status === 'succeeded') {
-        setTimeout(() => {
-          setdisplayDuration(false)
-          navigate('/')
-        }, 1000);
+    if (loading) {
+      setdisplayDuration(false)
+      navigate('/')
     }
-  }, [status])
+  }, [loading])
 
   // in production remove the set time out
   const handleChange = (e) => {
@@ -37,14 +35,13 @@ const ComfirmToken = () => {
     <div className='h-screen flex justify-center items-center'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full max-w-md'>
         {
-          status === 'succeeded' && displayDuration && (
+          loading && displayDuration && (
             <div className={`${ data === 'account created' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-[500] flex justify-center items-center`}>
               <h1 className='text-white p-4'>{ data }</h1>
             </div>
           )
         }
         <h1 className='text-xl font-semibold mb-4'>{data}</h1>
-        <h1 className='text-xl font-semibold mb-4'>{status}</h1>
         <form onSubmit={handleSubmit}>
           <h1 className='text-2xl font-bold mb-6 text-center'>Confirmation Token</h1>
           <input

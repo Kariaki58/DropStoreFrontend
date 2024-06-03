@@ -4,7 +4,7 @@ import { comfirmToken } from "./comfirmTokenPost";
 
 const initialState = {
     token: '',
-    status: '',
+    loading: true,
     error: null
 }
 
@@ -15,14 +15,14 @@ const tokenSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(comfirmToken.pending, (state) => {
-            state.status = 'loading'
+            state.loading = true
         })
         .addCase(comfirmToken.fulfilled, (state, action) => {
-            state.status = 'succeeded'
+            state.loading = false
             state.data = action.payload
         })
         .addCase(comfirmToken.rejected, (state, action) => {
-            state.status = 'failed'
+            state.loading = true
             state.error = action.payload
         })
     }

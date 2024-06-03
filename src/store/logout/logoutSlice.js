@@ -3,7 +3,7 @@ import { logOutAccount } from "./logoutPost";
 
 const initialState = {
     data: '',
-    status: '',
+    loading: true,
     error: ''
 }
 const logoutSlice = createSlice({
@@ -12,14 +12,14 @@ const logoutSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(logOutAccount.pending, (state) => {
-            state.status = 'loading'
+            state.loading = false
         })
         .addCase(logOutAccount.fulfilled, (state, action) => {
-            state.status = 'succeeded'
+            state.loading = true
             state.data = action.payload
         })
         .addCase(logOutAccount.rejected, (state, action) => {
-            state.status = 'failed'
+            state.loading = false
             state.error = action.payload
         })
     }
