@@ -97,20 +97,6 @@ const UploadProductForm = () => {
       setError(error.response.data.error)
     }
   };
-
-  if (!loading) {
-    return (
-    <ThreeDots
-    visible={true}
-    height="80"
-    width="80"
-    color="#4fa94d"
-    radius="9"
-    ariaLabel="three-dots-loading"
-    wrapperStyle={{}}
-    wrapperClass=""
-    />)
-  }
   return (
     <div className="max-w-3xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md relative">
       {

@@ -36,21 +36,22 @@ const Header = () => {
     }
   };
 
-  useEffect(() => {
-    if (logoutState && !logoutState.loading) {
-      setTimeout(() => {
-        setDisplayDuration(false);
-      }, 1000);
-    }
-  }, [logoutState?.loading]);
+  // useEffect(() => {
+    
+  //   if (logoutState && !logoutState.loading) {
+  //     setTimeout(() => {
+  //       setDisplayDuration(false);
+  //     }, 1000);
+  //   }
+  // }, [logoutState?.loading]);
 
-  useEffect(() => {
-    if (logoutState?.data !== 'Failed to destroy session' && !logoutState?.loading) {
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
-    }
-  }, [logoutState?.loading, logoutState?.data, navigate]);
+  // useEffect(() => {
+  //   if (logoutState?.data !== 'Failed to destroy session' && !logoutState?.loading) {
+  //     setTimeout(() => {
+  //       navigate('/');
+  //     }, 2000);
+  //   }
+  // }, [logoutState?.loading, logoutState?.data, navigate]);
 
   useEffect(() => {
     if (isDropdownOpen) {
@@ -62,6 +63,7 @@ const Header = () => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, [isDropdownOpen]);
+  
   return (
     <header className='bg-purple-900'>
       {

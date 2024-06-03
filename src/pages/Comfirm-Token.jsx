@@ -13,7 +13,7 @@ const ComfirmToken = () => {
 
 
   useEffect(() => {
-    if (loading) {
+    if (!loading) {
       setdisplayDuration(false)
       navigate('/')
     }

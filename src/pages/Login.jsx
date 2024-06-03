@@ -41,11 +41,10 @@ const Login = () => {
   useEffect(() => {
     if (data !== 'Invalid credentials' && !loading) {
       setTimeout(() => {
-        console.log("here")
+        navigate('/api/auth/comfirm-token')
       }, 2000);
-    } else {
     }
-  }, [loading])
+  }, [data])
 
   return (
     <div className='m-auto max-w-lg mt-24 flex justify-center px-4 md:px-0'>
