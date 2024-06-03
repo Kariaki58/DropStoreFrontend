@@ -15,6 +15,10 @@ const ComfirmToken = () => {
   useEffect(() => {
     if (!loading) {
       setdisplayDuration(false)
+      if (localStorage.getItem('logout')) {
+        localStorage.removeItem('auth')
+        localStorage.setItem('auth', 'login')
+      }
       navigate('/')
     }
   }, [loading])

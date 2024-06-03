@@ -49,8 +49,7 @@ const Register = () => {
 
     useEffect(() => {
       if (data === 'An email has been sent to you' && !loading) {
-        console.log(loading)
-        console.log(data)
+        localStorage.setItem('auth', 'login')
         setTimeout(() => {
           navigate('/api/auth/comfirm-token', { replace: true })
         }, 2000)

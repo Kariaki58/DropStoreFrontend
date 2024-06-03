@@ -39,6 +39,9 @@ const Header = () => {
     setDisplayDuration(true)
     setLogoutState(response.data.msg)
     setStatus(prev => !prev)
+    localStorage.removeItem('auth')
+    localStorage.setItem('auth', 'logout')
+  
     navigate('/api/auth/login')
     location.reload()
   };
@@ -108,12 +111,18 @@ const Header = () => {
 
                   <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
                   <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/settings'>setting</Link></li>
-                  <li className='font-bold text-lg cursor-pointer p-3'>
-                    <Link to='/api/auth/login'>Login</Link>
-                  </li>
-                  <li className='font-bold text-lg cursor-pointer p-3' onClick={handleLogout}>
-                    Logout
-                  </li>
+                  {
+                    localStorage.getItem('auth') === 'logout' && 
+                    <li className='font-bold text-lg cursor-pointer p-3'>
+                      <Link to='/api/auth/login'>Login</Link>
+                    </li>
+                  }
+                  {
+                    localStorage.getItem('auth') === 'login' &&
+                    <li className='font-bold text-lg cursor-pointer p-3' onClick={handleLogout}>
+                      Logout
+                    </li> 
+                  }
                 </ul>
               </div>
             )}
@@ -134,12 +143,18 @@ const Header = () => {
           <div className='fixed top-0 left-0 w-3/4 max-w-xs h-full bg-white p-5 z-50'>
             <button className='mb-5' onClick={() => setIsSidebarOpen(false)}>Close</button>
             <ul className='flex flex-col gap-5'>
-              <li className='text-black font-bold text-xl cursor-pointer'>
+              {
+                localStorage.getItem('auth') === 'logout' &&
+                <li className='text-black font-bold text-xl cursor-pointer'>
                 <Link to='/api/auth/login' onClick={() => setIsSidebarOpen(false)}>Login</Link>
               </li>
-              <li className='text-white font-bold text-xl cursor-pointer' onClick={handleLogout}>
-                Logout
-              </li>
+              }
+              {
+                localStorage.getItem('auth') === 'login' && 
+                <li className='text-white font-bold text-xl cursor-pointer' onClick={handleLogout}>
+                  Logout
+                </li>
+              }
               <li><FaAffiliatetheme className='text-3xl text-black cursor-pointer' /></li>
               <li><FaCartArrowDown className='text-3xl text-black cursor-pointer' /></li>
               <li className='w-10'><img src={images.defaultImage} className='w-full rounded-full' /></li>
