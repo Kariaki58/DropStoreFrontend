@@ -16,6 +16,7 @@ const CustomizedStore = () => {
     banner: ''
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null)
 
   const handleFormChange = async (e) => {
     setGetStore(prev => ({
@@ -29,16 +30,23 @@ const CustomizedStore = () => {
     const imgUrl = await signedUpload();
 
     try {
-      await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/store/update`, { getStore, imgUrl }, { withCredentials: true });
+      const response = await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/store/update`, { getStore, imgUrl }, { withCredentials: true });
+      setError(response.data.msg)
     } catch (err) {
-      console.log(err.message);
+      setError(err.response.data.error)
+      return
     }
   };
 
   const getStoreContent = async () => {
-    const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/get/store`, { withCredentials: true });
-    setGetStore(response.data.msg);
-    setLoading(true);
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/get/store`, { withCredentials: true });
+      setGetStore(response.data.msg);
+      setLoading(true);
+    } catch (error) {
+      setError(error.response.data.error)
+      return
+    }
   };
 
   useEffect(() => {
@@ -63,7 +71,8 @@ const CustomizedStore = () => {
       const { secure_url } = res.data;
       return secure_url;
     } catch (error) {
-      console.error(error);
+      setError('something went wrong with cloudinary')
+      return
     }
   };
 
@@ -76,7 +85,8 @@ const CustomizedStore = () => {
       );
       return res.data;
     } catch (error) {
-      console.error(error);
+      setError(error.response.data.error)
+      return
     }
   };
 
@@ -90,10 +100,10 @@ const CustomizedStore = () => {
     e.preventDefault();
     try {
       const imgUrl = await signedUpload();
-      await dispatch(
+      const response = await dispatch(
         CreateStore({ storeName: form.storeName, storeCategory: form.storeCategory, banner: imgUrl })
       ).unwrap();
-
+      setError(response)
       setImg(null);
       setForm({
         storeName: '',
@@ -101,7 +111,8 @@ const CustomizedStore = () => {
       });
       getStoreContent();
     } catch (error) {
-      console.error(error);
+      setError(error.response.data.error)
+      return
     }
   };
 
@@ -130,6 +141,12 @@ const CustomizedStore = () => {
       {loading && getStore ? (
         <>
           <div className='relative w-full h-[400px]'>
+            {
+              error &&
+              <div className='bg-red-500 z-50 absolute bottom-0 w-full p-5'>
+                <h1 className='text-white text-center text-5xl'>{error}</h1>
+              </div>
+            }
             <img
               src={imgPreview || getStore.banner}
               onClick={changeBanner}

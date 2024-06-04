@@ -29,7 +29,6 @@ const Orders = () => {
       )
     );
     const response = await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/dashboard/orders`, request, { withCredentials: true });
-    console.log(response)
   };
 
   return (

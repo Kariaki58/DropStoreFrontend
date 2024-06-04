@@ -108,9 +108,6 @@ const Header = () => {
             {isDropdownOpen && (
               <div className='absolute right-[-40px] top-12 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
                 <ul className='py-2'>
-
-                  <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
-                  <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/settings'>setting</Link></li>
                   {
                     localStorage.getItem('auth') === 'logout' && 
                     <li className='font-bold text-lg cursor-pointer p-3'>
@@ -119,9 +116,13 @@ const Header = () => {
                   }
                   {
                     localStorage.getItem('auth') === 'login' &&
-                    <li className='font-bold text-lg cursor-pointer p-3' onClick={handleLogout}>
-                      Logout
-                    </li> 
+                    <>
+                      <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
+                      <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/settings'>setting</Link></li>
+                      <li className='font-bold text-lg cursor-pointer p-3' onClick={handleLogout}>
+                        Logout
+                      </li> 
+                    </>
                   }
                 </ul>
               </div>

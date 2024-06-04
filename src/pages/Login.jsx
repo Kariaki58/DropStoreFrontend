@@ -13,8 +13,6 @@ const Login = () => {
     e.preventDefault()
     setdisplayDuration(true)
     dispatch(logInAccount(userData))
-    localStorage.removeItem('auth')
-    localStorage.setItem('auth', 'login')
   }
 
 
@@ -41,7 +39,10 @@ const Login = () => {
 
   // in production remove the set time out
   useEffect(() => {
-    if (data !== 'Invalid credentials' && !loading) {
+    if (data === 'loged in successfull' && !loading) {
+
+      localStorage.removeItem('auth')
+      localStorage.setItem('auth', 'login')
       setTimeout(() => {
         navigate('/')
       }, 2000);
