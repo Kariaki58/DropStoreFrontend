@@ -32,7 +32,7 @@ const Orders = () => {
   };
 
   return (
-    <div className="overflow-x-auto mt-10 mb-10 w-[80%] p-5" style={{ scrollbarWidth: 'thin' }}>
+    <div className="overflow-x-auto mt-10 mb-10 w-[80%] h-[80vh] p-5" style={{ scrollbarWidth: 'thin' }}>
       <table className="min-w-full border border-gray-200 bg-slate-900">
         <thead>
           <tr className="text-left text-white font-bold">
