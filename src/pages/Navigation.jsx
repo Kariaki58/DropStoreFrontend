@@ -101,9 +101,9 @@ const Header = () => {
               onClick={toggleDropdown} 
             />
             {isDropdownOpen && (
-              <div className='absolute right-0 top-12 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
+              <div className='absolute right-0 top-12 mt-2 w-48 bg-red rounded-lg shadow-lg z-40'>
                 <ul className='py-2'>
-                  {localStorage.getItem('auth') === 'logout' && (
+                  {(localStorage.getItem('auth') === 'logout' || !localStorage.getItem('auth')) && (
                     <li className='font-bold text-lg cursor-pointer p-3'>
                       <Link to='/api/auth/login'>Login</Link>
                     </li>
