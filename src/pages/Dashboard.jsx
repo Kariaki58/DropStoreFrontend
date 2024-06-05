@@ -8,6 +8,7 @@ import { FaRegAddressBook } from "react-icons/fa";
 import { Link, Outlet } from 'react-router-dom';
 
 
+// dashboard design
 const Dashboard = () => {
    
     const handleImageClick = () => {

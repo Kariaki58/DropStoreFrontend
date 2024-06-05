@@ -1,3 +1,4 @@
+// upload a new product to the backend
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 

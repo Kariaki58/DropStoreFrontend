@@ -4,7 +4,7 @@ const initialState = {
   modifiedproduct: [],
 }
 
-
+// this code does nothing yet
 export const productSlice = createSlice({
     name: 'modify',
     initialState,

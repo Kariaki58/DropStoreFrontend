@@ -1,3 +1,4 @@
+// add to cart slice
 import { createSlice } from "@reduxjs/toolkit";
 import { addToCart } from "./addTocart";
 

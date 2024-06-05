@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders } from '../store/orders/orderGet';
 
+
+// orders page to see orders from other 
 const Orders = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState([]);
@@ -28,11 +30,11 @@ const Orders = () => {
         order._id === orderId ? { ...order, delivery: updateStatus } : order
       )
     );
-    const response = await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/dashboard/orders`, request, { withCredentials: true });
+    await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/dashboard/orders`, request, { withCredentials: true });
   };
 
   return (
-    <div className="overflow-x-auto mt-10 mb-10 w-[80%] h-[80vh] p-5" style={{ scrollbarWidth: 'thin' }}>
+    <div className="overflow-x-auto mt-10 mb-10 w-full md:w-[80%] h-[80vh] p-5" style={{ scrollbarWidth: 'thin' }}>
       <table className="min-w-full border border-gray-200 bg-slate-900">
         <thead>
           <tr className="text-left text-white font-bold">
@@ -49,7 +51,7 @@ const Orders = () => {
             <tr key={order._id}>
               <td className="p-5 border-b bg-slate-600 text-white flex gap-2 items-center">
                 <div className='w-8 h-8'>
-                  <img src={order.productId.imgUrl} alt='product image' className='w-full'/>
+                  <img src={order.productId.imgUrl} alt='product image' className='w-full' />
                 </div>
                 <p>{order.productId.productName}</p>
               </td>

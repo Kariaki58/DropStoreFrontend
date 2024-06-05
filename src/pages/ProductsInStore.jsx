@@ -7,13 +7,12 @@ import { FiDelete } from "react-icons/fi";
 import axios from 'axios';
 
 
+// product in store
 function ProductsInStore() {
   const dispatch = useDispatch();
   const { content, loading } = useSelector((state) => state.userupload);
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState(null)
-  const [img, setImg] = useState(null)
-  
+  const [img, setImg] = useState(null);
 
   useEffect(() => {
     dispatch(getUserUploads());
@@ -45,7 +44,7 @@ function ProductsInStore() {
       const { secure_url } = res.data;
       return secure_url;
     } catch (error) {
-      return
+      return;
     }
   };
 
@@ -71,36 +70,34 @@ function ProductsInStore() {
   const handleTextChange = async (e, index, productId) => {
     const updatedProducts = [...products];
     updatedProducts[index] = { ...updatedProducts[index], [e.target.name]: e.target.value };
-    dispatch(modifyProduct(updatedProducts))
+    dispatch(modifyProduct(updatedProducts));
     setProducts(updatedProducts);
-    await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/product/edit`, { product: updatedProducts[index], productId }, { withCredentials: true })
+    await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/product/edit`, { product: updatedProducts[index], productId }, { withCredentials: true });
   };
 
   const handleFileChange = async (e, index, productId) => {
     const file = e.target.files[0];
     if (file) {
-      setImg(file)
-      const update = await signedUpload(file)
+      setImg(file);
+      const update = await signedUpload(file);
       const reader = new FileReader();
       
       reader.onload = () => {
         const updatedProducts = [...products];
-        updatedProducts[index] = { ...updatedProducts[index], imgUrl: reader.result || update};
+        updatedProducts[index] = { ...updatedProducts[index], imgUrl: reader.result || update };
         setProducts(updatedProducts);
-        dispatch(modifyProduct(updatedProducts))
+        dispatch(modifyProduct(updatedProducts));
       };
       reader.readAsDataURL(file);
-      const updateProduct = {...products[index], imgUrl: update}
-      await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/product/edit`, { product: updateProduct, productId }, { withCredentials: true })
+      const updateProduct = { ...products[index], imgUrl: update };
+      await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/product/edit`, { product: updateProduct, productId }, { withCredentials: true });
     }
   };
 
   const handleDeleteProduct = async (index, productId) => {
-    setProducts(prev => {
-      return prev.filter((item) => item._id !== productId)
-    })
-    await axios.delete(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/${productId}/delete`, { withCredentials: true})
-  }
+    setProducts((prev) => prev.filter((item) => item._id !== productId));
+    await axios.delete(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/${productId}/delete`, { withCredentials: true });
+  };
 
   if (loading) {
     return <ThreeDots color="#fff" height={10} />;
@@ -109,7 +106,7 @@ function ProductsInStore() {
   return (
     <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
       {!loading && products && products.map((item, index) => (
-        <div key={item._id} className="max-w-xs sm:max-w-md md:max-w-[300px] lg:max-w-[250px] xl:max-w-[200px] w-full shadow-md rounded-md mt-5">
+        <div key={item._id} className="w-full shadow-md rounded-md mt-5">
           <div className='relative'>
             <img
               src={item.imgUrl}
@@ -117,7 +114,7 @@ function ProductsInStore() {
               className='cursor-pointer w-full h-40 sm:h-52 md:h-60 lg:h-48 xl:h-40 object-cover rounded-t-md'
               alt="Product"
             />
-          <FiDelete onClick={() => handleDeleteProduct(index, item._id)} className='w-10 h-10 absolute top-[-10px] right-0 text-red-800 hover:cursor-pointer'/>
+            <FiDelete onClick={() => handleDeleteProduct(index, item._id)} className='w-10 h-10 absolute top-[-10px] right-0 text-red-800 hover:cursor-pointer'/>
           </div>
           <form className="p-2">
             <textarea

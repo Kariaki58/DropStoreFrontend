@@ -1,3 +1,4 @@
+// add store product to the array
 import { createSlice } from '@reduxjs/toolkit';
 import { StoreProductFetch } from './StoreProduct';
 

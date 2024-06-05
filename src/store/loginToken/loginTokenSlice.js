@@ -1,3 +1,4 @@
+// login token slice
 import { createSlice } from "@reduxjs/toolkit";
 import { logInAccount } from "./loginTokenPost";
 

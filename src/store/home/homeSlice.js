@@ -1,3 +1,4 @@
+// homepage dataset slice
 import { createSlice } from "@reduxjs/toolkit";
 import { getHomePageData } from './homeGet';
 

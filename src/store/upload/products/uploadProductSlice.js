@@ -1,3 +1,4 @@
+// upload a new product slice
 import { createSlice } from "@reduxjs/toolkit";
 import { getSignatureForUpload } from "./uploadProduct";
 

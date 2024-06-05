@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ThreeDots } from 'react-loader-spinner';
 import axios from 'axios';
 
+// upload product form
 const UploadProductForm = () => {
   const [img, setImg] = useState(null);
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
 
   const [form, setFormData] = useState({
     productName: '',
@@ -44,7 +45,7 @@ const UploadProductForm = () => {
       const { secure_url } = res.data;
       return secure_url;
     } catch (error) {
-      setError('Something went wrong in the server')
+      setError('Something went wrong in the server');
     }
   };
 
@@ -53,7 +54,7 @@ const UploadProductForm = () => {
       const res = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/gensignature`, { folder }, { withCredentials: true });
       return res.data;
     } catch (error) {
-      setError('Something went wrong in the server')
+      setError('Something went wrong in the server');
     }
   };
 
@@ -83,7 +84,7 @@ const UploadProductForm = () => {
 
       setLoading(prev => !prev);
       navigate("/api/customize/store");
-      setError(response.data.msg)
+      setError(response.data.msg);
     } catch (error) {
       setLoading(prev => !prev);
       setFormData({
@@ -92,18 +93,19 @@ const UploadProductForm = () => {
         price: '',
         instock: 0,
       });
-      setImg(null)
-      setVideo(null)
-      setError(error.response.data.error)
+      setImg(null);
+      setVideo(null);
+      setError(error.response.data.error);
     }
   };
+
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md relative">
-      {
-        error && <div className={`color ${error === 'Product added to store' ?  'bg-green-700': 'bg-red-700'} w-96 border rounded-full left-52 absolute top-[-50px]`}>
+    <div className="max-w-lg mx-auto mt-10 bg-white p-6 rounded-lg shadow-md relative">
+      {error && (
+        <div className={`color ${error === 'Product added to store' ?  'bg-green-700': 'bg-red-700'} w-96 border rounded-full left-52 absolute top-[-50px]`}>
           <p className='p-3 text-center text-white'>{ error }</p>
         </div>
-      }
+      )}
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="image" className="block text-sm font-medium text-gray-700">Upload product Image</label>

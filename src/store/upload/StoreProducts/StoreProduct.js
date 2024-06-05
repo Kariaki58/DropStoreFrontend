@@ -1,6 +1,6 @@
+// get store product
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useParams } from "react-router";
 
 
 export const StoreProductFetch = createAsyncThunk('storeProduct/fetch', async (storeId) => {

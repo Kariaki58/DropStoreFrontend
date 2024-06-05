@@ -1,3 +1,4 @@
+// create slice to comfirm token
 import { createSlice } from "@reduxjs/toolkit";
 import { comfirmToken } from "./comfirmTokenPost";
 

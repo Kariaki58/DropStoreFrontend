@@ -1,3 +1,4 @@
+// create user store slice
 import { createSlice } from "@reduxjs/toolkit";
 import { CreateStore } from "./productsInStorePost";
 

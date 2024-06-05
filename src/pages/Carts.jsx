@@ -5,6 +5,8 @@ import { loadStripe } from '@stripe/stripe-js'
 import { ThreeDots } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
 
+
+// cart frontend view
 const Carts = () => {
   const dispatch = useDispatch();
   const { cart, loading } = useSelector((state) => state.myCart);

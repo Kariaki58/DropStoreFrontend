@@ -3,62 +3,58 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logInAccount } from '../store/loginToken/loginTokenPost';
 
-const Login = () => {
-  const dispatch = useDispatch()
-  const { loading, data } = useSelector((state) => state.login)
-  const [displayDuration, setdisplayDuration] = useState(true)
 
+// login user frontend, and send post request to the backend
+const Login = () => {
+  const dispatch = useDispatch();
+  const { loading, data } = useSelector((state) => state.login);
+  const [displayDuration, setdisplayDuration] = useState(true);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    setdisplayDuration(true)
-    dispatch(logInAccount(userData))
-  }
+    e.preventDefault();
+    setdisplayDuration(true);
+    dispatch(logInAccount(userData));
+  };
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: '',
     password: ''
-  })
+  });
 
   const handleChange = (e) => {
     setUserData({
       ...userData,
       [e.target.name]: e.target.value
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     if (!loading) {
-        setTimeout(() => {
-          setdisplayDuration(false)
-        }, 1000);
+      setTimeout(() => {
+        setdisplayDuration(false);
+      }, 1000);
     }
-  }, [loading])
+  }, [loading]);
 
-  // in production remove the set time out
   useEffect(() => {
     if (data === 'loged in successfull' && !loading) {
-
-      localStorage.removeItem('auth')
-      localStorage.setItem('auth', 'login')
+      localStorage.removeItem('auth');
+      localStorage.setItem('auth', 'login');
       setTimeout(() => {
-        navigate('/')
+        navigate('/');
       }, 2000);
     }
-  }, [data])
+  }, [data, loading, navigate]);
 
   return (
-    <div className='m-auto max-w-lg mt-24 flex justify-center px-4 md:px-0'>
-      <div className='bg-white shadow-lg rounded-lg p-8 w-full'>
-        {
-          !loading && displayDuration && (
-            <div className={`${ data === 'loged in successfull' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-50 flex justify-center items-center`}>
-              <h1 className='text-white p-4'>{ data }</h1>
-            </div>
-          )
-        }
+    <div className='flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8'>
+      <div className='bg-white shadow-lg rounded-lg p-8 w-full max-w-md'>
+        {!loading && displayDuration && (
+          <div className={`${data === 'loged in successfull' ? 'bg-green-600' : 'bg-red-600'} absolute top-0 right-0 h-16 z-50 flex justify-center items-center`}>
+            <h1 className='text-white p-4'>{data}</h1>
+          </div>
+        )}
         <form className='w-full' onSubmit={handleSubmit}>
           <h1 className='text-3xl font-semibold mb-6 text-center'>Sign In</h1>
           <label htmlFor='email' className='block text-xl mb-2'>Email address</label>
@@ -67,7 +63,7 @@ const Login = () => {
             type='email'
             value={userData.email}
             onChange={handleChange}
-            className='block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
+            className='block w-full py-2 px-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
             placeholder='Enter email'
             required
           />
@@ -77,7 +73,7 @@ const Login = () => {
             value={userData.password}
             onChange={handleChange}
             type='password'
-            className='block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
+            className='block w-full py-2 px-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
             placeholder='Enter password'
             required
           />
@@ -87,6 +83,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

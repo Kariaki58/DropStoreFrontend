@@ -5,6 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 import { CreateStore } from '../store/upload/customizeUserStore/productsInStorePost';
 import axios from 'axios';
 
+// customized store, not yet completed
 const CustomizedStore = () => {
   const dispatch = useDispatch();
   const [img, setImg] = useState(null);
@@ -137,14 +138,14 @@ const CustomizedStore = () => {
   };
 
   return (
-    <section>
+    <section className="px-4 sm:px-6 lg:px-8">
       {loading && getStore ? (
         <>
-          <div className='relative w-full h-[400px]'>
+          <div className='relative w-full h-[200px] sm:h-[300px] lg:h-[400px]'>
             {
               error &&
-              <div className='bg-red-500 z-50 absolute bottom-0 w-full p-5'>
-                <h1 className='text-white text-center text-5xl'>{error}</h1>
+              <div className='bg-red-500 z-50 absolute bottom-0 w-full p-2 sm:p-4'>
+                <h1 className='text-white text-center text-xl sm:text-2xl lg:text-5xl'>{error}</h1>
               </div>
             }
             <img
@@ -155,10 +156,10 @@ const CustomizedStore = () => {
             />
           </div>
           <div className='flex justify-center'>
-            <div className='flex flex-col items-center'>
-              <form onSubmit={handleUpdateSubmit}>
+            <div className='flex flex-col items-center w-full max-w-lg'>
+              <form onSubmit={handleUpdateSubmit} className="w-full">
                 <input
-                  className='text-center font-bold text-[4rem] text-purple-900 focus:outline-none'
+                  className='text-center font-bold text-3xl sm:text-4xl lg:text-5xl text-purple-900 focus:outline-none w-full'
                   value={getStore.storeName}
                   onChange={handleFormChange}
                   name='storeName'
@@ -168,7 +169,7 @@ const CustomizedStore = () => {
                   value={getStore.storeCategory}
                   onChange={handleFormChange}
                   name='storeCategory'
-                  className='block w-full border bg-purple-900 text-white text-xl font-bold p-5 focus:outline-none border-gray-300 rounded-md mt-5 mb-5'
+                  className='block w-full border bg-purple-900 text-white text-lg sm:text-xl lg:text-2xl font-bold p-3 sm:p-5 focus:outline-none border-gray-300 rounded-md mt-5 mb-5'
                 >
                   <option value='Kid Dress' className='font-bold text-xl'>
                     Kid Dress
@@ -189,11 +190,11 @@ const CustomizedStore = () => {
                 />
                 <div className='text-center mt-5'>
                   <Link to='/api/customize/store/upload'>
-                    <button className='bg-purple-900 p-5 rounded-full text-white font-bold mb-2'>Upload New Product</button>
+                    <button className='bg-purple-900 p-3 sm:p-5 rounded-full text-white font-bold mb-2'>Upload New Product</button>
                   </Link>
                 </div>
                 <div className='text-center mt-5'>
-                  <button type='submit' className='bg-purple-900 px-5 py-2 rounded-full text-white font-bold mb-10'>
+                  <button type='submit' className='bg-purple-900 px-5 py-2 sm:py-3 rounded-full text-white font-bold mb-10'>
                     Go live
                   </button>
                 </div>
@@ -203,7 +204,7 @@ const CustomizedStore = () => {
         </>
       ) : (
         <>
-          <div className='relative w-full h-[400px]'>
+          <div className='relative w-full h-[200px] sm:h-[300px] lg:h-[400px]'>
             <img
               src={imgPreview || images.defaultImage} // Use the preview URL if available
               alt='Banner'
@@ -212,11 +213,11 @@ const CustomizedStore = () => {
             />
           </div>
           <div className='flex justify-center'>
-            <div className='flex flex-col items-center'>
-              <form onSubmit={handleSubmit}>
+            <div className='flex flex-col items-center w-full max-w-lg'>
+              <form onSubmit={handleSubmit} className="w-full">
                 <input
                   onChange={handleChange}
-                  className='text-center font-bold text-[4rem] text-purple-900 focus:outline-none'
+                  className='text-center font-bold text-3xl sm:text-4xl lg:text-5xl text-purple-900 focus:outline-none w-full'
                   value={form.storeName}
                   name='storeName'
                   placeholder='Store Name'
@@ -225,7 +226,7 @@ const CustomizedStore = () => {
                   value={form.storeCategory}
                   name='storeCategory'
                   onChange={handleChange}
-                  className='block w-full border bg-purple-900 text-white text-xl font-bold p-5 focus:outline-none border-gray-300 rounded-md mt-5 mb-5'
+                  className='block w-full border bg-purple-900 text-white text-lg sm:text-xl lg:text-2xl font-bold p-3 sm:p-5 focus:outline-none border-gray-300 rounded-md mt-5 mb-5'
                 >
                   <option value='Kid Dress' className='font-bold text-xl'>
                     Kid Dress
@@ -245,7 +246,7 @@ const CustomizedStore = () => {
                   className='hidden'
                 />
                 <div className='text-center mt-5'>
-                  <button type='submit' className='bg-purple-900 px-5 py-2 rounded-full text-white font-bold mb-10'>
+                  <button type='submit' className='bg-purple-900 px-5 py-2 sm:py-3 rounded-full text-white font-bold mb-10'>
                     Go live
                   </button>
                 </div>

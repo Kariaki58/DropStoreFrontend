@@ -1,3 +1,4 @@
+// get user payload slice
 import { createSlice } from "@reduxjs/toolkit";
 import { createUserAccount } from "./userPost";
 

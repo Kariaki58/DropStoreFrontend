@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Cart } from '../store/upload/cart/cart';
 import axios from 'axios';
 
+
+// responsive user navigation
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -20,7 +22,9 @@ const Header = () => {
   const [logoutState, setLogoutState] = useState(null);
 
   useEffect(() => {
-    dispatch(Cart());
+    if (localStorage.getItem("auth") === 'login') {
+      dispatch(Cart());
+    }
   }, [dispatch]);
 
   useEffect(() => {
@@ -101,7 +105,7 @@ const Header = () => {
               onClick={toggleDropdown} 
             />
             {isDropdownOpen && (
-              <div className='absolute right-0 top-12 mt-2 w-48 bg-red rounded-lg shadow-lg z-40'>
+              <div className='absolute right-0 top-12 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
                 <ul className='py-2'>
                   {(localStorage.getItem('auth') === 'logout' || !localStorage.getItem('auth')) && (
                     <li className='font-bold text-lg cursor-pointer p-3'>

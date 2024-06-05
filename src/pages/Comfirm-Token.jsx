@@ -4,13 +4,13 @@ import { comfirmToken } from '../store/comfirmToken/comfirmTokenPost';
 import { useNavigate } from 'react-router';
 
 
+// comfirm token component
 const ComfirmToken = () => {
   const [token, setToken] = useState({ email_token: ''})
   const [displayDuration, setdisplayDuration] = useState(true)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { data, loading, error } = useSelector((state) => state.token)
-
 
   useEffect(() => {
     if (!loading) {
@@ -23,25 +23,25 @@ const ComfirmToken = () => {
     }
   }, [loading])
 
-  // in production remove the set time out
   const handleChange = (e) => {
     setToken({
       ...token,
       [e.target.name]: e.target.value
     })
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(comfirmToken(token))
   }
 
   return (
-    <div className='h-screen flex justify-center items-center'>
-      <div className='bg-white shadow-lg rounded-lg p-8 w-full max-w-md'>
+    <div className='min-h-screen flex justify-center items-center p-4 sm:p-6'>
+      <div className='bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md'>
         {
           !loading && displayDuration && (
-            <div className={`${ data === 'account created' ? 'bg-green-600' : 'bg-red-600' } absolute top-0 right-0 h-16 z-[500] flex justify-center items-center`}>
-              <h1 className='text-white p-4'>{ data }</h1>
+            <div className={`${data === 'account created' ? 'bg-green-600' : 'bg-red-600'} absolute top-0 right-0 h-16 z-[500] flex justify-center items-center w-full`}>
+              <h1 className='text-white p-4'>{data}</h1>
             </div>
           )
         }

@@ -1,3 +1,4 @@
+// get user slice payload to the content list
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserUploads } from "./userUploadGet";
 

@@ -1,3 +1,5 @@
+// upload files to cloudinary
+// not in use yet
 import { createSlice } from "@reduxjs/toolkit";
 import { uploadFile } from "./cloudinaryUpload";
 
