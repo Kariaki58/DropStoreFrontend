@@ -21,6 +21,7 @@ Drop store is An ecommerce platform where users can do the following
 - orders page
 - sellers dashboard
 - address page
+- stripe payment
 
 ## How To Install It
 
@@ -38,6 +39,7 @@ VITE_APP_CLOUDINARY_CLOUD_NAME=<cloudinary cloud name>
 VITE_APP_BACKEND_BASEURL=<backend path>
 VITE_APP_IMAGE_FOLDER=<cloudinary image present>
 VITE_APP_VIDEO_FOLDER=<cloudinary video preset
+VITE_APP_STRIPE_PUBLIC=<stripe public key
 ```
 
 After setting cloudinary up Run
