@@ -19,7 +19,7 @@ const Stats = () => {
 
   const getBackendData = async () => {
     try {
-      const response = await axios.get("https://dropstorebackend.onrender.com/api/chart/data", { withCredentials: true });
+      const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/chart/data`, { withCredentials: true });
       setData(response.data);
     } catch (error) {
       console.error(error);

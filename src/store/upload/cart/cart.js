@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const Cart = createAsyncThunk('cart/get', async (_, { rejectWithValue }) => {
     try {
-        const response = await axios.get("https://dropstorebackend.onrender.com/api/cart", { withCredentials: true });
+        const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/cart`, { withCredentials: true });
         return response.data;
     } catch (err) {
         console.error("Error fetching cart data:", err);
