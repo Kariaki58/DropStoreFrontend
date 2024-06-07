@@ -17,7 +17,7 @@ const Orders = () => {
 
   useEffect(() => {
     if (orders?.msg) {
-      setState(orders.msg);
+      setState(prev => [...orders.msg]);
     }
   }, [orders]);
 
@@ -32,7 +32,6 @@ const Orders = () => {
     );
     await axios.put(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/dashboard/orders`, request, { withCredentials: true });
   };
-
   return (
     <div className="overflow-x-auto mt-10 mb-10 w-full md:w-[80%] h-[80vh] p-5" style={{ scrollbarWidth: 'thin' }}>
       <table className="min-w-full border border-gray-200 bg-slate-900">
