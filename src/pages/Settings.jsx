@@ -18,6 +18,9 @@ const Settings = () => {
     dispatch(userProfile())
   }, [])
 
+  useEffect(() => {
+    setPreviewImg(userAccountInfo.profile)
+  }, [loadingState])
   const uploadFile = async (type, timestamp, signature) => {
     const folder = import.meta.env.VITE_APP_IMAGE_FOLDER;
     const data = new FormData();
@@ -66,7 +69,6 @@ const Settings = () => {
       setImage(null);
       setPreviewImg(null);
       setLoading(false);
-      navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -113,7 +115,7 @@ const Settings = () => {
                 </div>
               )}
               <img 
-                src={userAccountInfo.profile || images.defaultImage}
+                src={previewImg || images.defaultImage}
                 alt="Profile Preview" 
                 className="w-full h-full rounded-full object-cover cursor-pointer" 
                 onClick={() => document.getElementById('upload').click()} 
