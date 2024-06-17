@@ -12,6 +12,7 @@ import addToCartSlice from "./upload/cartCount/addToCartSlice.js";
 import cartSlice from "./upload/cart/cartSlice.js";
 import orderSlice from "./orders/orderSlice.js";
 import addressSlice from "./Address/addressSlice.js";
+import profileSlice from './Profile/userProfileSlice';
 
 
 export const store = configureStore({
@@ -27,7 +28,8 @@ export const store = configureStore({
         cart: addToCartSlice,
         myCart: cartSlice,
         order: orderSlice,
-        address: addressSlice
+        address: addressSlice,
+        profile: profileSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
 })
