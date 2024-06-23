@@ -12,7 +12,6 @@ function ProductsInStore() {
   const dispatch = useDispatch();
   const { content, loading } = useSelector((state) => state.userupload);
   const [products, setProducts] = useState([]);
-  const [img, setImg] = useState(null);
 
   useEffect(() => {
     dispatch(getUserUploads());
@@ -78,7 +77,6 @@ function ProductsInStore() {
   const handleFileChange = async (e, index, productId) => {
     const file = e.target.files[0];
     if (file) {
-      setImg(file);
       const update = await signedUpload(file);
       const reader = new FileReader();
       

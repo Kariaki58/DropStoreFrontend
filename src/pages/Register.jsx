@@ -13,6 +13,7 @@ const Register = () => {
   const [displayDuration, setdisplayDuration] = useState(true);
   const [passwordError, setPasswordError] = useState('');
   const [userData, setUserData] = useState({
+    fullName: '',
     email: '',
     password: '',
     comfirmPassword: '',
@@ -28,8 +29,9 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setdisplayDuration(true);
-    const { email, password } = userData;
+    const { fullName, email, password } = userData;
     const request = {
+      fullName,
       email,
       password,
     };
@@ -50,7 +52,6 @@ const Register = () => {
 
   useEffect(() => {
     if (data === 'An email has been sent to you' && !loading) {
-      localStorage.setItem('auth', 'login');
       setTimeout(() => {
         navigate('/api/auth/comfirm-token', { replace: true });
       }, 2000);
@@ -74,6 +75,18 @@ const Register = () => {
         <form className="w-full" onSubmit={handleSubmit}>
           <h1 className="text-3xl font-semibold mb-6 text-center">Sign Up</h1>
           <label htmlFor="email" className="block text-xl mb-2">
+            full name
+          </label>
+          <input
+            name="fullName"
+            type="text"
+            value={userData.fullName}
+            onChange={handleChange}
+            className="block w-full py-2 px-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            placeholder="Enter your fullName"
+            required
+          />
+          <label htmlFor="email" className="block text-xl mb-2">
             Email address
           </label>
           <input
@@ -81,7 +94,7 @@ const Register = () => {
             type="email"
             value={userData.email}
             onChange={handleChange}
-            className="block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="block w-full py-2 px-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
             placeholder="Enter email"
             required
           />
@@ -93,10 +106,10 @@ const Register = () => {
             value={userData.password}
             onChange={handleChange}
             name="password"
-            className={`block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 ${
+            className={`block w-full py-2 px-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
               passwordError
                 ? 'border-red-600 focus:ring-red-500'
-                : 'border-slate-700 focus:ring-purple-500'
+                : 'focus:ring-purple-500'
             }`}
             placeholder="Enter password"
             required
@@ -109,10 +122,10 @@ const Register = () => {
             value={userData.comfirmPassword}
             onChange={handleChange}
             name="comfirmPassword"
-            className={`block w-full py-2 px-3 mb-4 rounded-lg focus:outline-none focus:ring-2 ${
+            className={`block w-full py-2 px-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 ${
               passwordError
                 ? 'border-red-600 focus:ring-red-500'
-                : 'border-slate-700 focus:ring-purple-500'
+                : 'focus:ring-purple-500'
             }`}
             placeholder="Confirm password"
             required

@@ -13,7 +13,7 @@ const Settings = () => {
   const [loading, setLoading] = useState(false);
   const [previewImg, setPreviewImg] = useState(null);
   const [formData, setFormData] = useState({
-    userName: '',
+    fullName: '',
     phoneNumber: '',
     address: '',
     city: '',
@@ -152,8 +152,8 @@ const Settings = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="address" className="block text-sm font-medium text-gray-700 mt-7">userName</label>
-                    <input value={formData.userName} name='userName' onChange={handleTextChange} className="block px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                    <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mt-7">userName</label>
+                    <input value={formData.fullName} name='fullName' onChange={handleTextChange} className="block px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
                   </div>
                   <input
                     type="file"

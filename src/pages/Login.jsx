@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logInAccount } from '../store/loginToken/loginTokenPost';
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
+import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
 
 
 // login user frontend, and send post request to the backend
 const Login = () => {
+  const isAuthenticated = useIsAuthenticated()
   const dispatch = useDispatch();
-  const { loading, data } = useSelector((state) => state.login);
+  const signIn = useSignIn()
+  const { loading, data, token } = useSelector((state) => state.login);
   const [displayDuration, setdisplayDuration] = useState(true);
 
   const handleSubmit = (e) => {
@@ -38,14 +42,26 @@ const Login = () => {
   }, [loading]);
 
   useEffect(() => {
-    if (data === 'loged in successfull' && !loading) {
-      localStorage.removeItem('auth');
-      localStorage.setItem('auth', 'login');
+    if (data && token && !loading) {
+      signIn({
+        auth: {
+          token,
+          type: 'Bearer'
+        },
+        userState: {
+          email: userData.email
+        }
+      })
       setTimeout(() => {
         navigate('/');
       }, 2000);
     }
   }, [data, loading, navigate]);
+
+  useEffect( () => {
+  if (isAuthenticated) {
+    navigate('/')
+  }}, [])
 
   return (
     <div className='flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8'>

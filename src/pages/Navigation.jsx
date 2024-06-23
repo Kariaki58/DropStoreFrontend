@@ -2,13 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaCartArrowDown, FaAffiliatetheme, FaBars } from 'react-icons/fa';
 import images from '../assets';
+import useSignOut from 'react-auth-kit/hooks/useSignOut';
 import { useSelector, useDispatch } from 'react-redux';
+import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
 import { Cart } from '../store/upload/cart/cart';
 import axios from 'axios';
 
 
 // responsive user navigation
 const Header = () => {
+  const isAuthenticated = useIsAuthenticated()
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -20,11 +24,10 @@ const Header = () => {
   const [status, setStatus] = useState(false);
   const [errorOnLogout, setErrorOnLogout] = useState(null);
   const [logoutState, setLogoutState] = useState(null);
+  const signOut = useSignOut()
 
   useEffect(() => {
-    if (localStorage.getItem("auth") === 'login') {
       dispatch(Cart());
-    }
   }, [dispatch]);
 
   useEffect(() => {
@@ -42,8 +45,8 @@ const Header = () => {
     setDisplayDuration(true);
     setLogoutState(response.data.msg);
     setStatus((prev) => !prev);
-    localStorage.removeItem('auth');
-    localStorage.setItem('auth', 'logout');
+
+    signOut()
   
     navigate('/api/auth/login');
     location.reload();
@@ -107,12 +110,12 @@ const Header = () => {
             {isDropdownOpen && (
               <div className='absolute right-0 top-12 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
                 <ul className='py-2'>
-                  {(localStorage.getItem('auth') === 'logout' || !localStorage.getItem('auth')) && (
+                  {!isAuthenticated && (
                     <li className='font-bold text-lg cursor-pointer p-3'>
                       <Link to='/api/auth/login'>Login</Link>
                     </li>
                   )}
-                  {localStorage.getItem('auth') === 'login' && (
+                  {isAuthenticated && (
                     <>
                       <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
                       <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/settings'>Settings</Link></li>
@@ -141,12 +144,12 @@ const Header = () => {
           <div className='fixed top-0 left-0 w-3/4 max-w-xs h-full bg-white p-5 z-50'>
             <button className='mb-5' onClick={() => setIsSidebarOpen(false)}>Close</button>
             <ul className='flex flex-col gap-5'>
-              {localStorage.getItem('auth') === 'logout' && (
+              {isAuthenticated && (
                 <li className='text-black font-bold text-xl cursor-pointer'>
                   <Link to='/api/auth/login' onClick={() => setIsSidebarOpen(false)}>Login</Link>
                 </li>
               )}
-              {localStorage.getItem('auth') === 'login' && (
+              {!isAuthenticated && (
                 <>
                   <li className='text-black font-bold text-xl cursor-pointer'>
                     <Link to='/api/dashboard' onClick={() => setIsSidebarOpen(false)}>Dashboard</Link>

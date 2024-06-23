@@ -8,7 +8,7 @@ export const logInAccount = createAsyncThunk('login/post', async (userData) => {
         if (response.data.error) {
             return response.data.error
         }
-        return response.data.msg
+        return response.data
     } catch (err) {
         return 'invalid credential'
     }

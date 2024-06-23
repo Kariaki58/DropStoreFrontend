@@ -5,6 +5,7 @@ import { logInAccount } from "./loginTokenPost";
 const initialState = {
     email: '',
     password: '',
+    token: '',
     loading: true,
     data: '',
     error: ''
@@ -21,7 +22,8 @@ const loginSlice = createSlice({
         })
         .addCase(logInAccount.fulfilled, (state, action) => {
             state.loading = false
-            state.data = action.payload
+            state.data = action.payload.msg
+            state.token = action.payload.token
         })
         .addCase(logInAccount.rejected, (state, action) => {
             state.loading = true

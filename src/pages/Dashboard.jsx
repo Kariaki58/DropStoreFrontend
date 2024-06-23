@@ -14,12 +14,22 @@ import { ThreeDots } from 'react-loader-spinner';
 // dashboard design
 const Dashboard = () => {
     const [previewImg, setPreviewImg] = useState(null)
+    const [formData, setFormData] = useState({
+      fullName: '',
+      phoneNumber: '',
+      address: '',
+      city: '',
+      country_code: '',
+      state: '',
+      postalCode: 0,
+      country: '',
+    })
     const dispatch = useDispatch()
-
     const { userAccountInfo, loadingState, error } = useSelector(state => state.profile)
 
     useEffect(() => {
       dispatch(userProfile())
+      setFormData(userAccountInfo)
     }, [])
 
     useEffect(() => {
@@ -39,11 +49,6 @@ const Dashboard = () => {
       )
     }
     
-    const handleImageClick = (e) => {
-      console.log("clicked")
-      document.getElementById('newImage').click()
-    }
-    
   return (
     <div className='flex'>
       <div className='bg-purple-900 h-screen w-[20%] flex items-center flex-col overflow-y-auto'>
@@ -51,7 +56,7 @@ const Dashboard = () => {
           <div className='w-28 h-28 mx-auto'>
             <img src={previewImg || images.defaultImage} className='w-full h-full object-cover rounded-full'/>
           </div>
-          <input value='Kariaki Stephen' type='text' className='mt-4 text-center bg-transparent focus:outline-none text-white' readOnly/>
+          <input value={formData.fullName} type='text' className='mt-4 text-center bg-transparent focus:outline-none text-white' readOnly/>
         </div>
         <div className='mt-10 self-start pl-5'>
           <ul className='space-y-7'>
