@@ -175,6 +175,8 @@ const Settings = () => {
                       country={'us'}
                       value={formData.phoneNumber}
                       onChange={handlePhoneChange}
+                      buttonStyle={{padding: '0.5rem', fontSize: '18px'}}
+                      inputStyle={{width: '100%', paddingLeft: '4rem', paddingTop: '1.5rem', paddingBottom: '1.5rem'}}
                     />
                 </div>
                 <div>
