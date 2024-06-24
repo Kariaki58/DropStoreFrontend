@@ -28,12 +28,11 @@ function App() {
         <Route path="/api/auth/login" element={<Login />} />
         <Route path="/api/auth/sign-up" element={<Register />} />
         <Route path="/api/auth/comfirm-token" element={<ComfirmToken />} />
-        
+        <Route path="/api/:storeId/products" element={<StoreProducts />} />
         <Route element={<AuthOutlet fallbackPath='/api/auth/login' />}>
           <Route path="/api/settings" element={<Settings />} />
           <Route path="/api/store" element={<Store />} />
           <Route path="/api/carts" element={<Carts />} />
-          <Route path="/api/:storeId/products" element={<StoreProducts />} />
           <Route path="/payment/sucess" element={<SuccessPage />} />
           <Route path="/payment/cancel" element={<CancelPage />} />
           <Route path="/api/dashboard" element={<Dashboard />} >
