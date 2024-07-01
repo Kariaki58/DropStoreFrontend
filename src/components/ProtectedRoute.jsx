@@ -1,13 +1,12 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../session/authentication/sessionAuth';
 
+// user protected route
 const ProtectedRoute = ({ children }) => {
-  const { isSessionAuthenticated, setIsSessionAuthenticated } = useAuth();
+  const { isSessionAuthenticated } = useAuth();
   
 
-  // After loading, check if the user is authenticated
   if (!isSessionAuthenticated) {
     // Redirect to login if not authenticated
     return <Navigate to="/api/auth/login" />;
