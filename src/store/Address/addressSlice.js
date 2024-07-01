@@ -1,6 +1,7 @@
 // create slice to get payload
 import { createSlice } from "@reduxjs/toolkit";
 import userAddress from "./address";
+import { revertAll } from "../actions";
 
 const initialState = {
     address: [],
@@ -24,6 +25,7 @@ const addSlice = createSlice({
             state.loading = true
             state.error = action.payload
         })
+        .addCase(revertAll, () => initialState);
     }
 })
 

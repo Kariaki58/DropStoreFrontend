@@ -5,6 +5,7 @@ import './index.css';
 import createStore from 'react-auth-kit/createStore';
 import { BrowserRouter } from 'react-router-dom';
 import AuthProvider from 'react-auth-kit';
+import { SessionAuthProvider } from './session/authentication/sessionAuth.jsx';
 import { store } from './store/index.js';
 import { Provider } from 'react-redux';
 
@@ -17,12 +18,14 @@ const authStore = createStore({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider store={authStore}>
+    <Provider store={store}>
       <BrowserRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </BrowserRouter>
-    </AuthProvider>
+        <SessionAuthProvider>
+            <AuthProvider store={authStore}>
+              <App />
+            </AuthProvider>
+          </SessionAuthProvider>
+        </BrowserRouter>
+      </Provider>
   </React.StrictMode>,
 );

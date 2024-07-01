@@ -1,6 +1,7 @@
 // get order slice
 import { createSlice } from "@reduxjs/toolkit";
 import { getOrders } from "./orderGet";
+import { revertAll } from "../actions";
 
 const initialState = {
     orders: [],
@@ -24,7 +25,8 @@ const orderSlice = createSlice({
             .addCase(getOrders.rejected, (state, action) => {
                 state.loading = true;
                 state.error = action.error.message;
-            });
+            })
+            .addCase(revertAll, () => initialState);
     }
 });
 

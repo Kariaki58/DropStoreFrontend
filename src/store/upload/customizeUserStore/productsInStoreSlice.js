@@ -1,6 +1,7 @@
 // create user store slice
 import { createSlice } from "@reduxjs/toolkit";
 import { CreateStore } from "./productsInStorePost";
+import { revertAll } from "../../actions";
 
 
 const initialState = {
@@ -25,6 +26,7 @@ const createStoreSlice = createSlice({
             state.loading = true
             state.error = action.payload
         })
+        .addCase(revertAll, () => initialState);
     }
 })
 

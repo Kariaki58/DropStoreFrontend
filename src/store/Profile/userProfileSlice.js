@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { revertAll } from "../actions";
 import { userProfile } from "./userProfile";
 
 
@@ -25,6 +26,7 @@ const profileSlice = createSlice({
             state.loadingState = false
             state.error = action.payload
         })
+        .addCase(revertAll, () => initialState);
     }
 })
 

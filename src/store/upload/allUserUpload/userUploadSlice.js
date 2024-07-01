@@ -1,6 +1,7 @@
 // get user slice payload to the content list
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserUploads } from "./userUploadGet";
+import { revertAll } from "../../actions";
 
 
 const initialState = {
@@ -26,6 +27,7 @@ const userUploadSlice = createSlice({
             state.loading = true
             state.error = action.payload
         })
+        .addCase(revertAll, () => initialState);
     }
 })
 

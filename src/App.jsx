@@ -14,6 +14,7 @@ import Carts from "./pages/Carts"
 import ProductsInStore from "./pages/ProductsInStore"
 import UploadProductForm from './pages/UploadProductForm';
 import StoreProducts from "./pages/StoreProducts"
+import ProtectedRoute from "./components/ProtectedRoute"
 import SuccessPage from "./pages/SuccessPage"
 import CancelPage from "./pages/CancelPage"
 import AuthOutlet from '@auth-kit/react-router/AuthOutlet'
@@ -28,20 +29,24 @@ function App() {
         <Route path="/api/auth/login" element={<Login />} />
         <Route path="/api/auth/sign-up" element={<Register />} />
         <Route path="/api/auth/comfirm-token" element={<ComfirmToken />} />
+
+        {/* Protected Routes */}
         <Route path="/api/:storeId/products" element={<StoreProducts />} />
+        <Route path="/api/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+        <Route path="/api/store" element={<ProtectedRoute><Store /></ProtectedRoute>} />
+        <Route path="/api/carts" element={<ProtectedRoute><Carts /></ProtectedRoute>} />
+        <Route path="/payment/sucess" element={<ProtectedRoute><SuccessPage /></ProtectedRoute>} />
+        <Route path="/payment/cancel" element={<ProtectedRoute><CancelPage /></ProtectedRoute>} />
+
+        {/* AuthOutlet for additional protection */}
         <Route element={<AuthOutlet fallbackPath='/api/auth/login' />}>
-          <Route path="/api/settings" element={<Settings />} />
-          <Route path="/api/store" element={<Store />} />
-          <Route path="/api/carts" element={<Carts />} />
-          <Route path="/payment/sucess" element={<SuccessPage />} />
-          <Route path="/payment/cancel" element={<CancelPage />} />
-          <Route path="/api/dashboard" element={<Dashboard />} >
-            <Route index element={<Stats />} />
-            <Route path="orders" element={<Orders />} />
+          <Route path="/api/customize/store" element={<ProtectedRoute><CustomizedStore /></ProtectedRoute>} >
+            <Route index element={<ProtectedRoute><ProductsInStore /></ProtectedRoute>} />
+            <Route path="upload" element={<ProtectedRoute><UploadProductForm /></ProtectedRoute>} />
           </Route>
-          <Route path="/api/customize/store" element={<CustomizedStore />}>
-            <Route index element={<ProductsInStore />} />
-            <Route path="upload" element={<UploadProductForm />} />
+          <Route path="/api/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} >
+            <Route index element={<ProtectedRoute><Stats /></ProtectedRoute>} />
+            <Route path="orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
           </Route>
         </Route>
       </Routes>

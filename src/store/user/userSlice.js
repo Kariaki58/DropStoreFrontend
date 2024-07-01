@@ -1,5 +1,6 @@
 // get user payload slice
 import { createSlice } from "@reduxjs/toolkit";
+import { revertAll } from "../actions";
 import { createUserAccount } from "./userPost";
 
 const initialState =  {
@@ -26,7 +27,8 @@ const userSlice = createSlice({
       .addCase(createUserAccount.rejected, (state, action) => {
         state.loading = true;
         state.error = action.payload;
-      });
+      })
+      .addCase(revertAll, () => initialState);
   },
 });
 

@@ -4,15 +4,12 @@ import { FaSearch, FaCartArrowDown, FaAffiliatetheme, FaBars } from 'react-icons
 import images from '../assets';
 import useSignOut from 'react-auth-kit/hooks/useSignOut';
 import { useSelector, useDispatch } from 'react-redux';
-import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
 import { Cart } from '../store/upload/cart/cart';
-import axios from 'axios';
-
+import { revertAll, resetLogin } from '../store/actions';
+import { useAuth } from '../session/authentication/sessionAuth';
 
 // responsive user navigation
 const Header = () => {
-  const isAuthenticated = useIsAuthenticated()
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -25,6 +22,8 @@ const Header = () => {
   const [errorOnLogout, setErrorOnLogout] = useState(null);
   const [logoutState, setLogoutState] = useState(null);
   const signOut = useSignOut()
+  const {isSessionAuthenticated, sessionLogout} = useAuth()
+
 
   useEffect(() => {
       dispatch(Cart());
@@ -37,19 +36,23 @@ const Header = () => {
   }, [logoutState]);
 
   const handleLogout = async () => {
-    const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/auth/logout`, {}, { withCredentials: true });
+    const response = await sessionLogout();
     if (response.data.error) {
       setDisplayDuration(false);
+      dispatch(revertAll())
+      dispatch(resetLogin())
       setErrorOnLogout(response.data.error);
+      return;
     }
+    dispatch(revertAll())
+    dispatch(resetLogin())
     setDisplayDuration(true);
     setLogoutState(response.data.msg);
     setStatus((prev) => !prev);
-
-    signOut()
-  
+    signOut();
+    
+    // Navigate after signOut to ensure the session state is updated
     navigate('/api/auth/login');
-    location.reload();
   };
 
   const toggleDropdown = () => {
@@ -103,7 +106,7 @@ const Header = () => {
           <Link to='/api/carts'>
             <li className='relative'>
               <FaCartArrowDown className='text-3xl text-white cursor-pointer' />
-              {!loading && cart && cart.msg && (
+              {!loading && isSessionAuthenticated && cart && cart.msg && (
                 <span className='absolute top-[-10px] left-5 text-white bg-black rounded-full px-1 font-bold text-sm'>{cart.msg.length}</span>
               )}
             </li>
@@ -117,12 +120,12 @@ const Header = () => {
             {isDropdownOpen && (
               <div className='absolute right-0 top-12 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
                 <ul className='py-2'>
-                  {!isAuthenticated && (
+                  {!isSessionAuthenticated && (
                     <li className='font-bold text-lg cursor-pointer p-3'>
                       <Link to='/api/auth/login'>Login</Link>
                     </li>
                   )}
-                  {isAuthenticated && (
+                  {isSessionAuthenticated && (
                     <>
                       <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
                       <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/settings'>Settings</Link></li>
@@ -151,12 +154,12 @@ const Header = () => {
           <div className='fixed top-0 left-0 w-3/4 max-w-xs h-full bg-white p-5 z-50'>
             <button className='mb-5' onClick={() => setIsSidebarOpen(false)}>Close</button>
             <ul className='flex flex-col gap-5'>
-              {isAuthenticated && (
+              {isSessionAuthenticated && (
                 <li className='text-black font-bold text-xl cursor-pointer'>
                   <Link to='/api/auth/login' onClick={() => setIsSidebarOpen(false)}>Login</Link>
                 </li>
               )}
-              {!isAuthenticated && (
+              {!isSessionAuthenticated && (
                 <>
                   <li className='text-black font-bold text-xl cursor-pointer'>
                     <Link to='/api/dashboard' onClick={() => setIsSidebarOpen(false)}>Dashboard</Link>

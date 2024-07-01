@@ -1,6 +1,7 @@
 // upload a new product slice
 import { createSlice } from "@reduxjs/toolkit";
 import { getSignatureForUpload } from "./uploadProduct";
+import { revertAll } from "../../actions";
 
 
 const initialState = {
@@ -26,7 +27,8 @@ const signatureSlice = createSlice({
         .addCase(getSignatureForUpload.rejected, (state, action) => {
           state.loading = true;
           state.error = action.error.message;
-        });
+        })
+        .addCase(revertAll, () => initialState);
     },
 });
 

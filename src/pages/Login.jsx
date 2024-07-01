@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { logInAccount } from '../store/loginToken/loginTokenPost';
+import { useAuth } from '../session/authentication/sessionAuth';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { resetLogin } from '../store/actions';
 
 
-// login user frontend, and send post request to the backend
 const Login = () => {
-  const isAuthenticated = useIsAuthenticated()
-  const dispatch = useDispatch();
-  const signIn = useSignIn()
-  const { loading, data, token } = useSelector((state) => state.login);
-  const [displayDuration, setdisplayDuration] = useState(true);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setdisplayDuration(true);
-    dispatch(logInAccount(userData));
-  };
+  const isAuthenticated = useIsAuthenticated();
+  const signIn = useSignIn();
+  const { sessionLogin } = useAuth();
+  const { loading, data, token, error } = useSelector((state) => state.login);
+  const dispatch = useDispatch()
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
@@ -33,44 +30,49 @@ const Login = () => {
     });
   };
 
-  useEffect(() => {
-    if (!loading) {
-      setTimeout(() => {
-        setdisplayDuration(false);
-      }, 1000);
-    }
-  }, [loading]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await sessionLogin(userData);
+  };
 
   useEffect(() => {
-    if (data && token && !loading) {
-      signIn({
-        auth: {
-          token,
-          type: 'Bearer'
-        },
-        userState: {
-          email: userData.email
-        }
-      })
+    if (isAuthenticated) {
       setTimeout(() => {
         navigate('/');
       }, 2000);
     }
-  }, [data, loading, navigate]);
+  }, [isAuthenticated])
 
-  useEffect( () => {
-  if (isAuthenticated) {
-    navigate('/')
-  }}, [])
+
+  useEffect(() => {
+    dispatch(resetLogin())
+  }, [navigate, data, error])
+
+  useEffect(() => {
+    if (!loading) {
+      if (data) {
+        toast.success(data);
+        if (token) {
+          signIn({
+            auth: {
+              token: token,
+              type: 'Bearer'
+            },
+            userState: {
+              email: userData.email
+            }
+          });
+        }
+      } else if (error) {
+        toast.error(error);
+      }
+    }
+  }, [loading, data, error, token]);
 
   return (
     <div className='flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full max-w-md'>
-        {!loading && displayDuration && (
-          <div className={`${data === 'loged in successfull' ? 'bg-green-600' : 'bg-red-600'} absolute top-0 right-0 h-16 z-50 flex justify-center items-center`}>
-            <h1 className='text-white p-4'>{data}</h1>
-          </div>
-        )}
+        <ToastContainer />
         <form className='w-full' onSubmit={handleSubmit}>
           <h1 className='text-3xl font-semibold mb-6 text-center'>Sign In</h1>
           <label htmlFor='email' className='block text-xl mb-2'>Email address</label>
@@ -93,7 +95,9 @@ const Login = () => {
             placeholder='Enter password'
             required
           />
-          <button className='w-full bg-purple-700 text-white py-3 mt-5 rounded-lg font-semibold hover:bg-purple-900 transition duration-300'>Login</button>
+          <button className='w-full bg-purple-700 text-white py-3 mt-5 rounded-lg font-semibold hover:bg-purple-900 transition duration-300'>
+          Login
+          </button>
         </form>
         <p className='mt-4 text-center'>Don't have an account? <Link className='text-purple-700 hover:underline' to='/api/auth/sign-up'>Sign up</Link></p>
       </div>

@@ -1,6 +1,7 @@
 // add to cart slice
 import { createSlice } from "@reduxjs/toolkit";
 import { addToCart } from "./addTocart";
+import { revertAll } from "../../actions";
 
 
 const initialState = {
@@ -25,6 +26,7 @@ const addToCartSlice = createSlice({
             state.loading = true
             state.error = action.payload
         })
+        .addCase(revertAll, () => initialState);
     }
 })
 

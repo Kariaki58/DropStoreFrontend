@@ -1,6 +1,7 @@
 // homepage dataset slice
 import { createSlice } from "@reduxjs/toolkit";
 import { getHomePageData } from './homeGet';
+import { revertAll } from "../actions";
 
 const initialState = {
     content: [],
@@ -25,6 +26,7 @@ const homeSlice = createSlice({
             state.status = false
             state.error = action.payload
         })
+        .addCase(revertAll, () => initialState);
     }
 })
 

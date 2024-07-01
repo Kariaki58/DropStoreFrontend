@@ -1,6 +1,7 @@
 // add store product to the array
 import { createSlice } from '@reduxjs/toolkit';
 import { StoreProductFetch } from './StoreProduct';
+import { revertAll } from '../../actions';
 
 
 const initialState = {
@@ -25,6 +26,7 @@ const storeSlice = createSlice({
             state.error = action.payload
             state.loading = true
         })
+        .addCase(revertAll, () => initialState)
     ]
 })
 
