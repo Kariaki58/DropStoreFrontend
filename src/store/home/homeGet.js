@@ -2,11 +2,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getHomePageData = createAsyncThunk('home/page', async () => {
+export const getHomePageData = createAsyncThunk('home/page', async (rejectWithValue) => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}`, { withCredentials: true })
-        return response.data.msg     
+        if (response.data.error) {
+            return rejectWithValue(response.data.error)
+        }
+        return response.data.msg
     } catch (err) {
-        throw new Error(err.message)
+        if (err.response && err.response.data && err.response.data.error) {
+            return rejectWithValue(err.response.data.error)
+        }
+        return rejectWithValue("An error occured")
     }
 });

@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { ThreeDots } from 'react-loader-spinner';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 // upload product form
 const UploadProductForm = () => {
@@ -73,18 +77,28 @@ const UploadProductForm = () => {
         imgUrl, videoUrl, ...form
       }, { withCredentials: true });
 
-      setImg(null);
-      setVideo(null);
-      setFormData({
-        productName: '',
-        description: '',
-        price: '',
-        instock: 0,
-      });
+      if (response.data.error) {
+        toast.error(response.data.error)
+        return
+      } else {
+        console.log(response.data.msg)
+        toast.success(response.data.msg)
+        setImg(null);
+        setVideo(null);
+        setFormData({
+          productName: '',
+          description: '',
+          price: '',
+          instock: 0,
+        });
 
-      setLoading(prev => !prev);
-      navigate("/api/customize/store");
-      setError(response.data.msg);
+        setLoading(prev => !prev);
+        // delay
+        setTimeout(() => {
+          navigate("/api/customize/store");
+        }, 5000);
+        setError(response.data.msg);
+      }
     } catch (error) {
       setLoading(prev => !prev);
       setFormData({
@@ -101,11 +115,7 @@ const UploadProductForm = () => {
 
   return (
     <div className="max-w-lg mx-auto mt-10 bg-white p-6 rounded-lg shadow-md relative">
-      {error && (
-        <div className={`color ${error === 'Product added to store' ?  'bg-green-700': 'bg-red-700'} w-96 border rounded-full left-52 absolute top-[-50px]`}>
-          <p className='p-3 text-center text-white'>{ error }</p>
-        </div>
-      )}
+      <ToastContainer/>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="image" className="block text-sm font-medium text-gray-700">Upload product Image</label>

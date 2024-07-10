@@ -3,11 +3,17 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-export const getSignatureForUpload = createAsyncThunk('upload/product', async (folder) => {
+export const getSignatureForUpload = createAsyncThunk('upload/product', async (folder, { rejectWithValue }) => {
     try {
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASEURL}/api/sign-upload`, { folder });
-        return res.data;
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_BASEURL}/api/sign-upload`, { folder });
+        if (response.data.error) {
+            return rejectWithValue(response.data.error)
+        }
+        return response.data
     } catch (error) {
-        console.error(error);
+        if (err.response && err.response.data && err.response.data.error) {
+            return rejectWithValue(err.response.data.error)
+        }
+        return rejectWithValue("An error occured")
     }
 })

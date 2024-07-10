@@ -93,7 +93,7 @@ const Header = () => {
       {errorOnLogout && (
         <div className='bg-red-600'></div>
       )}
-      <nav className='container flex justify-between items-center p-3 mx-auto'>
+      <nav className='container flex justify-between items-center p-1.5 mx-auto'>
         <h1 className='text-white text-3xl'>
           <Link to='/'>DropStore</Link>
         </h1>

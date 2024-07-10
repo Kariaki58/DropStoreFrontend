@@ -24,7 +24,7 @@ const orderSlice = createSlice({
             })
             .addCase(getOrders.rejected, (state, action) => {
                 state.loading = true;
-                state.error = action.error.message;
+                state.error = action.payload;
             })
             .addCase(revertAll, () => initialState);
     }

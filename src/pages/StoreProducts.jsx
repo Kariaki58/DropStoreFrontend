@@ -1,19 +1,31 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/upload/cartCount/addTocart';
 import { StoreProductFetch } from '../store/upload/StoreProducts/StoreProduct';
 import { ThreeDots } from 'react-loader-spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // product in store route
 const StoreProducts = () => {
     const dispatch = useDispatch();
     const { storeId } = useParams();
+    const navigate = useNavigate()
     const { loading, data, error } = useSelector((state) => state.storeproduct);
 
     useEffect(() => {
         dispatch(StoreProductFetch(storeId));
     }, []);
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error)
+            setTimeout(() => {
+                navigate('/')
+            }, 2000);
+        }
+    }, [error])
 
     const handleAddToCart = (productId) => {
         const request = { productId, storeId };
@@ -23,6 +35,7 @@ const StoreProducts = () => {
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen">
+                <ToastContainer />
                 <ThreeDots
                     visible={true}
                     height="80"
