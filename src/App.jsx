@@ -22,7 +22,7 @@ import AuthOutlet from '@auth-kit/react-router/AuthOutlet'
 
 function App() {
   return (
-    <div className="bg-[#FFFFFF]">
+    <div className="bg-gray-100">
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />}/>
