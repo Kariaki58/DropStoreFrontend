@@ -37,7 +37,7 @@ const Stats = () => {
   }
 
   return (
-    <section className="h-full w-full md:w-[80%] mt-5 p-5 relative">
+    <section className="h-full w-full md:w-[80%] mt-5 p-5 relative bg-white">
       {error && (
         <div className="bg-red-700 w-96 border rounded-full left-52 absolute top-[-50px]">
           <p className="p-3 text-center text-white">{error}</p>
@@ -45,23 +45,23 @@ const Stats = () => {
       )}
       <aside className="">
         <menu className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-slate-900 p-5 text-white text-xl font-bold rounded-lg">
+          <div className="bg-light-gray p-5 text-dark-gray text-xl font-bold rounded-lg">
             {orders && orders.msg && <p>{orders.msg.length}</p>}
             <Link to="/api/dashboard/orders">
               <p>Orders</p>
             </Link>
           </div>
-          <div className="bg-slate-900 p-5 text-white text-xl font-bold rounded-lg">
+          <div className="bg-light-gray p-5 text-dark-gray text-xl font-bold rounded-lg">
             <p>{orders.filledOrder}</p>
             <p>Orders fulfilled</p>
           </div>
-          <div className="bg-slate-900 p-5 text-white text-xl font-bold rounded-lg">
+          <div className="bg-light-gray p-5 text-dark-gray text-xl font-bold rounded-lg">
             <p>$2,800</p>
             <p>Total Earnings</p>
           </div>
         </menu>
-        <menu className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10 w-full">
-          <div className="bg-slate-900 h-[380px]">
+        <menu className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10 w-full">
+          <div className="bg-light-gray h-[380px] col-span-2">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 width={730}
@@ -87,7 +87,7 @@ const Stats = () => {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          <div className="bg-slate-900 h-[280px]">Pie Chart</div>
+          <div className="bg-light-gray h-[280px]">Pie Chart</div>
         </menu>
       </aside>
     </section>

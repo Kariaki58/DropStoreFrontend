@@ -77,7 +77,7 @@ const Header = () => {
   }, [isDropdownOpen]);
   
   return (
-    <header className='bg-purple-900'>
+    <header className='bg-dark-teal'>
       {displayDuration && status && (
         <div className={`${logoutState === 'you are been loged out' ? 'bg-green-600' : 'bg-red-600'} absolute top-0 right-0 h-16 z-[10000] flex justify-center items-center`}>
         <div className="px-4 py-3 shadow-md" role="alert">
@@ -97,9 +97,9 @@ const Header = () => {
         <h1 className='text-white text-3xl'>
           <Link to='/'>DropStore</Link>
         </h1>
-        <div className='hidden md:flex w-[500px] bg-slate-600 rounded-lg relative'>
+        <div className='hidden md:flex w-[500px] bg-dark-teal rounded-lg relative'>
           <input className='w-[460px] py-3 px-2 font-medium focus:outline-none bg-slate-300 rounded-l-lg' />
-          <FaSearch className='absolute right-3 top-3.5 text-xl' />
+          <FaSearch className='absolute right-3 top-3.5 text-xl text-white hover:cursor-pointer' />
         </div>
         <ul className='hidden md:flex gap-5 items-center relative'>
           <li><FaAffiliatetheme className='text-3xl text-white cursor-pointer' /></li>
@@ -118,7 +118,7 @@ const Header = () => {
               onClick={toggleDropdown} 
             />
             {isDropdownOpen && (
-              <div className='absolute right-0 top-12 mt-2 w-48 bg-white rounded-lg shadow-lg z-40'>
+              <div className='absolute right-0 top-[2.6rem] mt-2 w-48 bg-light-secondary-bg shadow-lg z-40'>
                 <ul className='py-2'>
                   {!isSessionAuthenticated && (
                     <li className='font-bold text-lg cursor-pointer p-3'>
@@ -127,9 +127,9 @@ const Header = () => {
                   )}
                   {isSessionAuthenticated && (
                     <>
-                      <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
-                      <li className='font-bold text-lg cursor-pointer p-3'><Link to='/api/settings'>Settings</Link></li>
-                      <li className='font-bold text-lg cursor-pointer p-3' onClick={handleLogout}>
+                      <li className='font-bold text-dark-gray text-lg cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
+                      <li className='font-bold text-dark-gray text-lg cursor-pointer p-3'><Link to='/api/settings'>Settings</Link></li>
+                      <li className='font-bold text-dark-gray text-lg cursor-pointer p-3' onClick={handleLogout}>
                         Logout
                       </li> 
                     </>
@@ -151,31 +151,31 @@ const Header = () => {
       )}
       {isSidebarOpen && (
         <div className='fixed inset-0 bg-black bg-opacity-50 z-50'>
-          <div className='fixed top-0 left-0 w-3/4 max-w-xs h-full bg-white p-5 z-50'>
-            <button className='mb-5' onClick={() => setIsSidebarOpen(false)}>Close</button>
+          <div className='fixed top-0 left-0 w-3/4 max-w-xs h-full bg-light-secondary-bg 0 p-5 z-50'>
+            <button className='mb-5 text-dark-gray' onClick={() => setIsSidebarOpen(false)}>Close</button>
             <ul className='flex flex-col gap-5'>
-              {isSessionAuthenticated && (
-                <li className='text-black font-bold text-xl cursor-pointer'>
+              {!isSessionAuthenticated && (
+                <li className='text-dark-gray font-bold text-xl cursor-pointer'>
                   <Link to='/api/auth/login' onClick={() => setIsSidebarOpen(false)}>Login</Link>
                 </li>
               )}
-              {!isSessionAuthenticated && (
+              {isSessionAuthenticated && (
                 <>
-                  <li className='text-black font-bold text-xl cursor-pointer'>
+                  <li className='text-dark-gray font-bold text-xl cursor-pointer'>
                     <Link to='/api/dashboard' onClick={() => setIsSidebarOpen(false)}>Dashboard</Link>
                   </li>
-                  <li className='text-black font-bold text-xl cursor-pointer'>
+                  <li className='text-dark-gray font-bold text-xl cursor-pointer'>
                     <Link to='/api/settings' onClick={() => setIsSidebarOpen(false)}>Settings</Link>
                   </li>
-                  <li className='text-black font-bold text-xl cursor-pointer' onClick={handleLogout}>
+                  <li className='text-dark-gray font-bold text-xl cursor-pointer' onClick={handleLogout}>
                     Logout
                   </li>
                 </>
               )}
-              <li><FaAffiliatetheme className='text-3xl text-black cursor-pointer' /></li>
+              <li><FaAffiliatetheme className='text-3xl text-dark-teal cursor-pointer' /></li>
               <Link to='/api/carts'>
                 <li className='relative'>
-                  <FaCartArrowDown className='text-3xl text-black cursor-pointer' />
+                  <FaCartArrowDown className='text-3xl text-dark-teal cursor-pointer' />
                   {!loading && cart && cart.msg && (
                     <span className='absolute top-[-10px] left-5 text-white bg-black rounded-full px-1 font-bold text-sm'>{cart.msg.length}</span>
                   )}
