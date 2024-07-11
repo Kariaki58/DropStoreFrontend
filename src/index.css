@@ -23,4 +23,86 @@
   background: #f1f1f1;
   }
   
-  
+
+/* Sidebar */
+.sidebar {
+  background-color: #004085; /* Dark Blue */
+  color: #FFFFFF; /* White */
+}
+
+/* Navigation Bar */
+.navbar {
+  background-color: #FFFFFF; /* White */
+  color: #007BFF; /* Blue */
+}
+
+/* Buttons */
+.button-primary {
+  background-color: #007BFF; /* Blue */
+  color: #FFFFFF; /* White */
+}
+
+.button-secondary {
+  background-color: #5BC0DE; /* Light Blue */
+  color: #FFFFFF; /* White */
+}
+
+/* Links */
+.links {
+  color: #007BFF; /* Blue */
+}
+
+/* Text */
+.text-header {
+  color: #004085; /* Dark Blue */
+}
+
+.text-body {
+  color: #000000; /* Black */
+}
+
+/* Charts */
+.chart {
+  background-color: #FFFFFF; /* White */
+  border-color: #6C757D; /* Grey */
+}
+
+.chart-primary {
+  color: #007BFF; /* Blue */
+}
+
+.chart-secondary {
+  color: #5BC0DE; /* Light Blue */
+}
+
+.chart-tertiary {
+  color: #6C757D; /* Grey */
+}
+
+.card {
+  background-color: #F8F9FA; /* Light Grey */
+  color: #000000; /* Black Text */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+}
+
+/* Card Header */
+.card-header {
+  background-color: #E9ECEF; /* Slightly Darker Grey */
+  color: #004085; /* Dark Blue */
+  font-weight: bold;
+  padding: 10px 15px;
+  border-bottom: 1px solid #D3D3D3; /* Light Border */
+}
+
+/* Card Body */
+.card-body {
+  padding: 15px;
+}
+
+/* Icon Styles */
+.card-icon {
+  color: #007BFF; /* Blue */
+  font-size: 24px; /* Adjust as needed */
+  margin-right: 10px;
+  vertical-align: middle;
+}

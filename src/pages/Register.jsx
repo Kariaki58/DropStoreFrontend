@@ -83,7 +83,7 @@ const Register = () => {
             type="text"
             value={userData.fullName}
             onChange={handleChange}
-            className="block w-full py-2 px-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="block w-full py-2 px-3 mb-4 rounded-lg border border-light-input-border focus:outline-none focus:ring-2 focus:ring-light-gray-border"
             placeholder="Enter your fullName"
             required
           />
@@ -95,7 +95,7 @@ const Register = () => {
             type="email"
             value={userData.email}
             onChange={handleChange}
-            className="block w-full py-2 px-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="block w-full py-2 px-3 mb-4 rounded-lg border border-light-input-border focus:outline-none focus:ring-2 focus:ring-light-gray-border"
             placeholder="Enter email"
             required
           />
@@ -107,10 +107,10 @@ const Register = () => {
             value={userData.password}
             onChange={handleChange}
             name="password"
-            className={`block w-full py-2 px-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`block w-full py-2 px-3 mb-4 rounded-lg border border-light-input-border focus:outline-none focus:ring-2 focus:ring-light-gray-border ${
               passwordError
                 ? 'border-red-600 focus:ring-red-500'
-                : 'focus:ring-purple-500'
+                : 'focus:ring-light-gray-border'
             }`}
             placeholder="Enter password"
             required
@@ -123,21 +123,21 @@ const Register = () => {
             value={userData.comfirmPassword}
             onChange={handleChange}
             name="comfirmPassword"
-            className={`block w-full py-2 px-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 ${
+            className={`block w-full py-2 px-3 mb-4 border border-light-input-border rounded-lg focus:outline-none focus:ring-2 ${
               passwordError
                 ? 'border-red-600 focus:ring-red-500'
-                : 'focus:ring-purple-500'
+                : 'focus:ring-light-gray-border'
             }`}
             placeholder="Confirm password"
             required
           />
-          <button className="w-full bg-purple-700 text-white py-3 mt-5 rounded-lg font-semibold hover:bg-purple-900 transition duration-300">
+          <button className="w-full bg-light-teal text-white py-3 mt-5 rounded-lg font-semibold hover:bg-darker-teal transition duration-300">
             Register
           </button>
         </form>
         <p className="mt-4 text-center">
           Already have an account?{' '}
-          <Link className="text-purple-700 hover:underline" to="/api/auth/login">
+          <Link className="text-dark-teal hover:underline" to="/api/auth/login">
             Sign in
           </Link>
         </p>

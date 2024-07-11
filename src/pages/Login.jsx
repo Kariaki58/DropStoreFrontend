@@ -95,11 +95,11 @@ const Login = () => {
             placeholder='Enter password'
             required
           />
-          <button className='w-full bg-purple-700 text-white py-3 mt-5 rounded-lg font-semibold hover:bg-purple-900 transition duration-300'>
+          <button className='w-full bg-light-teal text-white py-3 mt-5 rounded-lg font-semibold hover:bg-darker-teal transition duration-300'>
           Login
           </button>
         </form>
-        <p className='mt-4 text-center'>Don't have an account? <Link className='text-purple-700 hover:underline' to='/api/auth/sign-up'>Sign up</Link></p>
+        <p className='mt-4 text-center'>Don't have an account? <Link className='text-dark-teal hover:underline hover:text-light-teal' to='/api/auth/sign-up'>Sign up</Link></p>
       </div>
     </div>
   );

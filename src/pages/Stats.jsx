@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import images from '../assets';
 import { ThreeDots } from 'react-loader-spinner';
+import '../index.css';
 import { getOrders } from '../store/orders/orderGet';
 import { AreaChart, Tooltip, XAxis, YAxis, Area, ResponsiveContainer } from 'recharts';
+import { FaChartLine } from "react-icons/fa6";
+import { MdKeyboardArrowUp } from "react-icons/md";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 
-// display statistics and graphs
+
 const Stats = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
@@ -37,31 +41,15 @@ const Stats = () => {
   }
 
   return (
-    <section className="h-full w-full md:w-[80%] mt-5 p-5 relative">
+    <section className="w-full md:w-[80%] mt-5 p-5 relative">
       {error && (
         <div className="bg-red-700 w-96 border rounded-full left-52 absolute top-[-50px]">
           <p className="p-3 text-center text-white">{error}</p>
         </div>
       )}
-      <aside className="">
-        <menu className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-slate-900 p-5 text-white text-xl font-bold rounded-lg">
-            {orders && orders.msg && <p>{orders.msg.length}</p>}
-            <Link to="/api/dashboard/orders">
-              <p>Orders</p>
-            </Link>
-          </div>
-          <div className="bg-slate-900 p-5 text-white text-xl font-bold rounded-lg">
-            <p>{orders.filledOrder}</p>
-            <p>Orders fulfilled</p>
-          </div>
-          <div className="bg-slate-900 p-5 text-white text-xl font-bold rounded-lg">
-            <p>$2,800</p>
-            <p>Total Earnings</p>
-          </div>
-        </menu>
-        <menu className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10 w-full">
-          <div className="bg-slate-900 h-[380px]">
+      <aside>
+        <menu className="mb-10 w-full">
+          <div className="card h-[380px] col-span-2">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 width={730}
@@ -87,7 +75,87 @@ const Stats = () => {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          <div className="bg-slate-900 h-[280px]">Pie Chart</div>
+        </menu>
+        <menu className='mb-10 grid grid-cols-3 gap-5'>
+          <div className='card col-start-1 col-span-2 h-[280px]'></div>
+          <div className="card h-[280px]"></div>
+        </menu>
+        <menu className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className='p-5 text-xl font-bold rounded-lg card'>
+            <div className='flex items-center gap-2'>
+              <div className='text-[#343A40]'>
+                <FaChartLine />
+              </div>
+              <p className='text-[#343A40]'>Total Revenue</p>
+            </div>
+            <p className='text-[#343A40]'>$20,000</p>
+          </div>
+          <div className="p-5 text-xl font-bold rounded-lg card">
+            <div>
+              <p className='text-[#343A40]'>New Customers</p>
+              <p className='text-[#343A40]'>430</p>
+            </div>
+            <div className='flex items-center mt-10'>
+              <p className='text-[#cf2929] text-3xl'>
+                <MdOutlineKeyboardArrowDown />
+              </p>
+              <p className='text-[#cf2929] font-normal'>18%</p>
+            </div>
+          </div>
+          <div className="p-5 text-xl font-bold rounded-lg card">
+            <p className='text-[#343A40]'>Average order value</p>
+            <p className='text-[#343A40]'>$1,000</p>
+            <div className='flex items-center mt-10'>
+              <p className='text-[#3aff20] text-3xl'>
+                <MdKeyboardArrowUp />
+              </p>
+              <p className='text-[#3aff20] font-normal'>23%</p>
+            </div>
+          </div>
+          <div className="p-5 text-xl font-bold rounded-lg card">
+            <p className='text-[#343A40]'>Convertion Rate</p>
+            <p className='text-[#403a34]'>35.18%</p>
+            <div className='flex items-center mt-10'>
+              <p className='text-[#3aff20]'>
+                <MdKeyboardArrowUp />
+              </p>
+              <p className='text-[#3aff20] font-normal'>23%</p>
+            </div>
+          </div>
+        </menu>
+        <menu className="card w-full mt-10">
+          <h1 className='text-center font-bold text-2xl p-5 text-[#343A40] underline'>Best Selling Product</h1>
+          <table className="min-w-full rounded-lg">
+            <thead>
+              <tr className="w-full">
+                <th className="py-3 px-4 text-center text-xl font-semibold text-[#343A40]">Product ID</th>
+                <th className="py-3 px-4 text-center text-xl font-semibold text-[#343A40]">Product</th>
+                <th className="py-3 px-4 text-center text-xl font-semibold text-[#343A40]">Total Sales</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="w-full border-b hover:bg-gray-100">
+                <td className="py-3 px-4 text-center text-xl text-[#343A40]">89323sabe</td>
+                <td className="py-3 px-4 text-center text-xl text-[#343A40] flex items-center justify-center gap-3">
+                  <div className='w-20'>
+                    <img src={images.laptop} className='w-full h-full rounded'/>
+                  </div>
+                  <p>Men Hoodie, with sneaker 4 of them</p>
+                </td>
+                <td className="py-3 px-4 text-center text-xl text-[#343A40]">300</td>
+              </tr>
+              <tr className="w-full border-b hover:bg-gray-100">
+                <td className="py-3 px-4 text-center text-xl text-[#343A40]">89323sabe</td>
+                <td className="py-3 px-4 text-center text-xl text-[#343A40] flex items-center justify-center gap-3">
+                  <div className='w-20'>
+                    <img src={images.laptop} className='w-full h-full rounded'/>
+                  </div>
+                  <p>Men Hoodie, with sneaker 4 of them</p>
+                </td>
+                <td className="py-3 px-4 text-center text-xl text-[#343A40]">18k</td>
+              </tr>
+            </tbody>
+          </table>
         </menu>
       </aside>
     </section>
