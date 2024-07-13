@@ -91,14 +91,14 @@ const Carts = () => {
     <section className="container mx-auto p-5">
       <div className="grid gap-5">
         {render.map((item, index) => (
-          <div key={index} className="bg-[#004085] flex flex-row max-custom-sm:flex-col sm:w-full justify-between bg-light-gray text-white p-4 rounded-lg shadow-lg">
+          <div key={index} className="card flex flex-row max-custom-sm:flex-col sm:w-full justify-between p-4 rounded-lg shadow-lg">
             <div className="flex items-center lg:w-1/2">
               <div className="h-24 w-24 lg:h-32 lg:w-32 overflow-hidden rounded-lg">
                 <img src={item.productId.imgUrl} alt={item.productId.productName} className="h-full w-full object-cover"/>
               </div>
               <div className="ml-5">
                 <h1 className="text-xl font-bold">{item.productId.productName}</h1>
-                <p className="text-sm text-white">Seller: {item.storeName}</p>
+                <p className="text-sm text-light-gray">Seller: {item.storeName}</p>
                 <button onClick={() => handleDelete(item.productId._id)} className="mt-2 bg-[#007BFF] text-white p-2 rounded-lg hover:bg-darker-teal">Remove</button>
               </div>
             </div>

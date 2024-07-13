@@ -18,6 +18,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import SuccessPage from "./pages/SuccessPage"
 import CancelPage from "./pages/CancelPage"
 import AuthOutlet from '@auth-kit/react-router/AuthOutlet'
+import Products from "./components/Products"
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           </Route>
           <Route path="/api/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} >
             <Route index element={<ProtectedRoute><Stats /></ProtectedRoute>} />
+            <Route path="products" element={<ProtectedRoute><Products /></ProtectedRoute>} />
             <Route path="orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
           </Route>
         </Route>
