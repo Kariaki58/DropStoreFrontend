@@ -22,7 +22,7 @@ import { FiSettings } from "react-icons/fi";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { FaRocketchat } from "react-icons/fa";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
-
+import { HiGlobeEuropeAfrica } from "react-icons/hi2";
 
 
 const Dashboard = () => {
@@ -106,7 +106,7 @@ const Dashboard = () => {
             </li>
             {isAccordionOpen && (
               <div className="pl-5">
-                <Link to='/api/customize/store'>
+                <Link to='/api/dashboard/products'>
                   <li className='mb-2 flex items-center gap-2 text-2xl text-[#343A40] hover:bg-[#DADADA] p-2 rounded-lg cursor-pointer active:bg-dashboard-darker-teal'>
                     <MdOutlineProductionQuantityLimits />
                     <p>products</p>
@@ -148,6 +148,12 @@ const Dashboard = () => {
               <li className='mb-2 flex items-center gap-2 text-2xl text-[#343A40] hover:bg-[#DADADA] p-2 rounded-lg cursor-pointer active:bg-dashboard-darker-dark-teal'>
                 <FaUsers />
                 <p>Permissions</p>
+              </li>
+            </Link>
+            <Link>
+              <li className='mb-2 flex items-center gap-2 text-2xl text-[#343A40] hover:bg-[#DADADA] p-2 rounded-lg cursor-pointer active:bg-dashboard-darker-dark-teal'>
+                <HiGlobeEuropeAfrica />
+                <p>Live Customers</p>
               </li>
             </Link>
             <Link>

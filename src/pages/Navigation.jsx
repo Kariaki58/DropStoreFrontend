@@ -129,9 +129,9 @@ const Header = () => {
                   )}
                   {isSessionAuthenticated && (
                     <>
-                      <li className='font-bold text-dark-gray text-lg hover:bg-[#DADADA] cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
-                      <li className='font-bold text-dark-gray text-lg hover:bg-[#DADADA] cursor-pointer p-3'><Link to='/api/settings'>Settings</Link></li>
-                      <li className='font-bold text-dark-gray text-lg hover:bg-[#DADADA] cursor-pointer p-3' onClick={handleLogout}>
+                      <li className='font-bold text-[#343A40] text-lg hover:bg-[#DADADA] cursor-pointer p-3'><Link to='/api/dashboard'>Dashboard</Link></li>
+                      <li className='font-bold text-[#343A40] text-lg hover:bg-[#DADADA] cursor-pointer p-3'><Link to='/api/settings'>Settings</Link></li>
+                      <li className='font-bold text-[#343A40] text-lg hover:bg-[#DADADA] cursor-pointer p-3' onClick={handleLogout}>
                         Logout
                       </li> 
                     </>
