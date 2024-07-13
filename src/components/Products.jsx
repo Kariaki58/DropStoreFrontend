@@ -5,6 +5,8 @@ import { TbEdit } from "react-icons/tb";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { MdClose } from 'react-icons/md';
 import { FiDelete } from "react-icons/fi";
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import images from '../assets';
 
 
@@ -16,14 +18,14 @@ const Products = () => {
     };
 
   return (
-    <div className='w-full p-1 relative md:w-[80%]'>
+    <div className='w-full p-1 relative md:w-[80%] h-[40rem]'>
         <div className='bg-white p-5'>
             <h1 className='text-2xl font-bold text-[#343A40] mb-5'>All Products</h1>
             <div className='flex justify-between'>
                 <div className='flex items-center gap-3'>
                     <input placeholder='Search for product' className='card placeholder:text-[#94949c] w-[300px] py-3 px-2 font-medium text-[#343440] focus:outline-blue-300 focus:border-none rounded-lg border' />
-                    <IoMdSettings className='text-3xl text-[#343A40]'/>
-                    <RiDeleteBin5Fill className='text-3xl text-[#343A40]'/>
+                    <IoMdSettings className='text-3xl text-[#343A40] cursor-pointer'/>
+                    <RiDeleteBin5Fill className='text-3xl text-[#343A40] cursor-pointer'/>
                 </div>
                 <div className='flex'>
                     <button className='flex bg-blue-700 hover:bg-blue-900 rounded-xl p-2 text-white items-center gap-2' onClick={toggleModal}>
@@ -139,7 +141,7 @@ const Products = () => {
                 </div>
             )}
         </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto border-b">
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="">
                     <tr>
@@ -192,9 +194,83 @@ const Products = () => {
                             </div>
                         </td>
                     </tr>
-                    
+                    <tr>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-600" />
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900 font-bold">Product 1</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="h-10">
+                                <img src={images.laptop} className="h-full rounded-md" alt="Product" />
+                            </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900 font-bold">18ab12p3fk1345</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900 font-bold">$149</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="flex space-x-2">
+                                <button className="flex items-center bg-blue-700 hover:bg-blue-900 text-white p-2 rounded-xl">
+                                    <TbEdit className="mr-1" />
+                                    Edit item
+                                </button>
+                                <button className="text-white hover:bg-red-900 bg-red-700 flex items-center p-2 rounded-xl">
+                                    <RiDeleteBin6Fill className="mr-1" />
+                                    Delete item
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-600" />
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900 font-bold">Product 1</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="h-10">
+                                <img src={images.laptop} className="h-full rounded-md" alt="Product" />
+                            </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900 font-bold">18ab12p3fk1345</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900 font-bold">$149</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="flex space-x-2">
+                                <button className="flex items-center bg-blue-700 hover:bg-blue-900 text-white p-2 rounded-xl">
+                                    <TbEdit className="mr-1" />
+                                    Edit item
+                                </button>
+                                <button className="text-white hover:bg-red-900 bg-red-700 flex items-center p-2 rounded-xl">
+                                    <RiDeleteBin6Fill className="mr-1" />
+                                    Delete item
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
+        </div>
+        <div className='flex items-center text-[#343A40] bg-white px-4 justify-between'>
+            <div className='flex items-center text-[#343A40] bg-white py-4'>
+                <div className='flex items-center'>
+                    <MdOutlineKeyboardArrowLeft className='text-3xl cursor-pointer'/>
+                    <MdKeyboardArrowRight className='text-3xl cursor-pointer'/>
+                </div>
+                <p>showing <span className='font-semibold'>1-20</span> of <span className='font-semibold'>2290</span></p>
+            </div>
+            <div className='flex gap-3'>
+                <button className='flex items-center bg-blue-700 text-white p-2 rounded-xl hover:bg-blue-900'><MdOutlineKeyboardArrowLeft className='text-3xl cursor-pointer'/> Previous</button>
+                <button className='flex items-center bg-blue-700 text-white p-2 rounded-xl hover:bg-blue-900'>Next <MdKeyboardArrowRight className='text-3xl cursor-pointer'/></button>
+            </div>
         </div>
     </div>
   );
