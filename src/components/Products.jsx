@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IoMdSettings } from "react-icons/io";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
@@ -8,10 +8,123 @@ import { FiDelete } from "react-icons/fi";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import images from '../assets';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const Products = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false)
+    const [images, setImages] = useState(null)
+    const [allProducts, setAllProducts] = useState(null)
+    const [product, setProduct] = useState(
+        {
+            productName: '',
+            productCategory: '',
+            brand: '',
+            price: null,
+            instock: null,
+            productVideo: '',
+            productImages: [],
+            productDescription: ''
+        }
+    )
+
+    const uploadFile = async (file, type, timestamp, signature) => {
+        const folder = type === 'image' ? 'images' : 'videos';
+    
+        const data = new FormData();
+        data.append("file", file);
+        data.append("timestamp", timestamp);
+        data.append("signature", signature);
+        data.append("api_key", import.meta.env.VITE_APP_CLOUDINARY_API_KEY);
+        data.append("folder", folder);
+    
+        try {
+          const cloudName = import.meta.env.VITE_APP_CLOUDINARY_CLOUD_NAME;
+          const resourceType = type === 'image' ? 'image' : 'video';
+          const api = `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`;
+    
+          const res = await axios.post(api, data);
+          const { secure_url } = res.data;
+          return secure_url;
+        } catch (error) {
+          setError('Something went wrong in the server');
+        }
+    };
+    
+    const getSignatureForUpload = async (folder) => {
+        try {
+            const res = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/gensignature`, { folder }, { withCredentials: true })
+            return res.data
+        } catch (error) {
+            setError('Something went wrong in the server')
+        }
+    }
+
+    const onChange = (e) => {
+        // console.log(e.target.files)
+        if (e.target.files) {
+            setProduct((prevProduct) => ({
+                ...prevProduct,
+                productImages: [...prevProduct.productImages, ...Array.from(e.target.files)],
+            }));
+        } else {
+            setProduct({
+                ...product, [e.target.name]: e.target.value
+            })
+        }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        try {
+            const { timestamp: imgTimestamp, signature: imgSignature } = await getSignatureForUpload('images');
+            const { timestamp: videoTimestamp, signature: videoSignature } = await getSignatureForUpload('videos');
+
+            let images = [];
+            for (const item of product.productImages) {
+                const imgUrl = await uploadFile(item, 'image', imgTimestamp, imgSignature);
+                images.push(imgUrl);
+            }
+            
+            console.log(product)
+            const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/upload/product`, {
+                imgUrls: images,
+                ...product
+            }, { withCredentials: true });
+
+            if (response.data.error) {
+                toast.error(response.data.error);
+            } else {
+                toast.success(response.data.msg);
+                setProduct({
+                    productName: '',
+                    productCategory: '',
+                    brand: '',
+                    price: '',
+                    instock: '',
+                    productVideo: '',
+                    productImages: [],
+                    productDescription: ''
+                });
+            }
+        } catch (error) {
+            console.log(error.response.data.error)
+            setError(error.response.data.error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        setAllProducts(product)
+        console.log("inside useEffect")
+        console.log(allProducts)
+    }, [product]);
 
     const toggleModal = () => {
         setIsOpen(!isOpen);
@@ -40,7 +153,7 @@ const Products = () => {
                 tabIndex="-1"
                 aria-hidden="true"
                 >
-                <div className="relative p-4 w-full max-w-2xl max-h-full overflow-y-auto h-[45rem] scrollbar-thin scrollbar-track-gray-300">
+                <form onSubmit={handleSubmit} className="relative p-4 w-full max-w-2xl max-h-full overflow-y-auto h-[45rem] scrollbar-thin scrollbar-track-gray-300">
                     <div className="relative card rounded-lg shadow">
                     <div className="flex items-center justify-between p-4 md:p-5 border-b rounded">
                         <h3 className="text-xl font-semibold text-gray-900">
@@ -58,59 +171,59 @@ const Products = () => {
                         <div className='flex justify-between'>
                             <div>
                                 <h1 className='text-[#343A40] font-semibold mb-2'>Product Name</h1>
-                                <div><input placeholder='product name' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300'/></div>
+                                <div><input name='productName' value={product.productName} onChange={onChange} placeholder='product name' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300' required/></div>
                             </div>
                             <div>
                                 <h1 className='text-[#343A40] font-semibold mb-2'>Category</h1>
                                 <div>
-                                    <input placeholder='product category' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300'/>
+                                    <input name='productCategory' value={product.productCategory} onChange={onChange} placeholder='product category' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300' required/>
                                 </div>
                             </div>
                         </div>
                         <div className='flex justify-between'>
                             <div>
                                 <h1 className='text-[#343A40] font-semibold mb-2'>Brand</h1>
-                                <div><input placeholder='brand name' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300'/></div>
+                                <div><input name='brand' value={product.brand} onChange={onChange} placeholder='brand name' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300' required/></div>
                             </div>
                             <div>
                                 <h1 className='text-[#343A40] font-semibold mb-2'>Price</h1>
                                 <div>
-                                    <input placeholder='product price' type='number' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300'/>
+                                    <input name='price' value={product.price} onChange={onChange} placeholder='product price' type='number' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300' required/>
                                 </div>
                             </div>
                         </div>
                         <div className='flex justify-between'>
                             <div>
                                 <h1 className='text-[#343A40] font-semibold mb-2'>In stock</h1>
-                                <div><input placeholder='product in stock' type='number' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300'/></div>
+                                <div><input name='instock' value={product.instock} onChange={onChange} placeholder='product in stock' type='number' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300' required/></div>
                             </div>
                             <div>
                                 <h1 className='text-[#343A40] font-semibold mb-2'>Product video</h1>
                                 <div>
-                                    <input type='url' placeholder='optional video url..' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300'/>
+                                    <input name='productVideo' value={product.productVideo} onChange={onChange} type='url' placeholder='optional video url..' className='border bg-transparent px-1 py-2 rounded-lg focus:outline-blue-300' required/>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <textarea className='border bg-transparent rounded-lg focus:outline-blue-300 w-full h-28 p-3' placeholder='product discription...'></textarea>
+                            <textarea name='productDescription' value={product.productDescription} onChange={onChange} className='border bg-transparent rounded-lg focus:outline-blue-300 w-full h-28 p-3' placeholder='product discription...' required></textarea>
                         </div>
                         <div class="flex items-center justify-center w-full">
-                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer card">
+                            <label htmlFor="dropzone-file" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer card">
                                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                                     </svg>
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG, GIF, MP4 (MAX. 800x400px)</p>
+                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span></p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG, MP4</p>
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" multiple/>
+                                <input name='' onChange={onChange} id="dropzone-file" accept=".jpeg, .jpg, .png,video/*" type="file" class="hidden" multiple required/>
                             </label>
                         </div>
                     </div>
                     <div className="p-4 rounded-lg">
                         <h1 className="text-lg font-semibold mb-4 text-gray-700">Preview</h1>
                         <div className="flex gap-4 w-full overflow-x-auto p-4">
-                            {Array(5).fill().map((_, index) => (
+                            {/* {!allProducts && allProducts.map((_, index) => (
                                 <div key={index} className="w-40 flex-shrink-0 relative">
                                     <img
                                     src={images.laptop}
@@ -119,25 +232,24 @@ const Products = () => {
                                     />
                                     <FiDelete className='absolute top-0 right-0 m-2 text-xl hover:cursor-pointer'/>
                                 </div>
-                            ))}
+                            ))} */}
                         </div>
                     </div>
                     <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded">
                         <div>
                             <div>
                                 <button
-                                    onClick={toggleModal}
+                                    // onClick={toggleModal}
                                     className="text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                    type="button"
+                                    type="submit"
                                     >
                                         Add product
                                 </button>
                             </div>
                         </div>
-                        
                     </div>
                     </div>
-                </div>
+                </form>
                 </div>
             )}
         </div>

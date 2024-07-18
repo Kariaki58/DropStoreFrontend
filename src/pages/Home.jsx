@@ -54,17 +54,25 @@ const Home = () => {
                   onClick={() => handleClick(item._id)}
                 >
                   <div className='h-48 overflow-hidden rounded-t-lg'>
-                    <img src={item.banner} alt={`${item.storeName} banner`} className='w-full h-full object-cover' />
+                    <img src={item.imgUrl} alt={`${item.storeName} banner`} className='w-full h-full object-cover' />
                   </div>
-                  <div className='p-3'>
-                    <h1 className='font-bold text-xl sm:text-2xl mb-2'>{item.storeName}</h1>
-                    <div>
-                      <ul>
-                        {item.storeCategory.map((other, index) => (
-                          <li key={index} className='text-sm sm:text-base'>{other}</li>
-                        ))}
-                      </ul>
+                  <div className='mb-3'>
+                  <p className='postBody text-[#343A40]'>
+                    {(item.description).length <= 30 ? item.description :
+                    `${(item.description).slice(0, 30)}...`
+                    }
+                  </p>
+                  </div>
+                  <div className='flex justify-between text-[#343A40]'>
+                    <div className='flex gap-1'>
+                      <p>300 sold</p>
+                      <p>*****</p>
                     </div>
+                    {/* price should be based on the country, not hard coded with dollar sign */}
+                    <p>${item.price}</p> 
+                  </div>
+                  <div className='mt-2'>
+                    <Link><p className='text-blue-800 text-sm'>{item.storeName}</p></Link>
                   </div>
                 </div>
               ))}

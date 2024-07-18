@@ -30,9 +30,10 @@ function App() {
         <Route path="/api/auth/login" element={<Login />} />
         <Route path="/api/auth/sign-up" element={<Register />} />
         <Route path="/api/auth/comfirm-token" element={<ComfirmToken />} />
+        <Route path="/api/:storeId/products" element={<StoreProducts />} />
+
 
         {/* Protected Routes */}
-        <Route path="/api/:storeId/products" element={<StoreProducts />} />
         <Route path="/api/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
         <Route path="/api/store" element={<ProtectedRoute><Store /></ProtectedRoute>} />
         <Route path="/api/carts" element={<ProtectedRoute><Carts /></ProtectedRoute>} />
