@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoMdSettings } from "react-icons/io";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
@@ -10,14 +11,14 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import images from '../assets';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import ProductTable from './ProductTable';
 
 
 const Products = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false)
-    const [images, setImages] = useState(null)
-    const [allProducts, setAllProducts] = useState(null)
+    const [previewImage, setPreviewImage] = useState([])
     const [product, setProduct] = useState(
         {
             productName: '',
@@ -50,6 +51,7 @@ const Products = () => {
           const { secure_url } = res.data;
           return secure_url;
         } catch (error) {
+            console.log("something went wrong in the server")
           setError('Something went wrong in the server');
         }
     };
@@ -64,34 +66,34 @@ const Products = () => {
     }
 
     const onChange = (e) => {
-        // console.log(e.target.files)
-        if (e.target.files) {
-            setProduct((prevProduct) => ({
-                ...prevProduct,
-                productImages: [...prevProduct.productImages, ...Array.from(e.target.files)],
-            }));
-        } else {
-            setProduct({
-                ...product, [e.target.name]: e.target.value
-            })
-        }
+        setProduct({
+            ...product, [e.target.name]: e.target.value
+        })
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
+        if (previewImage.length > 5) {
+            alert('You are only allowed to upload a maximum of 5 images at a time');
+            return
+        }
+
         try {
             const { timestamp: imgTimestamp, signature: imgSignature } = await getSignatureForUpload('images');
             const { timestamp: videoTimestamp, signature: videoSignature } = await getSignatureForUpload('videos');
 
             let images = [];
-            for (const item of product.productImages) {
-                const imgUrl = await uploadFile(item, 'image', imgTimestamp, imgSignature);
+
+            const uploadPromises = Array.from(previewImage).map(async (img) => {
+                const imgUrl = await uploadFile(img, 'image', imgTimestamp, imgSignature);
                 images.push(imgUrl);
-            }
-            
-            console.log(product)
+                console.log("running...");
+            });
+
+            await Promise.all(uploadPromises);
+
             const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/upload/product`, {
                 imgUrls: images,
                 ...product
@@ -99,6 +101,16 @@ const Products = () => {
 
             if (response.data.error) {
                 toast.error(response.data.error);
+                setProduct({
+                    productName: '',
+                    productCategory: '',
+                    brand: '',
+                    price: '',
+                    instock: '',
+                    productVideo: '',
+                    productDescription: ''
+                });
+                setPreviewImage([])
             } else {
                 toast.success(response.data.msg);
                 setProduct({
@@ -108,9 +120,9 @@ const Products = () => {
                     price: '',
                     instock: '',
                     productVideo: '',
-                    productImages: [],
                     productDescription: ''
                 });
+                setPreviewImage([])
             }
         } catch (error) {
             console.log(error.response.data.error)
@@ -120,15 +132,13 @@ const Products = () => {
         }
     };
 
-    useEffect(() => {
-        setAllProducts(product)
-        console.log("inside useEffect")
-        console.log(allProducts)
-    }, [product]);
-
     const toggleModal = () => {
         setIsOpen(!isOpen);
     };
+
+    const removeImageFromPreview = (idx) => {
+        setPreviewImage((prev) => Array.from(prev).filter((images, index) => idx !== index))
+    }
 
   return (
     <div className='w-full p-1 relative md:w-[80%] h-[40rem]'>
@@ -216,24 +226,30 @@ const Products = () => {
                                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span></p>
                                     <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG, MP4</p>
                                 </div>
-                                <input name='' onChange={onChange} id="dropzone-file" accept=".jpeg, .jpg, .png,video/*" type="file" class="hidden" multiple required/>
+                                <input name='' onChange={(e) => setPreviewImage(e.target.files)} id="dropzone-file" accept=".jpeg, .jpg, .png,video/*" type="file" class="hidden" multiple required/>
                             </label>
                         </div>
                     </div>
                     <div className="p-4 rounded-lg">
-                        <h1 className="text-lg font-semibold mb-4 text-gray-700">Preview</h1>
-                        <div className="flex gap-4 w-full overflow-x-auto p-4">
-                            {/* {!allProducts && allProducts.map((_, index) => (
-                                <div key={index} className="w-40 flex-shrink-0 relative">
-                                    <img
-                                    src={images.laptop}
-                                    alt={`Preview ${index + 1}`}
-                                    className="w-full h-auto object-cover rounded-lg border border-gray-300 hover:shadow-lg transition-shadow duration-300"
-                                    />
-                                    <FiDelete className='absolute top-0 right-0 m-2 text-xl hover:cursor-pointer'/>
-                                </div>
-                            ))} */}
-                        </div>
+                        {
+                        previewImage.length > 0 && (
+                        <>
+                            <h1 className="text-lg font-semibold mb-4 text-gray-700">Preview</h1>
+                            <div className="flex gap-4 w-full overflow-x-auto p-4 h-40">
+                                {Array.from(previewImage).map((imageurl, index) => (
+                                    <div key={index} className="w-40 flex-shrink-0 relative h-full">
+                                        <img
+                                        src={URL.createObjectURL(imageurl)}
+                                        alt={`Preview ${index + 1}`}
+                                        className="w-full h-full object-cover rounded-lg border border-gray-300 hover:shadow-lg transition-shadow duration-300"
+                                        />
+                                        <FiDelete className='absolute top-0 right-0 m-2 text-xl hover:cursor-pointer text-[#343A40] card ' onClick={() => removeImageFromPreview(index)}/>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                            )
+                        }
                     </div>
                     <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded">
                         <div>
@@ -253,123 +269,8 @@ const Products = () => {
                 </div>
             )}
         </div>
-      <div className="overflow-x-auto border-b">
-            <table className="min-w-full divide-y divide-gray-200">
-                <thead className="">
-                    <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-600" />
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            PRODUCT NAME
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            PRODUCT IMAGE
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            ID
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            PRICE
-                        </th>
-                    </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                    <tr>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-600" />
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 font-bold">Product 1</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="h-10">
-                                <img src={images.laptop} className="h-full rounded-md" alt="Product" />
-                            </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 font-bold">18ab12p3fk1345</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 font-bold">$149</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="flex space-x-2">
-                                <button className="flex items-center bg-blue-700 hover:bg-blue-900 text-white p-2 rounded-xl">
-                                    <TbEdit className="mr-1" />
-                                    Edit item
-                                </button>
-                                <button className="text-white hover:bg-red-900 bg-red-700 flex items-center p-2 rounded-xl">
-                                    <RiDeleteBin6Fill className="mr-1" />
-                                    Delete item
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-600" />
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 font-bold">Product 1</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="h-10">
-                                <img src={images.laptop} className="h-full rounded-md" alt="Product" />
-                            </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 font-bold">18ab12p3fk1345</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 font-bold">$149</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="flex space-x-2">
-                                <button className="flex items-center bg-blue-700 hover:bg-blue-900 text-white p-2 rounded-xl">
-                                    <TbEdit className="mr-1" />
-                                    Edit item
-                                </button>
-                                <button className="text-white hover:bg-red-900 bg-red-700 flex items-center p-2 rounded-xl">
-                                    <RiDeleteBin6Fill className="mr-1" />
-                                    Delete item
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-600" />
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 font-bold">Product 1</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="h-10">
-                                <img src={images.laptop} className="h-full rounded-md" alt="Product" />
-                            </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 font-bold">18ab12p3fk1345</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 font-bold">$149</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="flex space-x-2">
-                                <button className="flex items-center bg-blue-700 hover:bg-blue-900 text-white p-2 rounded-xl">
-                                    <TbEdit className="mr-1" />
-                                    Edit item
-                                </button>
-                                <button className="text-white hover:bg-red-900 bg-red-700 flex items-center p-2 rounded-xl">
-                                    <RiDeleteBin6Fill className="mr-1" />
-                                    Delete item
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div className="overflow-x-auto border-b">
+            <ProductTable />
         </div>
         <div className='flex items-center text-[#343A40] bg-white px-4 justify-between'>
             <div className='flex items-center text-[#343A40] bg-white py-4'>

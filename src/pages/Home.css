@@ -1,0 +1,27 @@
+.image-slider {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.image-slider:hover {
+    animation: slide 5s linear infinite;
+}
+
+
+.image-slide {
+    flex: 1 0 100%;
+    height: 100%;
+}
+
+@keyframes slide {
+    0% { transform: translateY(0); }
+    20% { transform: translateY(0); }
+    25% { transform: translateY(-100%); }
+    45% { transform: translateY(-100%); }
+    50% { transform: translateY(-200%); }
+    70% { transform: translateY(-200%); }
+    75% { transform: translateY(-300%); }
+    95% { transform: translateY(-300%); }
+    100% { transform: translateY(0); }
+}
