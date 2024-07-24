@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getHomePageData } from '../store/home/homeGet';
@@ -6,6 +6,7 @@ import './Home.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import './Home.css'; // Import the CSS file for styling
+import ImagePreview from '../components/ImagePreview/ImagePreview';
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -14,6 +15,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { content, loading, error } = useSelector((state) => state.home);
+  const [displayImagePreview, setDisplayImagePreview] = useState([])
 
   useEffect(() => {
     dispatch(getHomePageData());
@@ -22,6 +24,15 @@ const Home = () => {
   const handleClick = (storeId) => {
     navigate(`/api/${storeId}/products`);
   };
+
+  const displayFull = (index) => {
+    setDisplayImagePreview(content[index].imgUrls)
+    console.log(displayImagePreview)
+  }
+
+  const onClose = () => {
+    setDisplayImagePreview([])
+  }
 
   return (
     <>
@@ -50,14 +61,13 @@ const Home = () => {
               <button className='bg-blue-300 text-white p-5 rounded-xl'>Product Content</button>
             </div>
             <div className='flex flex-wrap gap-4'>
-              {content.map((item) => (
+              {content.map((item, index) => (
                 <div
                   key={item._id}
-                  className='card w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2 bg-light-input-border text-dark-gray rounded-lg cursor-pointer'
-                  onClick={() => handleClick(item._id)}
+                  className='card w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2 bg-light-input-border text-dark-gray rounded-lg'
                 >
                   <div className='relative h-48 overflow-hidden rounded-t-lg'>
-                    <div className='h-48 image-slider'>
+                    <div data-modal-target="select-modal" data-modal-toggle="select-modal" className='h-48 image-slider cursor-pointer' onClick={() => displayFull(index)}>
                       {
                         item.imgUrls.map((image, index) => (
                           <div key={index} className='image-slide'>
@@ -83,13 +93,20 @@ const Home = () => {
                     <p>${item.price}</p> 
                   </div>
                   <div className='mt-2'>
-                    <Link><p className='text-blue-800 text-sm'>{item.storeName}</p></Link>
+                    <p className='text-blue-800 text-sm' onClick={() => handleClick(item._id)}>
+                      {item.storeName}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
+        {
+          displayImagePreview.length && (
+            <ImagePreview displayImagePreview={displayImagePreview} onClose={onClose}/>
+          )
+        }
       </div>
     </>
   );
