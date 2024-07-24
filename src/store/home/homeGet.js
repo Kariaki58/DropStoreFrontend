@@ -8,7 +8,6 @@ export const getHomePageData = createAsyncThunk('home/page', async (rejectWithVa
         if (response.data.error) {
             return rejectWithValue(response.data.error)
         }
-        console.log(response.data.msg)
         return response.data.msg
     } catch (err) {
         if (err.response && err.response.data && err.response.data.error) {

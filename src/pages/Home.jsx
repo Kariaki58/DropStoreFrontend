@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getHomePageData } from '../store/home/homeGet';
 import './Home.css'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import './Home.css'; // Import the CSS file for styling
+import { ToastContainer, toast } from 'react-toastify';
+
 
 // Home page display content from database
 const Home = () => {
@@ -66,13 +67,12 @@ const Home = () => {
                       }
                     </div>
                   </div>
-                  
                   <div className='mb-3'>
-                  <p className='postBody text-[#343A40]'>
-                    {(item.productDescription).length <= 30 ? item.productDescription :
-                    `${(item.productDescription).slice(0, 30)}...`
-                    }
-                  </p>
+                    <p className='postBody text-[#343A40]'>
+                      {(item.productDescription).length <= 30 ? item.productDescription :
+                      `${(item.productDescription).slice(0, 30)}...`
+                      }
+                    </p>
                   </div>
                   <div className='flex justify-between text-[#343A40]'>
                     <div className='flex gap-1'>

@@ -4,6 +4,7 @@ import App from './App.jsx';
 import './index.css';
 import createStore from 'react-auth-kit/createStore';
 import { BrowserRouter } from 'react-router-dom';
+
 import AuthProvider from 'react-auth-kit';
 import { SessionAuthProvider } from './session/authentication/sessionAuth.jsx';
 import { store } from './store/index.js';
