@@ -12,7 +12,7 @@ import { FaHeart } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";
 import { Cart } from '../store/upload/cart/cart';
-import { IoStarOutline } from "react-icons/io5";
+import { MdOutlineStarPurple500 } from "react-icons/md";
 
 
 const Home = () => {
@@ -182,10 +182,16 @@ const Home = () => {
                       {item.productDescription.length <= 40 ? item.productDescription : `${item.productDescription.slice(0, 40)}...`}
                     </p>
                   </div>
-                  <div className='flex justify-between text-[#343A40] cursor-pointer' onClick={() => NavigateToProductPage(item._id)}>
-                    <div className='flex gap-1'>
+                  <div className='flex justify-between items-center text-[#343A40] cursor-pointer' onClick={() => NavigateToProductPage(item._id)}>
+                    <div className='flex gap-1 items-center'>
                       <p>300 sold</p>
-                      <p>*****</p>
+                      <p className='flex text-orange-600'>
+                      {
+                        Array.from({length: 5}).map((_, index)  => (
+                          <MdOutlineStarPurple500 key={index} className='text-[0.6rem]'/>
+                        ))
+                      }
+                      </p>
                     </div>
                     <p>${item.price}</p>
                   </div>
