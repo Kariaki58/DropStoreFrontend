@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import images from '../assets';
+import images from '../../../assets';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserUploads } from '../store/upload/allUserUpload/userUploadGet';
+import { getUserUploads } from '../../../store/upload/allUserUpload/userUploadGet';
 import { ThreeDots } from 'react-loader-spinner';
 
 

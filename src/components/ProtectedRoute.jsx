@@ -6,7 +6,7 @@ import { useAuth } from '../session/authentication/sessionAuth';
 const ProtectedRoute = ({ children }) => {
   const { isSessionAuthenticated } = useAuth();
   
-
+  
   if (!isSessionAuthenticated) {
     // Redirect to login if not authenticated
     return <Navigate to="/api/auth/login" />;

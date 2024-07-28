@@ -81,7 +81,6 @@ const UploadProductForm = () => {
         toast.error(response.data.error)
         return
       } else {
-        console.log(response.data.msg)
         toast.success(response.data.msg)
         setImg(null);
         setVideo(null);

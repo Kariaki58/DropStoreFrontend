@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserUploads } from '../store/upload/allUserUpload/userUploadGet';
+import { getUserUploads } from '../../../store/upload/allUserUpload/userUploadGet';
+import { modifyProduct } from '../../../store/upload/modifyUpload/modifyupload';
 import { ThreeDots } from 'react-loader-spinner';
-import { modifyProduct } from '../store/upload/modifyUpload/modifyupload';
 import { FiDelete } from "react-icons/fi";
 import axios from 'axios';
 

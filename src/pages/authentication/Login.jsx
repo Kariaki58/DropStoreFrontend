@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../session/authentication/sessionAuth';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import { resetLogin } from '../store/actions';
+import { resetLogin } from '../../store/actions';
+import { useAuth } from '../../session/authentication/sessionAuth';
 
 
 const Login = () => {

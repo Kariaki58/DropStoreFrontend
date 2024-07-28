@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import images from '../assets';
-import '../index.css'
+import images from '../../assets';
+import '../../index.css'
 import { FaUsers } from "react-icons/fa";
 import { TbBuildingStore } from "react-icons/tb";
 import { IoMdHelpCircle } from "react-icons/io";
@@ -11,7 +11,7 @@ import { BsBagCheckFill } from "react-icons/bs";
 import { FiVideo } from "react-icons/fi";
 import { Link, Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { userProfile } from '../store/Profile/userProfile';
+import { userProfile } from '../../store/Profile/userProfile';
 import { ThreeDots } from 'react-loader-spinner';
 import { FaMessage } from 'react-icons/fa6';
 import { IoMdArrowDropdown } from "react-icons/io";

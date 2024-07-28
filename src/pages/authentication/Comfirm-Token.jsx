@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { comfirmToken } from '../store/comfirmToken/comfirmTokenPost';
 import { useNavigate } from 'react-router';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import axios from 'axios';
