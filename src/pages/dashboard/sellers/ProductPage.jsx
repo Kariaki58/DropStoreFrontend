@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserUploads } from '../store/upload/allUserUpload/userUploadGet';
-import Products from '../components/Products';
-import AddProductButton from '../components/actionButtons/AddProductButton';
-import ProductTable from '../components/actionButtons/ProductTable';
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
-
-import ProductPopUp from '../components/modal/ProductPopUp';
+import { getUserUploads } from '../../../store/upload/allUserUpload/userUploadGet';
+import Products from '../../../components/products/Products';
+import AddProductButton from '../../../components/actionButtons/AddProductButton';
+import ProductTable from '../../../components/actionButtons/ProductTable';
+import ProductPopUp from '../../../components/modal/ProductPopUp';
 
 const ProductsPage = () => {
   const [isOpen, setIsOpen] = useState(false);

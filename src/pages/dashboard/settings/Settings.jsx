@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import images from '../assets';
+import images from '../../../assets';
 import { useDispatch, useSelector } from 'react-redux';
-import { userProfile } from '../store/Profile/userProfile';
+import { userProfile } from '../../../store/Profile/userProfile';
 
 
 const Settings = () => {

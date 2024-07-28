@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThreeDots } from 'react-loader-spinner';
-import { createUserAccount } from '../store/user/userPost';
+import { createUserAccount } from '../../store/user/userPost';
 
 
 // registration page

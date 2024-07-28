@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Cart } from '../store/upload/cart/cart';
+import { Cart } from '../../store/upload/cart/cart';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js'
 import { ThreeDots } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-
 
 // cart frontend view
 const Carts = () => {
@@ -67,6 +66,7 @@ const Carts = () => {
   });
     await axios.delete(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/cart/${productId}`, { withCredentials: true });
     dispatch(Cart())
+
   };
 
   const calculateTotalPrice = () => {

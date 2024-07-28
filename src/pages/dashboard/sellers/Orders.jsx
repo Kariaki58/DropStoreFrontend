@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrders } from '../store/orders/orderGet';
+import { getOrders } from '../../../store/orders/orderGet';
 
 const Orders = () => {
   const dispatch = useDispatch();

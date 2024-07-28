@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaCartArrowDown, FaAffiliatetheme, FaBars } from 'react-icons/fa';
-import images from '../assets';
+import images from '../../assets';
 import useSignOut from 'react-auth-kit/hooks/useSignOut';
 import { useSelector, useDispatch } from 'react-redux';
-import { Cart } from '../store/upload/cart/cart';
-import { revertAll, resetLogin } from '../store/actions';
-import { useAuth } from '../session/authentication/sessionAuth';
+import { Cart } from '../../store/upload/cart/cart';
+import { revertAll, resetLogin } from '../../store/actions';
+import { useAuth } from '../../session/authentication/sessionAuth';
 
 // responsive user navigation
 const Header = () => {

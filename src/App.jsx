@@ -1,25 +1,25 @@
 import { Route, Routes, useParams } from "react-router-dom"
 import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-import ComfirmToken from "./pages/Comfirm-Token"
-import Navigation from './pages/Navigation'
-import Settings from "./pages/Settings"
-import Dashboard from "./pages/Dashboard"
-import CustomizedStore from "./pages/CustomizedStore"
-import Orders from "./pages/Orders"
-import Stats from "./pages/Stats"
-import Store from './pages/Store'
-import Carts from "./pages/Carts"
-import ProductsInStore from "./pages/ProductsInStore"
-import UploadProductForm from './pages/UploadProductForm';
-import StoreProducts from "./pages/StoreProducts"
+import Login from "./pages/authentication/Login"
+import Register from "./pages/authentication/Register"
+import ComfirmToken from "./pages/authentication/Comfirm-Token"
+import Navigation from './components/navigation/Navigation'
+import Settings from "./pages/dashboard/settings/Settings"
+import Dashboard from "./pages/dashboard/Dashboard"
+import CustomizedStore from "./pages/dashboard/sellers/CustomizedStore"
+import Orders from "./pages/dashboard/sellers/Orders"
+import Stats from "./pages/dashboard/sellers/Stats"
+import Store from './pages/dashboard/sellers/Store'
+import Carts from "./pages/cart/Carts"
+import ProductsInStore from "./pages/dashboard/sellers/ProductsInStore"
+import UploadProductForm from './pages/dashboard/sellers/UploadProductForm';
+import StoreProducts from "./pages/dashboard/sellers/StoreProducts"
 import ProtectedRoute from "./components/ProtectedRoute"
-import SuccessPage from "./pages/SuccessPage"
-import CancelPage from "./pages/CancelPage"
+import SuccessPage from "./pages/payment/SuccessPage"
+import CancelPage from "./pages/payment/CancelPage"
 import AuthOutlet from '@auth-kit/react-router/AuthOutlet'
 // import Products from "./components/Products"
-import ProductPage from './pages/ProductPage'
+import ProductPage from './pages/dashboard/sellers/ProductPage'
 
 
 function App() {

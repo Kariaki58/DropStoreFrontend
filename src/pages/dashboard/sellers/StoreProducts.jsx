@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../store/upload/cartCount/addTocart';
-import { StoreProductFetch } from '../store/upload/StoreProducts/StoreProduct';
+import { addToCart } from '../../../store/upload/cartCount/addTocart';
+import { StoreProductFetch } from '../../../store/upload/StoreProducts/StoreProduct';
 import { ThreeDots } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
