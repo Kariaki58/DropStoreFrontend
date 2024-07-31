@@ -73,7 +73,6 @@ const Login = () => {
   const signInWithGoogle = () => {
     window.location.href = `${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/auth/google`;
   };
-
   return (
     <div className='flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full max-w-md'>

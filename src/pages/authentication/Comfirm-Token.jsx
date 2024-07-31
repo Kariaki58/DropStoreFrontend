@@ -53,6 +53,7 @@ const ComfirmToken = () => {
     console.log("loading")
     console.group(token)
     dispatch(ComfimTokenPost(token))    
+
   }
 
   const resendToken = async () => {
