@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Cart } from '../store/upload/cart/cart';
+import { Cart } from '../../store/upload/cart/cart';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js'
 import { ThreeDots } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-
 
 // cart frontend view
 const Carts = () => {
@@ -38,8 +37,11 @@ const Carts = () => {
 
   const makePayment = async () => {
     const stripe = await loadStripe(`${import.meta.env.VITE_APP_STRIPE_PUBLIC}`)
-    
-    const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/create-checkout-session`, { products: render }, { withCredentials: true })
+    const updatedCart = render.map((item) => ({
+      ...item,
+      quantity: quantities[item.productId._id] || item.quantity,
+    }));
+    const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/create-checkout-session`, { products: updatedCart }, { withCredentials: true })
     await stripe.redirectToCheckout({
       sessionId: response.data.id
     })
@@ -63,11 +65,13 @@ const Carts = () => {
       return prev.filter((item) => item.productId._id !== productId)
   });
     await axios.delete(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/cart/${productId}`, { withCredentials: true });
+    dispatch(Cart())
+
   };
 
   const calculateTotalPrice = () => {
     return render.reduce((total, item) => {
-      const price = parseFloat(item.productId.price.replace('$', ''));
+      const price = parseFloat(item.productId.price);
       return total + price * (quantities[item.productId._id] || 0);
     }, 0).toFixed(2);
   };
@@ -94,7 +98,7 @@ const Carts = () => {
           <div key={index} className="card flex flex-row max-custom-sm:flex-col sm:w-full justify-between p-4 rounded-lg shadow-lg">
             <div className="flex items-center lg:w-1/2">
               <div className="h-24 w-24 lg:h-32 lg:w-32 overflow-hidden rounded-lg">
-                <img src={item.productId.imgUrl} alt={item.productId.productName} className="h-full w-full object-cover"/>
+                <img src={item.productId.imgUrls[0]} alt={item.productId.productName} className="h-full w-full object-cover"/>
               </div>
               <div className="ml-5">
                 <h1 className="text-xl font-bold">{item.productId.productName}</h1>
@@ -103,7 +107,7 @@ const Carts = () => {
               </div>
             </div>
             <div className="flex flex-col justify-center mt-5 lg:mt-0 lg:ml-5">
-              <h1 className="text-2xl font-bold">${(parseFloat(item.productId.price.replace('$', '')) * (quantities[item.productId._id] || 0)).toFixed(2)}</h1>
+              <h1 className="text-2xl font-bold">${(parseFloat(item.productId.price) * (quantities[item.productId._id] || 0)).toFixed(2)}</h1>
               <div className="flex items-center gap-3 mt-2">
                 <button onClick={() => handleAddToCart(item.productId._id)} className="text-2xl font-bold bg-[#007BFF] text-white p-2 rounded-lg hover:bg-darker-teal">+</button>
                 <span className="text-2xl font-bold">{quantities[item.productId._id]}</span>

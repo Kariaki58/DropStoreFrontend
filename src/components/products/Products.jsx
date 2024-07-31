@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AddProductButton from './actionButtons/AddProductButton';
-import ProductTable from './actionButtons/ProductTable';
+import ProductTable from '../actionButtons/ProductTable';
+import AddProductButton from '../actionButtons/AddProductButton';
 
 const Products = ({ content, toggleModal }) => {
   return (

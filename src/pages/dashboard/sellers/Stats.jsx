@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import images from '../assets';
+import images from '../../../assets';
 import { ThreeDots } from 'react-loader-spinner';
-import '../index.css';
-import { getOrders } from '../store/orders/orderGet';
+import '../../../index.css';
+import { getOrders } from '../../../store/orders/orderGet';
 import { AreaChart, Tooltip, XAxis, YAxis, Area, ResponsiveContainer } from 'recharts';
 import { FaChartLine } from "react-icons/fa6";
 import { MdKeyboardArrowUp } from "react-icons/md";

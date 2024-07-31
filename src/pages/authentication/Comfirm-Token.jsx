@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { comfirmToken } from '../store/comfirmToken/comfirmTokenPost';
 import { useNavigate } from 'react-router';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import axios from 'axios';
-
+import { comfirmToken as ComfimTokenPost } from '../../store/comfirmToken/comfirmTokenPost';
 
 // comfirm token component
 const ComfirmToken = () => {
@@ -51,7 +50,9 @@ const ComfirmToken = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(comfirmToken(token))    
+    console.log("loading")
+    console.group(token)
+    dispatch(ComfimTokenPost(token))    
   }
 
   const resendToken = async () => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import images from '../assets';
+import images from '../../../assets';
 import { useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
-import { CreateStore } from '../store/upload/customizeUserStore/productsInStorePost';
+import { CreateStore } from '../../../store/upload/customizeUserStore/productsInStorePost';
 import axios from 'axios';
 
 // customized store, not yet completed
