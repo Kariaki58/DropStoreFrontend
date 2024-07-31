@@ -13,6 +13,7 @@ import { CiHeart } from "react-icons/ci";
 import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";
 import { Cart } from '../store/upload/cart/cart';
 import { MdOutlineStarPurple500 } from "react-icons/md";
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
 
 
 const Home = () => {
@@ -23,7 +24,41 @@ const Home = () => {
   const [displayImagePreview, setDisplayImagePreview] = useState([]);
   const [wishList, setWishList] = useState(new Set());
   const [clickedItems, setClickedItems] = useState(new Set());
+  const signIn = useSignIn();
   const [counts, setCounts] = useState({});
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const msg = urlParams.get('msg');
+    const email = urlParams.get('email')
+    const error = urlParams.get('error')
+
+    try {
+      if (error === 'authentication failed') {
+        toast.error(error);
+      } else if (error !== 'authentication failed' && token && msg === "Google Login Successful") {
+        signIn({
+          auth: {
+            token: token,
+            type: 'Bearer'
+          },
+          userState: {
+            email
+          }
+        });
+      }
+      if (msg === 'Google Login Successful') {
+        toast.success(msg)
+        setTimeout(() => {
+          navigate('/')
+        }, 2000);
+      }
+    } catch (err) {
+      console.log(err.message)
+    }
+}, [navigate]);
+
 
   useEffect(() => {
     dispatch(getHomePageData());

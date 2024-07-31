@@ -11,6 +11,7 @@ export const comfirmToken = createAsyncThunk('comfirmToken/post', async (email_t
         return response.data
         } catch (err) {
             if (err.response && err.response.data && err.response.data.error) {
+                console.log(err.response.data.error)
                 return rejectWithValue(err.response.data.error)
             }
             return rejectWithValue("An error occured")
