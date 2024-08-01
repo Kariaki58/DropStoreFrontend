@@ -21,18 +21,16 @@ const ResetPassword = () => {
     }
 
     try {
-      console.log(token)
-      console.log(password)
       const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/auth/password-reset`, {
         token,
         password,
       });
-      toast.success(response.data.message);
+      toast.success(response.data.msg);
       setTimeout(() => {
         navigate('/api/auth/login');
       }, 2000);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.error);
     }
   };
 
