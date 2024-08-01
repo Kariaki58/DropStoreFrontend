@@ -47,12 +47,7 @@ const Home = () => {
             email
           }
         });
-      }
-      if (msg === 'Google Login Successful') {
-        toast.success(msg)
-        setTimeout(() => {
-          navigate('/')
-        }, 2000);
+        navigate('/')
       }
     } catch (err) {
       console.log(err.message)

@@ -20,6 +20,8 @@ import CancelPage from "./pages/payment/CancelPage"
 import AuthOutlet from '@auth-kit/react-router/AuthOutlet'
 // import Products from "./components/Products"
 import ProductPage from './pages/dashboard/sellers/ProductPage'
+import ResetPassword from "./pages/authentication/ResetPassword"
+import ForgetPassword from "./pages/authentication/ForgetPassword"
 
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
         <Route path="/api/auth/sign-up" element={<Register />} />
         <Route path="/api/auth/comfirm-token" element={<ComfirmToken />} />
         <Route path="/api/:storeId/products" element={<StoreProducts />} />
+        <Route path="/api/auth/reset-password" element={<ResetPassword />} />
+        <Route path="/api/auth/forget-password" element={<ForgetPassword />} />
 
 
         {/* Protected Routes */}

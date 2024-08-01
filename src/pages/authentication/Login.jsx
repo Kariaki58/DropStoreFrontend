@@ -74,13 +74,17 @@ const Login = () => {
     window.location.href = `${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/auth/google`;
   };
 
+  const handlePasswordForget = () => {
+    navigate('/api/auth/forget-password')
+  }
+
   return (
     <div className='flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full max-w-md'>
         <ToastContainer />
         <form className='w-full' onSubmit={handleSubmit}>
-          <h1 className='text-3xl font-semibold mb-6 text-center'>Sign In</h1>
-          <label htmlFor='email' className='block text-xl mb-2'>Email address</label>
+          <h1 className='text-3xl text-[#343A40] font-semibold mb-6 text-center'>Sign In</h1>
+          <label htmlFor='email' className='block text-xl mb-2 text-[#343A40]'>Email address</label>
           <input
             name='email'
             type='email'
@@ -90,7 +94,7 @@ const Login = () => {
             placeholder='Enter email'
             required
           />
-          <label htmlFor='password' className='block text-xl mb-2'>Password</label>
+          <label htmlFor='password' className='block text-xl mb-2 text-[#343A40]'>Password</label>
           <input
             name='password'
             value={userData.password}
@@ -100,6 +104,7 @@ const Login = () => {
             placeholder='Enter password'
             required
           />
+          <p className='text-center text-blue-800 hover:text-blue-950 cursor-pointer' onClick={handlePasswordForget}>forgot password?</p>
           <button className='w-full bg-blue-700 text-white py-3 mt-5 rounded-lg font-semibold hover:bg-darker-teal transition duration-300'>
           Login
           </button>
